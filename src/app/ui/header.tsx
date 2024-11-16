@@ -20,15 +20,18 @@ export default function Header() {
       </div>
       <Search />
       <div className="flex w-full items-center justify-between gap-6 md:justify-center md:w-auto">
-        <button className="flex items-center gap-2 text-zinc-300">
+        <button className="flex items-center gap-2 text-zinc-300 hover:opacity-50 transition-all">
           <MapPin className="size-6" />
-          <span className="font-normal ">Calcular frete</span>
+          <span className="font-normal text-base">Calcular frete</span>
         </button>
-        <Link href={""} className="flex gap-2 text-zinc-300">
+        <Link
+          href={""}
+          className="flex gap-2 text-zinc-300 hover:opacity-50 transition-all"
+        >
           <Bell />
-          <span>Alertas</span>
+          <span className="font-normal text-base">Alertas</span>
         </Link>
-        <button className="bg-green-100 hidden px-6 py-3 rounded-3xl text-green-700 text-sm md:flex">
+        <button className="bg-green-100 hidden px-6 py-3 rounded-3xl text-green-700 text-base font-semibold md:flex hover:opacity-50 hover:transition-all">
           Entrar
         </button>
       </div>

@@ -5,7 +5,7 @@ import Link from "next/link"
 export default function Navbar() {
   return (
     <div className="w-full justify-center bg-green-700 hidden md:flex">
-      <ul className="flex gap-8 py-3 text-zinc-50">
+      <ul className="flex gap-8 py-3 text-zinc-50 hover:[&>li>a]:opacity-50 hover:[&>li>a]:transition-all">
         <li>
           <Link href={""}>Processador</Link>
         </li>
