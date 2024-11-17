@@ -1,11 +1,12 @@
 "use-client"
 
-import DefaultLayout from "./ui/default-layout"
+
 import Banner from "./ui/home/banner"
 import pichauLogo from "../assets/pichau-logo.svg"
 import kabumLogo from "../assets/kabum!-logo.svg"
 import terabyteLogo from "../assets/terabyte-logo.svg"
 import { CarouselSpacing } from "./ui/home/carousel"
+import DefaultLayout from "./ui/defaultLayout/default-layout"
 
 export default function Home() {
   return (
