@@ -14,7 +14,7 @@ export default function Header() {
         <button className="bg-transparent">
           <NavbarMobile />
         </button>
-        <Link href={""}>
+        <Link href={"/"}>
           <Image src={logo} alt="Landscape picture" width={240} height={24} />
         </Link>
         <button className="bg-green-100 flex px-6 py-3 rounded-3xl text-green-700 text-sm md:hidden">
@@ -23,12 +23,12 @@ export default function Header() {
       </div>
       <Search />
       <div className="flex w-full items-center justify-between gap-6 md:justify-center md:w-auto">
-        <button className="flex items-center gap-2 text-zinc-300 hover:opacity-50 transition-all">
+        <button className="flex items-center gap-2 text-zinc-300 hover:opacity-50 transition-all" >
           <MapPin className="size-6" />
           <span className="font-normal text-base">Calcular frete</span>
         </button>
         <Link
-          href={""}
+          href={"/alertas"}
           className="flex gap-2 text-zinc-300 hover:opacity-50 transition-all"
         >
           <Bell />

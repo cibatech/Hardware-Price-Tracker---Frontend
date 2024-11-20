@@ -4,7 +4,7 @@ import Navbar from "./navbar";
 
 export default function DefaultLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="">
+    <div className="min-h-screen">
       <Header />
       <Navbar />
       {children}
