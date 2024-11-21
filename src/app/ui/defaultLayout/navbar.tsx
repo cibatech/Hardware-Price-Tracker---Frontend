@@ -1,4 +1,4 @@
-"use client"
+
 
 import { hardwareComponetsList } from "@/constants"
 import Link from "next/link"

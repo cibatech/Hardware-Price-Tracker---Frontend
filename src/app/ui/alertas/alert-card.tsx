@@ -1,6 +1,8 @@
-import Image from "next/image";
+"use client"
+
+import Image from "next/image"
 import gtxImage from "../../../../public/gpu.svg"
-import { Pencil, Trash } from "lucide-react";
+import { Pencil, Trash } from "lucide-react"
 
 export function AlertCard() {
   return (

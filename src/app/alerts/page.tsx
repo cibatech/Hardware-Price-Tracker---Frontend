@@ -1,3 +1,5 @@
+
+
 import { Trash } from "lucide-react"
 import { SearchAlerts } from "../ui/alertas/search"
 import DefaultLayout from "../ui/defaultLayout/default-layout"
@@ -15,7 +17,7 @@ export default function Alerts() {
             <button className="bg-green-100 flex text-sm font-medium text-green-700 items-center rounded-3xl px-3 py-2 gap-3 flex-1">
               <Trash />
               Remover todos os alertas
-            </button> 
+            </button>
           </section>
         </div>
         <main className="flex gap-3 justify-center md:flex-row flex-col">

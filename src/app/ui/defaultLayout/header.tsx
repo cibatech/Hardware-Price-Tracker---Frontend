@@ -1,11 +1,12 @@
 "use client"
 
-import { Bell, MapPin } from "lucide-react"
+import { Bell } from "lucide-react"
 import logo from "../../../../public/logo.svg"
 import Image from "next/image"
 import Search from "../search"
 import Link from "next/link"
 import { NavbarMobile } from "./navbar-mobile"
+import { ShippingModal } from "../modals/shipping-modal"
 
 export default function Header() {
   return (
@@ -23,12 +24,9 @@ export default function Header() {
       </div>
       <Search />
       <div className="flex w-full items-center justify-between gap-6 md:justify-center md:w-auto">
-        <button className="flex items-center gap-2 text-zinc-300 hover:opacity-50 transition-all" >
-          <MapPin className="size-6" />
-          <span className="font-normal text-base">Calcular frete</span>
-        </button>
+        <ShippingModal />
         <Link
-          href={"/alertas"}
+          href={"/alerts"}
           className="flex gap-2 text-zinc-300 hover:opacity-50 transition-all"
         >
           <Bell />

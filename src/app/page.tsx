@@ -1,4 +1,4 @@
-"use-client"
+
 
 
 import Banner from "./ui/home/banner"
