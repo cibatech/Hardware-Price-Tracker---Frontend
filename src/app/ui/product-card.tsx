@@ -15,7 +15,7 @@ export function ProductCard({
   store,
 }: IProductCard) {
   return (
-    <div className="flex flex-col justify-center px-6 py-8 gap-6 border rounded-xl ">
+    <div className="flex flex-col justify-center px-6 py-8 gap-6 border rounded-xl max-w-xs">
       <Image src={productImageUrl} alt="" className="w-[14.5rem] h-auto m-auto" />
       <span className="text-base font-medium">{productTitle}</span>
       <div className="flex flex-col gap-4">

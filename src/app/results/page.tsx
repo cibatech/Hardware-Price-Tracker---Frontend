@@ -1,6 +1,9 @@
 import { DeleteButton } from "../ui/button/button"
 import DefaultLayout from "../ui/defaultLayout/default-layout"
 import { Select } from "../ui/select/select"
+import gpuPicture from "../../../public/gpu.svg"
+import { ProductCard } from "../ui/product-card"
+import { PaginationDemo } from "../ui/results/products-pagination"
 
 export default function ResultsPage() {
   return (
@@ -18,14 +21,30 @@ export default function ResultsPage() {
             <DeleteButton>Resetar Filtros</DeleteButton>
           </div>
         </section>
-        <div>
+        <div className="flex items-center justify-between">
           <strong className="text-xl font-semibold">612 resultados</strong>
-          <div>
+          <div className="flex gap-3">
             <Select />
             <Select />
             <Select />
           </div>
+          <div>
+            <label htmlFor="">Produtos por página</label>
+            <Select />
+          </div>
         </div>
+        <div className="flex items-center justify-center w-full flex-wrap gap-8 max-w-[80%] m-auto">
+          {Array.from({ length: 10 }).map((_, index) => (
+            <ProductCard
+              key={index}
+              productImageUrl={gpuPicture}
+              productPrice={879}
+              productTitle="Placa de video galax geforce gtx 1650 ex plus 1click oc 4gb..."
+              store="Terabyte"
+            />
+          ))}
+        </div>
+        <PaginationDemo />
       </div>
     </DefaultLayout>
   )
