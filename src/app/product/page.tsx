@@ -1,3 +1,5 @@
+"use client"
+
 import DefaultLayout from "../ui/defaultLayout/default-layout"
 import StarRating from "../ui/product/avaliation-stars"
 import Image from "next/image"
@@ -6,13 +8,20 @@ import { PriceAnalysisCard } from "../ui/product/price-analysis-card"
 import { Button } from "../ui/button/button"
 import { BellRing, Truck } from "lucide-react"
 import { PriceClassificationCard } from "../ui/product/price-classification"
+import { useRef } from "react"
 
 export default function ProductPage() {
+  const compareSectionRef = useRef<HTMLDivElement>(null)
+
+  const scrollToCompareSection = () => {
+    compareSectionRef.current?.scrollIntoView({ behavior: "smooth" })
+  }
+
   return (
     <DefaultLayout>
-      <div>
+      <div className="flex flex-col max-w-screen-lg m-auto">
         <p>Bredcumb</p>
-        <section className="flex justify-center">
+        <section className="flex justify-center gap-16 w-full flex-wrap p-4">
           <div>
             <h1 className="text-2xl font-medium">
               Placa de vídeo GTX 1650 4G GDDR6
@@ -39,7 +48,9 @@ export default function ProductPage() {
                 </span>
               </div>
             </div>
-            <Button variant="secondary">Comparar em 3 lojas</Button>
+            <Button variant="secondary" onClick={scrollToCompareSection}>
+              Comparar em 3 lojas
+            </Button>
             <div className="flex flex-col px-4 py-6 gap-2 border border-zinc-300 rounded-xl">
               <strong className="text-base font-semibold">
                 Quer saber quando esse produto baixar o preço?
@@ -61,11 +72,16 @@ export default function ProductPage() {
             </div>
           </div>
         </section>
-        <section className="flex justify-center flex-col ">
+        <section
+          ref={compareSectionRef}
+          className="flex justify-center flex-col gap-11 py-8 px-4"
+        >
           <strong className="text-xl font-semibold">
             Compare preços em 3 lojas
           </strong>
-          <div>
+          <div className="flex gap-8 flex-col">
+            <PriceClassificationCard />
+            <PriceClassificationCard />
             <PriceClassificationCard />
           </div>
         </section>

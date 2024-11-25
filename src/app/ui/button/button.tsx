@@ -12,7 +12,7 @@ export function Button({ variant = "delete", ...props }: ButtonProps) {
     {
       "bg-green-100 text-green-700": variant === "delete",
       "bg-green-700 flex-1": variant === "submit",
-      "bg-green-700 rounded-lg": variant === "secondary",
+      "bg-green-700 rounded-lg ": variant === "secondary",
     }
   )
 
