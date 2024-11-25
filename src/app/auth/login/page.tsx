@@ -24,7 +24,10 @@ export default function Login() {
               variant="minimalist"
             />
           </div>
-          <Link href="/auth/register" className="text-center text-balance underline">
+          <Link
+            href="/auth/forgot-password"
+            className="text-center text-balance underline"
+          >
             Esqueci a senha
           </Link>
           <Button variant="submit">Confirmar</Button>
