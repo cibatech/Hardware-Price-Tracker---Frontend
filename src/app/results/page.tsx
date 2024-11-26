@@ -1,11 +1,11 @@
 "use client"
 
-import { DeleteButton } from "../ui/button/button"
-import DefaultLayout from "../ui/defaultLayout/default-layout"
-import { Select } from "../ui/select/select"
+import { DeleteButton } from "../components/ui/button/button"
+import DefaultLayout from "../components/ui/defaultLayout/default-layout"
+import { Select } from "../components/ui/select/select"
 import gpuPicture from "../../../public/gpu.svg"
-import { ProductCard } from "../ui/product-card"
-import { PaginationDemo } from "../ui/results/products-pagination"
+import { ProductCard } from "../components/ui/product-card"
+import { PaginationDemo } from "../components/results/products-pagination"
 import { useState } from "react"
 
 export default function ResultsPage() {

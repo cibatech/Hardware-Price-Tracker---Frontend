@@ -1,9 +1,7 @@
-
-
 import { hardwareComponetsList } from "@/constants"
 import Link from "next/link"
 
-export default function Navbar() {
+export function Navbar() {
   return (
     <div className="w-full justify-center bg-green-700 hidden md:flex">
       <ul className="flex gap-8 py-3 text-zinc-50">

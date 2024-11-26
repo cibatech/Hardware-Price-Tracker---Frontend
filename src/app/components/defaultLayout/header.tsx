@@ -3,12 +3,14 @@
 import { Bell } from "lucide-react"
 import logo from "../../../../public/logo.svg"
 import Image from "next/image"
-import Search from "../search"
+
 import Link from "next/link"
 import { NavbarMobile } from "./navbar-mobile"
-import { ShippingModal } from "../modals/shipping-modal"
+import Search from "../ui/search"
+import { ShippingModal } from "../ui/modals/shipping-modal"
 
-export default function Header() {
+
+export function Header() {
   return (
     <header className="w-full bg-green-700 flex items-center justify-between p-2 md:flex-row md:p-6 flex-col gap-6">
       <div className="flex items-center md:justify-center justify-between gap-6">

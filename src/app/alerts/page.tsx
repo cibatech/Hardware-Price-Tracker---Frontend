@@ -1,9 +1,7 @@
-
-
 import { Trash } from "lucide-react"
-import { SearchAlerts } from "../ui/alertas/search"
-import DefaultLayout from "../ui/defaultLayout/default-layout"
-import { AlertCard } from "../ui/alertas/alert-card"
+import { SearchAlerts } from "../components/alertas/search"
+import { AlertCard } from "../components/alertas/alert-card"
+import { DefaultLayout } from "../components/defaultLayout/default-layout"
 
 export default function Alerts() {
   return (

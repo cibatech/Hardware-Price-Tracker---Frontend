@@ -1,5 +1,3 @@
-import * as React from "react"
-
 import {
   Carousel,
   CarouselContent,
@@ -7,8 +5,9 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel"
-import { ProductCard } from "../product-card"
+
 import gpuPicture from "../../../../public/gpu.svg"
+import { ProductCard } from "../ui/product-card"
 
 export function CarouselSpacing() {
   return (

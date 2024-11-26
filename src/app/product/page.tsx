@@ -1,14 +1,15 @@
 "use client"
 
-import DefaultLayout from "../ui/defaultLayout/default-layout"
-import StarRating from "../ui/product/avaliation-stars"
+
+import StarRating from "../components/product/avaliation-stars"
 import Image from "next/image"
 import gpuImage from "../../../public/gpu.svg"
-import { PriceAnalysisCard } from "../ui/product/price-analysis-card"
-import { Button } from "../ui/button/button"
+import { PriceAnalysisCard } from "../components/product/price-analysis-card"
+import { Button } from "../components/ui/button/button"
 import { BellRing, Truck } from "lucide-react"
-import { PriceClassificationCard } from "../ui/product/price-classification"
+import { PriceClassificationCard } from "../components/product/price-classification"
 import { useRef } from "react"
+import { DefaultLayout } from "../components/defaultLayout/default-layout"
 
 export default function ProductPage() {
   const compareSectionRef = useRef<HTMLDivElement>(null)

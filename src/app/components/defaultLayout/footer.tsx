@@ -1,7 +1,7 @@
 import Image from "next/image"
 import logo from "../../../../public/logo.svg"
 
-export default function Footer() {
+export function Footer() {
   return (
     <footer className="w-full bg-green-700 p-6 flex justify-center items-center flex-col">
       <Image src={logo} alt="Landscape picture" width={240} height={24} />
