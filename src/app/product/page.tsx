@@ -10,6 +10,7 @@ import { BellRing, Truck } from "lucide-react"
 import { PriceClassificationCard } from "../components/product/price-classification"
 import { useRef } from "react"
 import { DefaultLayout } from "../components/defaultLayout/default-layout"
+import { Chart } from "../components/product/chart"
 
 export default function ProductPage() {
   const compareSectionRef = useRef<HTMLDivElement>(null)
@@ -85,6 +86,10 @@ export default function ProductPage() {
             <PriceClassificationCard />
             <PriceClassificationCard />
           </div>
+        </section>
+        <section className="flex justify-center flex-col gap-11 py-8 px-4">
+          <strong className="text-xl font-semibold">Histórico de preços</strong>
+          <Chart />
         </section>
       </div>
     </DefaultLayout>

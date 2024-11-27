@@ -1,12 +1,12 @@
 "use client"
 
-import { DeleteButton } from "../components/ui/button/button"
-import DefaultLayout from "../components/ui/defaultLayout/default-layout"
 import { Select } from "../components/ui/select/select"
 import gpuPicture from "../../../public/gpu.svg"
 import { ProductCard } from "../components/ui/product-card"
 import { PaginationDemo } from "../components/results/products-pagination"
 import { useState } from "react"
+import { DefaultLayout } from "../components/defaultLayout/default-layout"
+import { Button } from "../components/ui/button/button"
 
 export default function ResultsPage() {
   const options = ["Asus", "Gigabyte", "MSI", "Asrock"]
@@ -30,7 +30,7 @@ export default function ResultsPage() {
                 2
               </span>
             </div>
-            <DeleteButton>Resetar Filtros</DeleteButton>
+            <Button variant="delete">Resetar Filtros</Button>
           </div>
         </section>
         <div className="flex items-center justify-between  w-full ">
@@ -65,7 +65,7 @@ export default function ResultsPage() {
           </div>
           <div className="flex gap-3 items-center text-sm text-green-700">
             <label htmlFor="">Produtos por página</label>
-            <Select />
+            <Select><p>a</p></Select>
           </div>
         </div>
         <div className="flex flex-1 justify-center flex-wrap gap-8 m-auto ">

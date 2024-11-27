@@ -8,7 +8,7 @@ import { LucideInfo } from "lucide-react"
 export function PopoverInfo() {
   return (
     <Popover >
-      <PopoverTrigger>
+      <PopoverTrigger asChild>
         <button className="bg-green-100 text-green-700 size-10 rounded-full flex items-center justify-center">
           <LucideInfo />
         </button>
