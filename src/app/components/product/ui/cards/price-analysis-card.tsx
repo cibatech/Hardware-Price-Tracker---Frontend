@@ -1,5 +1,5 @@
 import { LucideLaugh, LucideMeh, LucideSmile } from "lucide-react"
-import { PopoverInfo } from "./popover-info"
+import { PopoverInfoCard } from "./popover-info"
 
 type PriceClassification = "good" | "ok" | "bed"
 
@@ -19,7 +19,7 @@ export function PriceAnalysisCard({
           {priceClassification === "ok" && <LucideSmile />}
           {priceClassification === "bed" && <LucideMeh />}
         </div>
-        <PopoverInfo />
+        <PopoverInfoCard />
       </div>
     </div>
   )
