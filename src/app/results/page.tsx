@@ -1,25 +1,27 @@
 "use client"
 
 import { Select } from "../components/ui/select/select"
-import gpuPicture from "../../../public/gpu.svg"
 import { ProductCard } from "../components/ui/product-card"
 import { PaginationDemo } from "../components/results/products-pagination"
 import { DefaultLayout } from "../components/defaultLayout/default-layout"
 import { Button } from "../components/ui/button/button"
 import { BreadcrumbDemo } from "../components/product/ui/breadcumb"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import { Filter } from "lucide-react"
+import { Filter, Trash, X } from "lucide-react"
 import { useState } from "react"
+import gpuPicture from "../../../public/gpu.svg"
+import { Input } from "../components/ui/inputs/input"
+import { productsPaginationOptions } from "@/constants"
 
 export default function ResultsPage() {
-  const options = ["Asus", "Gigabyte", "MSI", "Asrock"]
-
+  const [isFilterModalOpen, setFilterModalOpen] = useState(false)
+  const { replace } = useRouter()
   const searchParams = useSearchParams()
   const pathname = usePathname()
-  const { replace } = useRouter()
   const params = new URLSearchParams(searchParams)
+  const options = ["Asus", "Gigabyte", "MSI", "Asrock"]
 
-  const [isFilterModalOpen, setFilterModalOpen] = useState(false)
+  const filtersCount = params.size
 
   const handleOptionClick = (filterKey: string, option: string) => {
     const isSelected = searchParams.get(filterKey) === option
@@ -31,9 +33,30 @@ export default function ResultsPage() {
     replace(`${pathname}?${params.toString()}`)
   }
 
-  const renderSelect = (filterKey: string, label: string, list: string[]) => (
-    <Select selected={searchParams.get(filterKey) || label} defaultText={label}>
-      {list.map((option) => (
+  function handleResetFilters() {
+    params.forEach((_, key) => params.delete(key))
+    replace(pathname)
+  }
+
+  const PriceModal = () => {
+    return (
+      <form className="flex flex-col  gap-4 w-80">
+        <label htmlFor="initial-price" className="font-bold text-green-700">
+          Preço inicial
+        </label>
+        <Input variant="outline" id="initial-price" placeholder="R$ 0,00" />
+        <label htmlFor="final-price" className="font-bold text-green-700">
+          Preço final
+        </label>
+        <Input variant="outline" id="final-price" placeholder="R$ 0,00" />
+        <Button variant="secondary">Aplicar</Button>
+      </form>
+    )
+  }
+
+  const renderSelect = (filterKey: string, label: string, list: string[], priceFilter?: boolean, pagination?: boolean) => (
+    <Select selected={searchParams.get(filterKey) || label} defaultText={label} pagePagination={pagination}>
+      {!priceFilter ? list.map((option) => (
         <button
           key={option}
           onClick={() => handleOptionClick(filterKey, option)}
@@ -45,7 +68,7 @@ export default function ResultsPage() {
         >
           {option}
         </button>
-      ))}
+      )): (<PriceModal />)}
     </Select>
   )
 
@@ -58,10 +81,13 @@ export default function ResultsPage() {
             <div className="flex items-center gap-2">
               <strong className="text-xl font-semibold">Filtros</strong>
               <span className="size-5 flex items-center justify-center bg-green-700 rounded-full text-zinc-50">
-                2
+                {filtersCount}
               </span>
             </div>
-            <Button variant="delete">Resetar Filtros</Button>
+            <Button variant="delete" onClick={handleResetFilters}>
+              <Trash />
+              Resetar Filtros
+            </Button>
           </div>
         </section>
 
@@ -75,14 +101,20 @@ export default function ResultsPage() {
             <Filter />
           </Button>
           <div className="md:flex gap-3 hidden">
-            {renderSelect("preco", "Preço", options)}
+            {renderSelect("preco", "Preço", options, true)}
             {renderSelect("loja", "Loja", options)}
             {renderSelect("marca", "Marca", options)}
             {renderSelect("categoria", "Categoria", options)}
           </div>
           <div className="md:flex gap-3 items-center text-sm text-green-700 hidden">
             <label htmlFor="">Produtos por página</label>
-            {renderSelect("pagina", "10", options)}
+            {renderSelect(
+              "pagina",
+              "12",
+              productsPaginationOptions,
+              false,
+              true
+            )}
           </div>
         </section>
 
@@ -102,26 +134,38 @@ export default function ResultsPage() {
           <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
             <div className="bg-white rounded-lg w-11/12 max-w-md p-6">
               <header className="flex items-center justify-between mb-4">
-                <strong className="text-lg font-semibold">Filtros</strong>
+                <div className="flex items-center gap-2">
+                  <strong className="text-xl font-semibold">Filtros</strong>
+                  <span className="size-5 flex items-center justify-center bg-green-700 rounded-full text-zinc-50">
+                    {filtersCount}
+                  </span>
+                </div>
                 <button
                   onClick={() => setFilterModalOpen(false)}
-                  className="text-zinc-400"
+                  className="text-zinc-900"
                 >
-                  ✕
+                  <X />
                 </button>
               </header>
               <div className="flex flex-col gap-4 w-full">
                 {renderSelect("marca", "Marca", options)}
                 {renderSelect("tipo", "Tipo", options)}
                 {renderSelect("categoria", "Categoria", options)}
+                <div className="flex items-center justify-between">
+                  <span className="text-base text-green-700">
+                    Produtos por página
+                  </span>
+                  {renderSelect("categoria", "12", options)}
+                </div>
               </div>
               <div className="mt-6">
                 <Button
-                  onClick={() => setFilterModalOpen(false)}
-                  variant="rounded"
+                  onClick={handleResetFilters}
+                  variant="delete"
                   className="w-full"
                 >
-                  Aplicar Filtros
+                  <Trash />
+                  Resetar Filtros
                 </Button>
               </div>
             </div>
