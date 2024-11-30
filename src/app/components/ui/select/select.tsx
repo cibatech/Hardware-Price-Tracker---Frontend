@@ -39,7 +39,7 @@ export function Select({
       {isOpen && (
         <div
           className={`absolute mt-2 md:w-auto w-full  bg-white border border-green-700 rounded-lg shadow-lg p-4 flex flex-wrap gap-2 z-10 ${
-            pagePagination ? "" : "min-w-[12rem]"
+            pagePagination ? " -mt-56" : "min-w-[12rem]"
           }`}
           tabIndex={-1}
         >
