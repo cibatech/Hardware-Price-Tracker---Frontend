@@ -4,7 +4,7 @@ import { Search as LucideSearch } from "lucide-react"
 import SearchResults from "./search-results"
 import { useState, useRef } from "react"
 
-export default function Search() {
+export function Search() {
   const [showSearchResults, setShowSearchResults] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
 

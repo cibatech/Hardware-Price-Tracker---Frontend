@@ -1,5 +1,3 @@
-
-
 import {
   Dialog,
   DialogContent,
@@ -16,7 +14,7 @@ export function ShippingModal() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <button className="flex items-center gap-2 text-zinc-300 hover:opacity-50 transition-all">
+        <button className="flex items-center gap-2 text-zinc-300 hover:opacity-50 transition-all text-nowrap">
           <MapPin className="size-6" />
           <span className="font-normal text-base">Calcular frete</span>
         </button>
