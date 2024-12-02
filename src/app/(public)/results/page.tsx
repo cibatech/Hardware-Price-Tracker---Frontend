@@ -1,17 +1,18 @@
 "use client"
 
-import { ProductCard } from "../components/ui/product-card"
-import { PaginationDemo } from "../components/results/products-pagination"
-import { DefaultLayout } from "../components/defaultLayout/default-layout"
-import { Button } from "../components/ui/button/button"
-import { BreadcrumbDemo } from "../components/product/ui/breadcumb"
 import { Filter, Trash } from "lucide-react"
 import { useState } from "react"
 import { options, productsPaginationOptions } from "@/constants"
 import { useFilters } from "@/hooks/useFilters"
-import { RenderSelect } from "../components/results/render-select"
-import { FilterModal } from "../components/results/filter-modal"
-import gpuPicture from "../../../public/gpu.svg"
+
+import gpuPicture from "../../../../public/gpu.svg"
+import { DefaultLayout } from "@/app/components/defaultLayout/default-layout"
+import { BreadcrumbDemo } from "@/app/components/product/ui/breadcumb"
+import { Button } from "@/app/components/ui/button/button"
+import { RenderSelect } from "@/app/components/results/render-select"
+import { ProductCard } from "@/app/components/ui/product-card"
+import { FilterModal } from "@/app/components/results/filter-modal"
+import { PaginationDemo } from "@/app/components/results/products-pagination"
 
 export default function ResultsPage() {
   const [isFilterModalOpen, setFilterModalOpen] = useState(false)
