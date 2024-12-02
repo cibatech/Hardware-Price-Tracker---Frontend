@@ -1,6 +1,6 @@
-import { AlertCard } from "@/app/components/alertas/alert-card"
-import { SearchAlerts } from "@/app/components/alertas/search"
-import { DefaultLayout } from "@/app/components/defaultLayout/default-layout"
+import { AlertCard } from "@/components/alertas/alert-card"
+import { SearchAlerts } from "@/components/alertas/search"
+import { DefaultLayout } from "@/components/defaultLayout/default-layout"
 import { Trash } from "lucide-react"
 
 export default function Alerts() {

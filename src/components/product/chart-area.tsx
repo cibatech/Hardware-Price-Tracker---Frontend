@@ -6,7 +6,7 @@ import {
   ChartConfig,
   ChartContainer,
   ChartTooltip,
-} from "@/components/ui/chart"
+} from "../shadcn-ui/ui/chart"
 import { useState } from "react"
 
 const chartData = [

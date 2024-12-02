@@ -4,7 +4,7 @@ import {
   BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
+} from "../../shadcn-ui/ui/breadcrumb"
 
 export function BreadcrumbDemo() {
   return (

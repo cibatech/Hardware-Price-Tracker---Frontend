@@ -1,13 +1,11 @@
-
 import Image from "next/image"
 import gpuImage from "../../../../public/gpu.svg"
-import { DefaultLayout } from "@/app/components/defaultLayout/default-layout"
-import { BreadcrumbDemo } from "@/app/components/product/ui/breadcumb"
-import StarRating from "@/app/components/product/ui/avaliation-stars"
-import { PriceDatailsArea } from "@/app/components/product/price-details-area"
-import { ComparePriceArea } from "@/app/components/product/compare-price-area"
-import { PriceHistoryArea } from "@/app/components/product/price-history-area"
-
+import { DefaultLayout } from "@/components/defaultLayout/default-layout"
+import { BreadcrumbDemo } from "@/components/product/ui/breadcumb"
+import StarRating from "@/components/product/ui/avaliation-stars"
+import { PriceDatailsArea } from "@/components/product/price-details-area"
+import { ComparePriceArea } from "@/components/product/compare-price-area"
+import { PriceHistoryArea } from "@/components/product/price-history-area"
 
 export default function ProductPage() {
   return (

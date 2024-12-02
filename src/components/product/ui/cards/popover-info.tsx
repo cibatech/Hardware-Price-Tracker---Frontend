@@ -2,7 +2,7 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover"
+} from "../../../shadcn-ui//ui/popover"
 import { LucideInfo } from "lucide-react"
 
 const goToPriceHistory = () => {

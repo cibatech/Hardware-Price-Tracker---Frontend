@@ -5,7 +5,7 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet"
+} from "../shadcn-ui/ui/sheet"
 import { hardwareComponetsList } from "@/constants"
 import { Menu } from "lucide-react"
 import Link from "next/link"

@@ -1,6 +1,6 @@
 "use client"
 
-import logo from "../../../../public/logo.svg"
+import logo from "../../../public/logo.svg"
 import Image from "next/image"
 import Link from "next/link"
 import { Bell } from "lucide-react"

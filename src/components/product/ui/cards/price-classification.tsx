@@ -1,6 +1,6 @@
 import Image from "next/image"
 import logo from "../../../../../assets/terabyte-logo.svg"
-import gpu from "../../../../../../public/gpu.svg"
+import gpu from "../../../../../public/gpu.svg"
 import { LinkButton } from "../link-button"
 
 interface PriceClassificationCardProps {

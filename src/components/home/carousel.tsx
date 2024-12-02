@@ -4,10 +4,10 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "@/components/ui/carousel"
+} from "../shadcn-ui/ui/carousel"
 
-import gpuPicture from "../../../../public/gpu.svg"
-import { ProductCard } from "../ui/product-card"
+import gpuPicture from "../../../public/gpu.svg"
+import { ProductCard } from "../product/ui/cards/product-card"
 
 export function CarouselSpacing() {
   return (

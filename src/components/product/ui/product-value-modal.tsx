@@ -6,28 +6,29 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog"
-import { Input } from "../inputs/input"
-import { MapPin } from "lucide-react"
+} from "../../shadcn-ui/ui/dialog"
+import { BellRing } from "lucide-react"
+import { Input } from "../../ui/inputs/input"
+import { Button } from "../../ui/button/button"
 
-export function ShippingModal() {
+export function ProductValueModal() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <button className="flex items-center gap-2 text-zinc-300 hover:opacity-50 transition-all text-nowrap">
-          <MapPin className="size-6" />
-          <span className="font-normal text-base">Calcular frete</span>
-        </button>
+        <Button className="size-10" variant="secondary">
+          <BellRing />
+        </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Informe seu CEP</DialogTitle>
+          <DialogTitle>Definir valor</DialogTitle>
           <DialogDescription>
-            Com base no frete, poderá compensar comprar um diferente produto.
+            Defina o valor desejado e seja notificado assim que o produto
+            atingir ou ficar abaixo desse preço.
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
-          <Input type="string" placeholder="Digite seu CEP" />
+          <Input type="string" placeholder="Digite um valor" />
         </div>
         <DialogFooter>
           <button className="flex-1 bg-green-700 text-zinc-50 rounded-3xl py-2">

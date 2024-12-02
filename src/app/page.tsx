@@ -1,9 +1,9 @@
 import pichauLogo from "../assets/pichau-logo.svg"
 import kabumLogo from "../assets/kabum!-logo.svg"
 import terabyteLogo from "../assets/terabyte-logo.svg"
-import { DefaultLayout } from "./components/defaultLayout/default-layout"
-import { CarouselSpacing } from "./components/home/carousel"
-import { Banner } from "./components/home/banner"
+import { DefaultLayout } from "../components/defaultLayout/default-layout"
+import { CarouselSpacing } from "../components/home/carousel"
+import { Banner } from "../components/home/banner"
 
 export default function Home() {
   return (

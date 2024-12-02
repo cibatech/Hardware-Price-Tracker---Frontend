@@ -1,5 +1,5 @@
-import { Button } from "@/app/components/ui/button/button"
-import { Input } from "@/app/components/ui/inputs/input"
+import { Button } from "@/components/ui/button/button"
+import { Input } from "@/components/ui/inputs/input"
 import { ArrowLeft } from "lucide-react"
 
 export default function ForgotPassword() {
