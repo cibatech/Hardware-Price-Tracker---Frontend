@@ -7,3 +7,7 @@ export const hardwareComponetsList = [
   "Memória RAM",
   "Placa mãe",
 ]
+
+export const productsPaginationOptions = ["12", "24", "36"]
+
+export const options = ["Asus", "Gigabyte", "MSI", "Asrock"]
