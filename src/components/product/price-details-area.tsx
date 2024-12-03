@@ -3,7 +3,6 @@
 import { Button } from "../ui/button/button"
 import { PriceAnalysisCard } from "./ui/cards/price-analysis-card"
 import { ProductValueModal } from "./ui/product-value-modal"
-import { Truck } from "lucide-react"
 
 export function PriceDatailsArea() {
   const goToCompareSection = () => {
@@ -39,12 +38,6 @@ export function PriceDatailsArea() {
           <span>Ative as notificações.</span>
           <ProductValueModal />
         </div>
-      </div>
-      <div className="flex px-4 py-6 gap-2 border border-zinc-300 rounded-xl justify-between items-center">
-        <strong className="text-base font-semibold">Frete - R$ 44,50</strong>
-        <Button className="size-1" variant="sponsor">
-          <Truck />
-        </Button>
       </div>
     </div>
   )
