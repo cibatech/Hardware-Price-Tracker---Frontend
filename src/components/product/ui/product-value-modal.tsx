@@ -15,7 +15,7 @@ export function ProductValueModal() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="size-10" variant="secondary">
+        <Button className="size-10" variant="sponsor">
           <BellRing />
         </Button>
       </DialogTrigger>

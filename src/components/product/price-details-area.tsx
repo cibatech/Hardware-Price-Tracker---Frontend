@@ -42,7 +42,7 @@ export function PriceDatailsArea() {
       </div>
       <div className="flex px-4 py-6 gap-2 border border-zinc-300 rounded-xl justify-between items-center">
         <strong className="text-base font-semibold">Frete - R$ 44,50</strong>
-        <Button className="size-10" variant="secondary">
+        <Button className="size-1" variant="sponsor">
           <Truck />
         </Button>
       </div>

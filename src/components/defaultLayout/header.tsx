@@ -5,8 +5,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { Bell } from "lucide-react"
 import { NavbarMobile } from "./navbar-mobile"
-import { Search } from "../ui/search"
-import { ShippingModal } from "../ui/modals/shipping-modal"
+import { Search } from "../ui/search/search"
 
 export function Header() {
   return (
@@ -24,7 +23,6 @@ export function Header() {
       </div>
       <Search />
       <div className="flex w-full items-center justify-between gap-6 md:justify-center md:w-auto">
-        <ShippingModal />
         <Link
           href={"/alerts"}
           className="flex gap-2 text-zinc-300 hover:opacity-50 transition-all"

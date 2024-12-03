@@ -10,7 +10,7 @@ export default function Login() {
         <form action="" className="flex flex-col gap-8 flex-1">
           <div className="flex gap-3 flex-col">
             <span className="text-xs font-semibold text-zinc-600">
-              Login e senha necessários para a autenticação
+              Login, senha e nome necessários para a autenticação
             </span>
 
             <Input
@@ -33,9 +33,9 @@ export default function Login() {
           <Button variant="submit">Confirmar</Button>
         </form>
         <span className="text-center">
-          Já tenho uma conta -{" "}
+          Ainda não tenho uma conta -{" "}
           <Link href="/auth/register" className="text-balance underline">
-            Entrar
+            Cadrastar
           </Link>
         </span>
       </div>
