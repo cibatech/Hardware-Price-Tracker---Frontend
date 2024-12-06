@@ -8,7 +8,7 @@ interface IBannerProps {
 
 export function Banner({ imageUrl, imageAlt, text }: IBannerProps) {
   return (
-    <div className="flex flex-col justify-center items-center border border-zinc-300 px-16 py-12 rounded-3xl gap-6">
+    <div className="flex flex-col justify-center items-center border border-zinc-300 px-16 py-12 rounded-3xl gap-6 hover:shadow-md cursor-pointer">
       <div className="rounded-full size-[10rem] bg-zinc-100 flex items-center justify-center">
         <Image src={imageUrl} alt={imageAlt} />
       </div>

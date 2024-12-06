@@ -1,11 +1,15 @@
+"use client"
+
 import { priceFormatter } from "@/lib/formatter"
 import Image from "next/image"
+import { redirect } from "next/navigation"
 
 interface IProductCard {
   productImageUrl: string
   productPrice: number
   productTitle: string
   store: string
+  redirectLink: string
 }
 
 export function ProductCard({
@@ -13,10 +17,22 @@ export function ProductCard({
   productPrice,
   productTitle,
   store,
+  redirectLink
 }: IProductCard) {
+  function handleRedirectToProductPage() {
+    redirect(`/product/${redirectLink}`)
+  }
+
   return (
-    <div className="flex flex-col justify-center px-6 py-8 gap-6 border rounded-xl max-w-[17.5rem]">
-      <Image src={productImageUrl} alt="" className="w-[14.5rem] h-auto m-auto" />
+    <div
+      className="flex flex-col justify-center px-6 py-8 gap-6 border rounded-xl max-w-[17.5rem] cursor-pointer hover:shadow-lg"
+      onClick={handleRedirectToProductPage}
+    >
+      <Image
+        src={productImageUrl}
+        alt=""
+        className="w-[14.5rem] h-auto m-auto"
+      />
       <span className="text-base font-medium">{productTitle}</span>
       <div className="flex flex-col gap-4">
         <span className="text-zinc-600 text-xs font-semibold ">

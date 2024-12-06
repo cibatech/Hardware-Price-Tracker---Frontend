@@ -20,6 +20,7 @@ export function CarouselSpacing() {
               productPrice={879}
               productTitle="Placa de video galax geforce gtx 1650 ex plus 1click oc 4gb..."
               store="Terabyte"
+              redirectLink=""
             />
           </CarouselItem>
         ))}
