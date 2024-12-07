@@ -31,6 +31,8 @@ export function ProductCard({
       <Image
         src={productImageUrl}
         alt=""
+        width={232}
+        height={146} 
         className="w-[14.5rem] h-auto m-auto"
       />
       <span className="text-base font-medium">{productTitle}</span>

@@ -11,3 +11,5 @@ export const hardwareComponetsList = [
 export const productsPaginationOptions = ["12", "24", "36"]
 
 export const options = ["Asus", "Gigabyte", "MSI", "Asrock"]
+
+export const stores = ["TeraByte","Pichau","Kabum"]

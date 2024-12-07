@@ -1,11 +1,11 @@
 "use client"
 
 import { Filter, Trash } from "lucide-react"
-import { useState } from "react"
-import { options, productsPaginationOptions } from "@/constants"
+import { useEffect, useState } from "react"
+import { options, productsPaginationOptions, stores } from "@/constants"
 import { useFilters } from "@/hooks/useFilters"
 
-import gpuPicture from "../../../../public/gpu.svg"
+// import gpuPicture from "../../../../public/gpu.svg"
 
 import { BreadcrumbDemo } from "@/components/product/ui/breadcumb"
 import { Button } from "@/components/ui/button/button"
@@ -13,10 +13,31 @@ import { RenderSelect } from "@/components/results/render-select"
 import { ProductCard } from "@/components/product/ui/cards/product-card"
 import { FilterModal } from "@/components/results/filter-modal"
 import { PaginationDemo } from "@/components/results/products-pagination"
+import { filterProduct, ProductsResponse } from "@/http"
 
 export default function ResultsPage() {
   const [isFilterModalOpen, setFilterModalOpen] = useState(false)
-  const { filtersCount, resetFilters } = useFilters()
+  const { filtersCount, resetFilters, searchParams } = useFilters()
+  const [productsList, setProductsList] = useState<
+    ProductsResponse["response"]["Return"]["TotalList"]
+  >([])
+
+  const store = searchParams.get("loja")
+
+  useEffect(() => {
+    console.log(store)
+
+    async function fetchProducts() {
+      const data = await filterProduct(store)
+      if (data) {
+        setProductsList(data.response.Return.TotalList) 
+      }
+    }
+
+    fetchProducts()
+  }, [store])
+
+  const totalResults = productsList.length
 
   return (
     <main className="flex flex-col gap-8 py-8 w-full max-w-screen-xl m-auto">
@@ -37,7 +58,9 @@ export default function ResultsPage() {
       </section>
 
       <section className="flex items-center justify-between md:w-[95%] w-[20rem] m-auto">
-        <strong className="text-xl font-semibold">612 resultados</strong>
+        <strong className="text-xl font-semibold">
+          {totalResults} resultados
+        </strong>
         <Button
           className="size-10"
           variant="filter"
@@ -47,7 +70,7 @@ export default function ResultsPage() {
         </Button>
         <div className="md:flex gap-3 hidden">
           {RenderSelect("preco", "Preço", options, true)}
-          {RenderSelect("loja", "Loja", options)}
+          {RenderSelect("loja", "Loja", stores)}
           {RenderSelect("marca", "Marca", options)}
           {RenderSelect("categoria", "Categoria", options, false)}
         </div>
@@ -58,13 +81,13 @@ export default function ResultsPage() {
       </section>
 
       <div className="flex flex-1 justify-center flex-wrap gap-8 m-auto">
-        {Array.from({ length: 10 }).map((_, index) => (
+        {productsList.map((product, index) => (
           <ProductCard
             key={index}
-            productImageUrl={gpuPicture}
-            productPrice={879}
-            productTitle="Placa de video galax geforce gtx 1650 ex plus 1click oc 4gb..."
-            store="Terabyte"
+            productImageUrl={product.ImageUrl}
+            productPrice={product.Value}
+            productTitle={product.Title}
+            store={product.Kind}
             redirectLink=""
           />
         ))}
