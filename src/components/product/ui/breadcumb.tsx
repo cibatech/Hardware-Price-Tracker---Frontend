@@ -6,20 +6,28 @@ import {
   BreadcrumbSeparator,
 } from "../../shadcn-ui/ui/breadcrumb"
 
-export function BreadcrumbDemo() {
+export function BreadcrumbDemo({
+  productTitle,
+  produtId,
+}: {
+  productTitle: string
+  produtId: string
+}) {
   return (
     <Breadcrumb className="mx-6 my-8">
       <BreadcrumbList>
         <BreadcrumbItem>
-          <BreadcrumbLink href="/" >Home</BreadcrumbLink>
+          <BreadcrumbLink href="/">Home</BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbLink href="/results">Pesquisa</BreadcrumbLink>
+          <BreadcrumbLink href="/results">Resultados</BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbLink href="/results/gtx1650">GTX 1650</BreadcrumbLink>
+          <BreadcrumbLink href={`/product/${produtId}`}>
+            {productTitle}
+          </BreadcrumbLink>
         </BreadcrumbItem>
       </BreadcrumbList>
     </Breadcrumb>

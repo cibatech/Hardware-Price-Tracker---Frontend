@@ -1,7 +1,7 @@
 import { LucideLaugh, LucideMeh, LucideSmile } from "lucide-react"
 import { PopoverInfoCard } from "./popover-info"
 
-type PriceClassification = "good" | "ok" | "bed"
+export type PriceClassification = "Good" | "Normal" | "Bad"
 
 interface IPriceClassification {
   priceClassification: PriceClassification
@@ -15,9 +15,9 @@ export function PriceAnalysisCard({
       <span className="text-base font-semibold">O preço está ótimo</span>
       <div className="flex items-center justify-between gap-3">
         <div className="bg-green-100 text-green-700 size-10 rounded-full flex items-center justify-center">
-          {priceClassification === "good" && <LucideLaugh />}
-          {priceClassification === "ok" && <LucideSmile />}
-          {priceClassification === "bed" && <LucideMeh />}
+          {priceClassification === "Good" && <LucideLaugh />}
+          {priceClassification === "Normal" && <LucideSmile />}
+          {priceClassification === "Bad" && <LucideMeh />}
         </div>
         <PopoverInfoCard />
       </div>
