@@ -88,7 +88,7 @@ export default function ResultsPage() {
             productPrice={product.Value}
             productTitle={product.Title}
             store={product.Kind}
-            redirectLink=""
+            productId={product.Id}
           />
         ))}
       </div>

@@ -8,8 +8,8 @@ interface IProductCard {
   productImageUrl: string
   productPrice: number
   productTitle: string
+  productId: string
   store: string
-  redirectLink: string
 }
 
 export function ProductCard({
@@ -17,10 +17,10 @@ export function ProductCard({
   productPrice,
   productTitle,
   store,
-  redirectLink
+  productId
 }: IProductCard) {
   function handleRedirectToProductPage() {
-    redirect(`/product/${redirectLink}`)
+    redirect(`/product/${productId}`)
   }
 
   return (
