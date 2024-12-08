@@ -1,14 +1,21 @@
 "use client"
 
 import { Search as LucideSearch } from "lucide-react"
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { SuggestionItem } from "./suggestion-card"
+import { useDebouncedCallback } from "use-debounce"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import { Product, searchByQuery } from "@/http/fetch-search-by-product"
 
 export function Search() {
+  const [suggestions, setSuggestions] = useState<Product[]>([])
+  const [isOpen, setIsOpen] = useState(false)
+  const searchParams = useSearchParams()
+  const pathname = usePathname()
+  const { replace } = useRouter()
+
   const divRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
-  const [value, setValue] = useState("")
-  const [isOpen, setIsOpen] = useState(false)
 
   const handleTriggerClick = () => {
     if (inputRef.current) {
@@ -20,6 +27,32 @@ export function Search() {
   const handleBlur = () => {
     setTimeout(() => setIsOpen(false), 100)
   }
+
+  const handleSearch = useDebouncedCallback((term) => {
+    console.log(`Searching... ${term}`)
+
+    const params = new URLSearchParams(searchParams)
+
+    if (term) {
+      params.set("query", term)
+    } else {
+      params.delete("query")
+    }
+    replace(`${pathname}?${params.toString()}`)
+  }, 300)
+
+  const query = searchParams.get("query")
+
+  useEffect(() => {
+    const handleSearchByQuery = async () => {
+      if (query) {
+        const data = await searchByQuery(query)
+        setSuggestions(data.response)
+      }
+    }
+
+    handleSearchByQuery()
+  }, [query])
 
   return (
     <div className="relative w-full md:w-[45%]">
@@ -33,8 +66,9 @@ export function Search() {
           type="text"
           placeholder="Buscar"
           className="bg-transparent outline-none flex-1"
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
+          onChange={(e) => {
+            handleSearch(e.target.value)
+          }}
           onFocus={() => setIsOpen(true)}
           onBlur={handleBlur}
         />
@@ -48,9 +82,14 @@ export function Search() {
             width: divRef.current ? `${divRef.current.clientWidth}px` : "100%",
           }}
         >
-          <ul className="bg-zinc-50 flex flex-col w-full p-4 border gap-3 rounded-xl">
-            {Array.from({ length: 4 }).map((_, index) => (
-              <SuggestionItem key={index} />
+          <ul className="bg-zinc-50 flex flex-col w-full p-4 border gap-3 rounded-xl max-h-64 overflow-scroll">
+            {suggestions.map((suggestion, index) => (
+              <SuggestionItem
+                key={index}
+                suggestionTitle={suggestion.Title}
+                suggestionCategory={suggestion.Where}
+                suggestionRedirectProductPageById={suggestion.Title}
+              />
             ))}
           </ul>
         </div>

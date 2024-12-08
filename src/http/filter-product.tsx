@@ -29,7 +29,7 @@ export type ProductsResponse = {
 }
 
 
-export async function filterProduct(store?: string | null): Promise<ProductsResponse | void> {
+export async function filterProduct(store?: string | null): Promise<ProductsResponse> {
   try {
     const { data } = await api.get(
       `/api/products/hardware/null--null/${store}/1`
@@ -41,5 +41,6 @@ export async function filterProduct(store?: string | null): Promise<ProductsResp
     return data
   } catch (error) {
     console.log(error)
+    throw new Error("Erro ao filtrar o produto") 
   }
 }

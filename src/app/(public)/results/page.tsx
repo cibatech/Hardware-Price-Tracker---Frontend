@@ -4,16 +4,14 @@ import { Filter, Trash } from "lucide-react"
 import { useEffect, useState } from "react"
 import { options, productsPaginationOptions, stores } from "@/constants"
 import { useFilters } from "@/hooks/useFilters"
-
-// import gpuPicture from "../../../../public/gpu.svg"
-
 import { BreadcrumbDemo } from "@/components/product/ui/breadcumb"
 import { Button } from "@/components/ui/button/button"
 import { RenderSelect } from "@/components/results/render-select"
 import { ProductCard } from "@/components/product/ui/cards/product-card"
 import { FilterModal } from "@/components/results/filter-modal"
 import { PaginationDemo } from "@/components/results/products-pagination"
-import { filterProduct, ProductsResponse } from "@/http"
+import { filterProduct, ProductsResponse } from "@/http/filter-product"
+import { searchByQuery } from "@/http/fetch-search-by-product"
 
 export default function ResultsPage() {
   const [isFilterModalOpen, setFilterModalOpen] = useState(false)
@@ -23,26 +21,36 @@ export default function ResultsPage() {
   >([])
 
   const store = searchParams.get("loja")
+  const query = searchParams.get("query")
 
   useEffect(() => {
     console.log(store)
 
-    async function fetchProducts() {
-      const data = await filterProduct(store)
-      if (data) {
-        setProductsList(data.response.Return.TotalList) 
+    if (!query) {
+      async function fetchProducts() {
+        const data = await filterProduct(store)
+        if (data) {
+          setProductsList(data.response.Return.TotalList)
+        }
       }
-    }
 
-    fetchProducts()
-  }, [store])
+      fetchProducts()
+    } else {
+      const handleSearchByQuery = async () => {
+        const data = await searchByQuery(query)
+        setProductsList(data.response)
+      }
+
+      handleSearchByQuery()
+    }
+  }, [store, query])
 
   const totalResults = productsList.length
 
   return (
     <main className="flex flex-col gap-8 py-8 w-full max-w-screen-xl m-auto">
       <section className="flex flex-1 items-center justify-between">
-        <BreadcrumbDemo />
+        <BreadcrumbDemo isProductPage={false} />
         <div className="md:flex items-center justify-between gap-4 hidden">
           <div className="flex items-center gap-2">
             <strong className="text-xl font-semibold">Filtros</strong>
@@ -71,7 +79,7 @@ export default function ResultsPage() {
         <div className="md:flex gap-3 hidden">
           {RenderSelect("preco", "Preço", options, true)}
           {RenderSelect("loja", "Loja", stores)}
-          {RenderSelect("marca", "Marca", options)}
+          {/* {RenderSelect("marca", "Marca", options)} */}
           {RenderSelect("categoria", "Categoria", options, false)}
         </div>
         <div className="md:flex gap-3 items-center text-sm text-green-700 hidden">

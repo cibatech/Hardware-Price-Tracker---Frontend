@@ -8,6 +8,7 @@ import {
   ChartTooltip,
 } from "../shadcn-ui/ui/chart"
 import { useState } from "react"
+import { filterProductByDateOptions } from "@/constants"
 
 const chartData = [
   { month: "January", desktop: 186 },
@@ -45,8 +46,7 @@ const CustomTooltip = ({ active, payload, label }: CustomTooltipProps) => {
 }
 
 export function ChartArea() {
-  const options = ["Asus", "Gigabyte", "MSI", "Asrock"]
-  const [selected, setSelected] = useState("Asus")
+  const [selected, setSelected] = useState("30 dias")
 
   return (
     <div className="flex flex-col gap-10">
@@ -86,7 +86,7 @@ export function ChartArea() {
         </LineChart>
       </ChartContainer>
       <section className="flex items-center w-full gap-8 ml-6 overflow-scroll">
-        {options.map((option) => (
+        {filterProductByDateOptions.map((option) => (
           <button
             key={option}
             className={`px-4 py-2 border bg-green-100 rounded-3xl transition-all ${

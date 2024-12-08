@@ -12,4 +12,11 @@ export const productsPaginationOptions = ["12", "24", "36"]
 
 export const options = ["Asus", "Gigabyte", "MSI", "Asrock"]
 
-export const stores = ["TeraByte","Pichau","Kabum"]
+export const stores = ["TeraByte", "Pichau", "Kabum"]
+
+export const filterProductByDateOptions = [
+  "30 dias",
+  "3 meses",
+  "6 meses",
+  "1 ano",
+]
