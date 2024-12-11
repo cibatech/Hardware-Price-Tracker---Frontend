@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react"
 import { SuggestionItem } from "./suggestion-card"
 import { useDebouncedCallback } from "use-debounce"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import { Product, searchByQuery } from "@/http/fetch-search-by-product"
+import { Product, searchByQuery } from "@/http/product/fetch-search-by-product"
 
 export function Search() {
   const [suggestions, setSuggestions] = useState<Product[]>([])

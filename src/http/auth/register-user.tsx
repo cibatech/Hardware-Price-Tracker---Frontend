@@ -1,18 +1,5 @@
+import { RegisterData, RegisterResponse } from "@/@types/auth"
 import { api } from "@/services/api"
-
-export type RegisterResponse = {
-  Description: string
-  data: {
-    Id: string
-    Email: string
-    Password: string
-  }
-}
-
-export type RegisterData = {
-  Email: string
-  Password: string
-}
 
 export async function registerUser(
   registerData: RegisterData

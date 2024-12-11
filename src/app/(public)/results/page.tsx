@@ -10,8 +10,8 @@ import { RenderSelect } from "@/components/results/render-select"
 import { ProductCard } from "@/components/product/ui/cards/product-card"
 import { FilterModal } from "@/components/results/filter-modal"
 import { PaginationDemo } from "@/components/results/products-pagination"
-import { filterProduct, ProductsResponse } from "@/http/filter-product"
-import { searchByQuery } from "@/http/fetch-search-by-product"
+import { filterProduct, ProductsResponse } from "@/http/product/filter-product"
+import { searchByQuery } from "@/http/product/fetch-search-by-product"
 
 export default function ResultsPage() {
   const [isFilterModalOpen, setFilterModalOpen] = useState(false)

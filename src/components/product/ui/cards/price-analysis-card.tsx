@@ -1,11 +1,6 @@
 import { LucideLaugh, LucideMeh, LucideSmile } from "lucide-react"
 import { PopoverInfoCard } from "./popover-info"
-
-export type PriceClassification = "Good" | "Normal" | "Bad"
-
-interface IPriceClassification {
-  priceClassification: PriceClassification
-}
+import { IPriceClassification } from "@/@types/product"
 
 export function PriceAnalysisCard({
   priceClassification,

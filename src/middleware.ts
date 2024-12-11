@@ -4,6 +4,7 @@ import { NextRequest, NextResponse } from "next/server"
 export async function middleware(request: NextRequest) {
   const cookie = await cookies()
   const userId = cookie.get("userId")
+  console.log("Middleware - Rotas protegidas", userId)
 
   const protectedRoutes = ["/alerts"]
 
@@ -19,5 +20,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/alerts:path"],
+  matcher: ["/alerts:path*"],
 }
