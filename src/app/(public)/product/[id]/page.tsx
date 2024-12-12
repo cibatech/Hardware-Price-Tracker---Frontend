@@ -16,11 +16,10 @@ export default async function ProductPage({
 }) {
   const productData = await FetchProductById(params.id)
   const trendsData = await FetchTrendsById(params.id)
-  const data = await FetchProductsByComparasion(params.id)
+  const comparasionData = await FetchProductsByComparasion(params.id)
 
-  const filteredBestPriceOrder = data.response.FindInThreeStores.sort(
-    (a, b) => a.Value - b.Value
-  )
+  const filteredBestPriceOrder =
+    comparasionData.response.FindInThreeStores.sort((a, b) => a.Value - b.Value)
 
   const lowestPriceProductId = filteredBestPriceOrder[0].Id
 
@@ -36,7 +35,9 @@ export default async function ProductPage({
           <h1 className="text-2xl font-medium max-w-[430px]">
             {productData.response.Product.Title}
           </h1>
+
           {/* <StarRating rating={2.4} avaliationsNumber={203} /> */}
+
           <Image
             src={productData.response.Product.ImageUrl}
             width={212}
@@ -45,6 +46,7 @@ export default async function ProductPage({
             className="size-[16rem] m-auto"
           />
         </div>
+
         <PriceDatailsArea
           price={productData.response.Product.Value}
           store={productData.response.Product.Kind}

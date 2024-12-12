@@ -5,16 +5,19 @@ import { Button } from "../ui/button/button"
 import { Input } from "../ui/inputs/input"
 
 export const PriceModal = () => {
-  const { updateFilter } = useFilters()
+  const { updateFilter, } = useFilters()
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
+
+   
 
     const initialPrice = (e.target as number).elements["initial-price"].value
     const finalPrice = (e.target as number).elements["final-price"].value
 
     updateFilter("initialPrice", `${initialPrice}`)
     updateFilter("finalPrice", `${finalPrice}`)
+    updateFilter("preco", "Preço")
   }
 
   return (

@@ -2,19 +2,19 @@ import { ProductsFilterResponse } from "@/@types/product"
 import { api } from "@/services/api"
 
 export async function filterProduct(
-  store?: string | null
+  category: string | "hardware",
+  store: string | null,
+  min: number | null,
+  max: number | null,
+  query: string | null
 ): Promise<ProductsFilterResponse> {
   try {
     const { data } = await api.get(
-      `/api/products/hardware/null--null/${store}/1`
+      `/api/products/${category}/${min}--${max}/${store}/${query}/1`
     )
-
-    console.log("REQ")
-    console.log(data)
 
     return data
   } catch (error) {
-    console.log(error)
-    throw new Error("Erro ao filtrar o produto")
+    throw new Error(`Erro ao filtrar por produto(s): ${error}`)
   }
 }

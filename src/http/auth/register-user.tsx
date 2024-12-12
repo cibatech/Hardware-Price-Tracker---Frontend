@@ -7,12 +7,8 @@ export async function registerUser(
   try {
     const { data } = await api.post("/api/user/create", registerData)
 
-    console.log("Usário registrado")
-    console.log(data)
-
     return data
   } catch (error) {
-    console.error(error)
-    throw new Error("Erro ao buscar as infos")
+    throw new Error(`Erro ao registrar usuário: ${error}`)
   }
 }

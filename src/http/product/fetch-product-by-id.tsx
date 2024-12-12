@@ -7,12 +7,8 @@ export async function FetchProductById(
   try {
     const { data } = await api.get(`/api/products/prices/${id}`)
 
-    console.log("Pegando produto específico")
-    console.log(data)
-
     return data
   } catch (error) {
-    console.error(error)
-    throw new Error("Erro ao buscar o produto")
+    throw new Error(`Erro ao buscar o produto: ${error}`)
   }
 }

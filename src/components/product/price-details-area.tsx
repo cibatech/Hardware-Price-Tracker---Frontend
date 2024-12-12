@@ -2,8 +2,9 @@
 
 import { priceFormatter } from "@/lib/formatter"
 import { Button } from "../ui/button/button"
-import { PriceAnalysisCard, PriceClassification } from "./ui/cards/price-analysis-card"
+import { PriceAnalysisCard } from "./ui/cards/price-analysis-card"
 import { ProductValueModal } from "./ui/product-value-modal"
+import { PriceClassification } from "@/@types/product"
 
 interface PriceDatailsProps {
   store: string
@@ -11,7 +12,11 @@ interface PriceDatailsProps {
   productEvaluation: PriceClassification
 }
 
-export function PriceDatailsArea({ price, store, productEvaluation }: PriceDatailsProps) {
+export function PriceDatailsArea({
+  price,
+  store,
+  productEvaluation,
+}: PriceDatailsProps) {
   const goToCompareSection = () => {
     const section = document.getElementById("compare-section")
     section?.scrollIntoView({ behavior: "smooth" })

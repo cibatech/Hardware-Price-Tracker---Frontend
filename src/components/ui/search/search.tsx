@@ -5,7 +5,8 @@ import { useEffect, useRef, useState } from "react"
 import { SuggestionItem } from "./suggestion-card"
 import { useDebouncedCallback } from "use-debounce"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import { Product, searchByQuery } from "@/http/product/fetch-search-by-product"
+import { searchByQuery } from "@/http/product/fetch-search-by-product"
+import { Product } from "@/@types/product"
 
 export function Search() {
   const [suggestions, setSuggestions] = useState<Product[]>([])
@@ -54,6 +55,8 @@ export function Search() {
     handleSearchByQuery()
   }, [query])
 
+  const suggestionsListLenght = suggestions.length
+
   return (
     <div className="relative w-full md:w-[45%]">
       <div
@@ -83,14 +86,21 @@ export function Search() {
           }}
         >
           <ul className="bg-zinc-50 flex flex-col w-full p-4 border gap-3 rounded-xl max-h-64 overflow-scroll">
-            {suggestions.map((suggestion, index) => (
-              <SuggestionItem
-                key={index}
-                suggestionTitle={suggestion.Title}
-                suggestionCategory={suggestion.Where}
-                suggestionRedirectProductPageById={suggestion.Title}
-              />
-            ))}
+            {suggestionsListLenght > 0 ? (
+              suggestions.map((suggestion, index) => (
+                <SuggestionItem
+                  key={index}
+                  suggestionTitle={suggestion.Title}
+                  suggestionCategory={suggestion.Where}
+                  suggestionRedirectProductPageById={suggestion.Title}
+                />
+              ))
+            ) : (
+              <div className="flex gap-3 items-center m-auto">
+                <LucideSearch />
+                <strong>Nenhuma busca ainda</strong>
+              </div>
+            )}
           </ul>
         </div>
       )}

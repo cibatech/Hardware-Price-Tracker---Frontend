@@ -2,7 +2,7 @@
 
 import { Filter, Trash } from "lucide-react"
 import { useEffect, useState } from "react"
-import { options, productsPaginationOptions, stores } from "@/constants"
+import { hardwareCategories, options, productsPaginationOptions, stores } from "@/constants"
 import { useFilters } from "@/hooks/useFilters"
 import { BreadcrumbDemo } from "@/components/product/ui/breadcumb"
 import { Button } from "@/components/ui/button/button"
@@ -10,40 +10,36 @@ import { RenderSelect } from "@/components/results/render-select"
 import { ProductCard } from "@/components/product/ui/cards/product-card"
 import { FilterModal } from "@/components/results/filter-modal"
 import { PaginationDemo } from "@/components/results/products-pagination"
-import { filterProduct, ProductsResponse } from "@/http/product/filter-product"
+import { filterProduct } from "@/http/product/filter-product"
 import { searchByQuery } from "@/http/product/fetch-search-by-product"
+import { ProductsFilterResponse } from "@/@types/product"
 
 export default function ResultsPage() {
   const [isFilterModalOpen, setFilterModalOpen] = useState(false)
   const { filtersCount, resetFilters, searchParams } = useFilters()
   const [productsList, setProductsList] = useState<
-    ProductsResponse["response"]["Return"]["TotalList"]
+    ProductsFilterResponse["response"]["Return"]["TotalList"]
   >([])
 
+  const category = searchParams.get("categoria")
   const store = searchParams.get("loja")
   const query = searchParams.get("query")
+  const minPrice = searchParams.get("initialPrice") 
+  const maxPrice = searchParams.get("finalPrice")
 
   useEffect(() => {
     console.log(store)
 
-    if (!query) {
-      async function fetchProducts() {
-        const data = await filterProduct(store)
-        if (data) {
-          setProductsList(data.response.Return.TotalList)
-        }
+    async function fetchProducts() {
+      const data = await filterProduct(category,store, minPrice, maxPrice, query)
+      if (data) {
+        setProductsList(data.response.Return.TotalList)
       }
-
-      fetchProducts()
-    } else {
-      const handleSearchByQuery = async () => {
-        const data = await searchByQuery(query)
-        setProductsList(data.response)
-      }
-
-      handleSearchByQuery()
     }
-  }, [store, query])
+
+    fetchProducts()
+
+  }, [store, query, minPrice, maxPrice])
 
   const totalResults = productsList.length
 
@@ -77,10 +73,10 @@ export default function ResultsPage() {
           <Filter />
         </Button>
         <div className="md:flex gap-3 hidden">
-          {RenderSelect("preco", "Preço", options, true)}
+          {RenderSelect("preco", "Preço ", options, true)}
           {RenderSelect("loja", "Loja", stores)}
           {/* {RenderSelect("marca", "Marca", options)} */}
-          {RenderSelect("categoria", "Categoria", options, false)}
+          {RenderSelect("categoria", "Categoria", hardwareCategories, false)}
         </div>
         <div className="md:flex gap-3 items-center text-sm text-green-700 hidden">
           <label htmlFor="">Produtos por página</label>

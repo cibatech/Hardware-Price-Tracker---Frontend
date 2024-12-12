@@ -18,12 +18,8 @@ export async function loginUser(
       path: "/",
     })
 
-    console.log("Usuário logado")
-    console.log(data)
-
     return data
   } catch (error) {
-    console.error("Erro ao logar o usuário:", error)
-    throw new Error("Erro ao buscar as informações")
+    throw new Error(`Erro ao logar usuário: ${error}`)
   }
 }
