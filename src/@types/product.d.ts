@@ -25,30 +25,36 @@ export type ProductsQueryResponse = {
   Config: ProductsQueryConfig
 }
 
+export type ProductWithInstallment = Product & {
+  onInstallment: string
+}
+
 export type ProductPriceResponse = {
   Description: string
   response: {
-    Product: Product
+    Product: ProductWithInstallment
     PriceRef: {
-      Id: string
-      AtDate: string
-      Price: number
-      ProdId: string
-    }[]
+      [date: string]: {
+        Id: string
+        AtDate: string
+        Price: number
+        ProdId: string
+      }[]
+    }
   }
   Config: {
     Id: string
+    PasDays: string
   }
 }
 
-export type ProductWithInstallment = Product & {
-  onInstallment: null
-}
+
+
 
 export type ProductComparasionResponse = {
   Description: string
   response: {
-    FindInThreeStores: Product[]
+    FindInThreeStores: ProductWithInstallment[]
   }
   BestPrice: ProductWithInstallment
   Config: {

@@ -17,6 +17,8 @@ export default async function ProductPage({
   const productData = await FetchProductById(params.id)
   const trendsData = await FetchTrendsById(params.id)
   const comparasionData = await FetchProductsByComparasion(params.id)
+  console.log(productData.response.Product.Title)
+  console.log(productData.response.Product.Value)
 
   const filteredBestPriceOrder =
     comparasionData.response.FindInThreeStores.sort((a, b) => a.Value - b.Value)
@@ -51,20 +53,24 @@ export default async function ProductPage({
           price={productData.response.Product.Value}
           store={productData.response.Product.Kind}
           productEvaluation={trendsData.response.ProductEvaluation}
+          tearmValue={productData.response.Product.onInstallment}
         />
       </section>
+
       <ComparePriceArea>
-        {filteredBestPriceOrder.slice(0, 3).map((product) => (
+        {filteredBestPriceOrder.slice(0, 3).map((product, index) => (
           <PriceClassificationCard
-            key={product.Id}
+            key={index}
             isLowestPrice={product.Id === lowestPriceProductId}
             productLink={product.Link}
             productPrice={product.Value}
             productStore={product.Kind}
             productImageUrl={product.ImageUrl}
+            tearmValue={product.onInstallment}
           />
         ))}
       </ComparePriceArea>
+
       <PriceHistoryArea />
     </div>
   )

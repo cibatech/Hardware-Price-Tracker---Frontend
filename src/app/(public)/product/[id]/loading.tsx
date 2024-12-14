@@ -6,27 +6,19 @@ import {
 
 export default function Loading() {
   return (
-    <div className="flex flex-col h-full max-w-screen-lg m-auto p-4 space-y-6">
-      {/* Breadcrumb Skeleton */}
+    <main className="flex flex-col max-w-screen-lg m-auto p-4 space-y-6 h-screen">
       <div className="w-full">
         <ProductSketonTitle />
       </div>
-
-      {/* Main Section */}
       <section className="flex justify-center gap-16 w-full flex-wrap">
-        {/* Image and Title Skeleton */}
-        <div className="flex flex-col  gap-4">
+        <div className="flex flex-col gap-4">
           <ProductSketonTitle />
           <ProductSketonImage />
         </div>
-
-        {/* Price Details Skeleton */}
         <div className="flex flex-col gap-4">
           <ProductSketonPriceDatails />
         </div>
       </section>
-
-      {/* Compare Prices Skeleton */}
       <div className="flex flex-col gap-4">
         <ProductSketonTitle />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -35,6 +27,6 @@ export default function Loading() {
           <ProductSketonPriceDatails />
         </div>
       </div>
-    </div>
+    </main>
   )
 }

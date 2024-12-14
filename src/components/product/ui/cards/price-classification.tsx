@@ -13,7 +13,7 @@ interface PriceClassificationCardProps {
   productStore: StoresOptions
   productLink: string
   productImageUrl: string
-  // está faltando o valor à prazo
+  tearmValue: string
 }
 
 const storeLogos = {
@@ -28,6 +28,7 @@ export function PriceClassificationCard({
   productStore,
   productLink,
   productImageUrl,
+  tearmValue,
 }: PriceClassificationCardProps) {
   return (
     <div className="flex border border-zinc-300 justify-between items-center rounded-lg px-1 md:px-10 py-8 md:flex-row flex-col gap-4">
@@ -47,7 +48,7 @@ export function PriceClassificationCard({
                 <span className="text-sm font-semibold ">(frete incluso)</span>
               </strong>
               <span className="text-xs text-slate-600 font-semibold">
-                ou 8x de R$ 354,87 com juros
+                ou {tearmValue}
               </span>
             </div>
             {isLowestPrice && (

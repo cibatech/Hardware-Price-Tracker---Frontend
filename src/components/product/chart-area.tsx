@@ -85,7 +85,7 @@ export function ChartArea() {
           />
         </LineChart>
       </ChartContainer>
-      <section className="flex items-center w-full gap-8 ml-6 overflow-scroll">
+      {/* <section className="flex items-center w-full gap-8 ml-6 overflow-scroll">
         {filterProductByDateOptions.map((option) => (
           <button
             key={option}
@@ -99,7 +99,7 @@ export function ChartArea() {
             {option}
           </button>
         ))}
-      </section>
+      </section> */}
     </div>
   )
 }

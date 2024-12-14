@@ -4,7 +4,6 @@ import { Filter, Trash } from "lucide-react"
 import { useEffect, useState } from "react"
 import {
   hardwareCategories,
- 
   productsPaginationOptions,
   stores,
 } from "@/constants"
@@ -19,11 +18,13 @@ import { filterProduct } from "@/http/product/filter-product"
 import { ProductsFilterResponse } from "@/@types/product"
 import { EmptyResults } from "@/components/results/empty-results"
 import { useRouter } from "next/navigation"
+import Loading from "@/components/results/loading"
 
 export default function ResultsPage() {
   const [isFilterModalOpen, setFilterModalOpen] = useState(false)
   const { filtersCount, resetFilters, searchParams, params } = useFilters()
   const [totalProducts, setTotalProducts] = useState(0)
+  const [isLoading, setIsLoading] = useState(false)
   const [productsList, setProductsList] = useState<
     ProductsFilterResponse["response"]["Return"]["TotalList"]
   >([])
@@ -42,20 +43,27 @@ export default function ResultsPage() {
     ? Number(searchParams.get("finalPrice"))
     : null
 
+  
   useEffect(() => {
     async function fetchProducts() {
-      const data = await filterProduct(
-        category,
-        store,
-        minPrice,
-        maxPrice,
-        query,
-        currentPage
-      )
-      if (data) {
-        setProductsList(data.response.Return.TotalList)
-        setTotalProducts(data.response.Return.TotalListLength)
-        console.log(data.response.Return.TotalListLength)
+      setIsLoading(true) 
+      try {
+        const data = await filterProduct(
+          category,
+          store,
+          minPrice,
+          maxPrice,
+          query,
+          currentPage
+        )
+        if (data) {
+          setProductsList(data.response.Return.TotalList)
+          setTotalProducts(data.response.Return.TotalListLength)
+        }
+      } catch (error) {
+        console.error("Erro ao buscar produtos:", error)
+      } finally {
+        setIsLoading(false) 
       }
     }
 
@@ -112,12 +120,7 @@ export default function ResultsPage() {
           <Filter />
         </Button>
         <div className="md:flex gap-3 hidden">
-          <RenderSelect
-            filterKey="preco"
-            label="Preço"
-           
-            priceFilter
-          />
+          <RenderSelect filterKey="preco" label="Preço" priceFilter />
           <RenderSelect filterKey="loja" label="Loja" list={stores} />
           <RenderSelect
             filterKey="categoria"
@@ -137,17 +140,21 @@ export default function ResultsPage() {
       </section>
 
       <div className="flex flex-1 justify-center flex-wrap gap-8 m-auto">
-        {totalProducts === 0 && <EmptyResults query={query} />}
-        {productsList.slice(0, productsPerPage).map((product, index) => (
-          <ProductCard
-            key={index}
-            productImageUrl={product.ImageUrl}
-            productPrice={product.Value}
-            productTitle={product.Title}
-            store={product.Kind}
-            productId={product.Id}
-          />
-        ))}
+        {isLoading && <Loading />}
+        {!isLoading && totalProducts === 0 && <EmptyResults query={query} />}
+        {!isLoading &&
+          productsList
+            .slice(0, productsPerPage)
+            .map((product, index) => (
+              <ProductCard
+                key={index}
+                productImageUrl={product.ImageUrl}
+                productPrice={product.Value}
+                productTitle={product.Title}
+                store={product.Kind}
+                productId={product.Id}
+              />
+            ))}
       </div>
 
       {isFilterModalOpen && (

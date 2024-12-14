@@ -5,7 +5,8 @@ export async function FetchProductById(
   id: string
 ): Promise<ProductPriceResponse> {
   try {
-    const { data } = await api.get(`/api/products/prices/${id}/20`)
+    const { data } = await api.get(`/api/products/prices/${id}/1`)
+    console.log(data)
 
     return data
   } catch (error) {
