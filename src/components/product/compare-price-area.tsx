@@ -1,6 +1,6 @@
-import { PriceClassificationCard } from "./ui/cards/price-classification";
+import { ReactNode } from "react"
 
-export function ComparePriceArea() {
+export function ComparePriceArea({ children }: { children: ReactNode }) {
   return (
     <section
       id="compare-section"
@@ -9,11 +9,7 @@ export function ComparePriceArea() {
       <strong className="text-xl font-semibold">
         Compare preços em 3 lojas
       </strong>
-      <div className="flex gap-8 flex-col">
-        <PriceClassificationCard isLowestPrice={true} />
-        <PriceClassificationCard isLowestPrice={false} />
-        <PriceClassificationCard isLowestPrice={false} />
-      </div>
+      <div className="flex gap-8 flex-col">{children}</div>
     </section>
   )
 }

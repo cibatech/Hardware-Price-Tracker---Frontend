@@ -1,13 +1,16 @@
-"use client"
-
 import logo from "../../../public/logo.svg"
 import Image from "next/image"
 import Link from "next/link"
 import { Bell } from "lucide-react"
 import { NavbarMobile } from "./navbar-mobile"
 import { Search } from "../ui/search/search"
+import { cookies } from "next/headers"
 
-export function Header() {
+export async function Header() {
+  const cookie = await cookies()
+  const userId = cookie.get("userId")
+  const isLogged = userId
+
   return (
     <header className="w-full bg-green-700 flex items-center justify-between p-2 md:flex-row md:p-6 flex-col gap-6">
       <div className="flex items-center md:justify-center justify-between gap-6">
@@ -31,7 +34,7 @@ export function Header() {
           <span className="font-normal text-base">Alertas</span>
         </Link>
         <button className="bg-green-100 hidden px-6 py-3 rounded-3xl text-green-700 text-base font-semibold md:flex hover:opacity-50 hover:transition-all">
-          Entrar
+          {isLogged ? "Ismael" : "Entrar"}
         </button>
       </div>
     </header>

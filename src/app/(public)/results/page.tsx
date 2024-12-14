@@ -1,87 +1,131 @@
 "use client"
 
 import { Filter, Trash } from "lucide-react"
-import { useState } from "react"
-import { options, productsPaginationOptions } from "@/constants"
+import { Suspense, useEffect, useState } from "react"
+import {
+  hardwareCategories,
+  options,
+  productsPaginationOptions,
+  stores,
+} from "@/constants"
 import { useFilters } from "@/hooks/useFilters"
-
-import gpuPicture from "../../../../public/gpu.svg"
-import { DefaultLayout } from "@/components/defaultLayout/default-layout"
 import { BreadcrumbDemo } from "@/components/product/ui/breadcumb"
 import { Button } from "@/components/ui/button/button"
 import { RenderSelect } from "@/components/results/render-select"
 import { ProductCard } from "@/components/product/ui/cards/product-card"
 import { FilterModal } from "@/components/results/filter-modal"
 import { PaginationDemo } from "@/components/results/products-pagination"
+import { filterProduct } from "@/http/product/filter-product"
+import { ProductsFilterResponse } from "@/@types/product"
+import { EmptyResults } from "@/components/results/empty-results"
+import { ProductSketonPriceDatails } from "@/components/product/ui/skeletons"
 
 export default function ResultsPage() {
   const [isFilterModalOpen, setFilterModalOpen] = useState(false)
-  const { filtersCount, resetFilters } = useFilters()
+  const { filtersCount, resetFilters, searchParams } = useFilters()
+  const [totalProducts, setTotalProducts] = useState(0)
+  const [productsList, setProductsList] = useState<
+    ProductsFilterResponse["response"]["Return"]["TotalList"]
+  >([])
+
+  const category = searchParams.get("categoria") || "hardware" 
+  const store = searchParams.get("loja")
+  const query = searchParams.get("query")
+  const currentPage = Number(searchParams.get("page")) || 1
+  const productsPerPage = Number(searchParams.get("productsPerPage")) || 12
+
+  const minPrice = searchParams.get("initialPrice")
+    ? Number(searchParams.get("initialPrice"))
+    : null
+  const maxPrice = searchParams.get("finalPrice")
+    ? Number(searchParams.get("finalPrice"))
+    : null
+
+  useEffect(() => {
+
+    async function fetchProducts() {
+      const data = await filterProduct(
+        category,
+        store,
+        minPrice,
+        maxPrice,
+        query,
+        currentPage
+      )
+      if (data) {
+        setProductsList(data.response.Return.TotalList)
+        setTotalProducts(data.response.Return.TotalListLength)
+        console.log(data.response.Return.TotalListLength)
+      }
+    }
+
+    fetchProducts()
+  }, [category, store, query, minPrice, maxPrice, currentPage])
+
+  const totalPages = Math.ceil(totalProducts / productsPerPage)
 
   return (
-    <DefaultLayout>
-      <div className="flex flex-col gap-8 py-8 w-full max-w-screen-xl m-auto">
-        <section className="flex flex-1 items-center justify-between">
-          <BreadcrumbDemo />
-          <div className="md:flex items-center justify-between gap-4 hidden">
-            <div className="flex items-center gap-2">
-              <strong className="text-xl font-semibold">Filtros</strong>
-              <span className="size-5 flex items-center justify-center bg-green-700 rounded-full text-zinc-50">
-                {filtersCount}
-              </span>
-            </div>
-            <Button variant="delete" onClick={resetFilters}>
-              <Trash />
-              Resetar Filtros
-            </Button>
+    <main className="flex flex-col gap-8 py-8 w-full max-w-screen-xl m-auto">
+      <section className="flex flex-1 items-center justify-between">
+        <BreadcrumbDemo isProductPage={false} />
+        <div className="md:flex items-center justify-between gap-4 hidden">
+          <div className="flex items-center gap-2">
+            <strong className="text-xl font-semibold">Filtros</strong>
+            <span className="size-5 flex items-center justify-center bg-green-700 rounded-full text-zinc-50">
+              {filtersCount}
+            </span>
           </div>
-        </section>
-
-        <section className="flex items-center justify-between md:w-[95%] w-[20rem] m-auto">
-          <strong className="text-xl font-semibold">612 resultados</strong>
-          <Button
-            className="size-10"
-            variant="filter"
-            onClick={() => setFilterModalOpen(true)}
-          >
-            <Filter />
+          <Button variant="delete" onClick={resetFilters}>
+            <Trash />
+            Resetar Filtros
           </Button>
-          <div className="md:flex gap-3 hidden">
-            {RenderSelect("preco", "Preço", options, true)}
-            {RenderSelect("loja", "Loja", options)}
-            {RenderSelect("marca", "Marca", options)}
-            {RenderSelect("categoria", "Categoria", options, false)}
-          </div>
-          <div className="md:flex gap-3 items-center text-sm text-green-700 hidden">
-            <label htmlFor="">Produtos por página</label>
-            {RenderSelect(
-              "pagina",
-              "12",
-              productsPaginationOptions,
-              false,
-              true
-            )}
-          </div>
-        </section>
+        </div>
+      </section>
 
-        <div className="flex flex-1 justify-center flex-wrap gap-8 m-auto">
-          {Array.from({ length: 10 }).map((_, index) => (
+      <section className="flex items-center justify-between md:w-[95%] w-[20rem] m-auto">
+        <strong className="text-xl font-semibold">
+          {totalProducts} resultados
+        </strong>
+        <Button
+          className="size-10"
+          variant="filter"
+          onClick={() => setFilterModalOpen(true)}
+        >
+          <Filter />
+        </Button>
+        <div className="md:flex gap-3 hidden">
+          {RenderSelect("preco", "Preço ", options, true)}
+          {RenderSelect("loja", "Loja", stores)}
+          {/* {RenderSelect("marca", "Marca", options)} */}
+          {RenderSelect("categoria", "Categoria", hardwareCategories, false)}
+        </div>
+        <div className="md:flex gap-3 items-center text-sm text-green-700 hidden">
+          <label htmlFor="">Produtos por página</label>
+          {RenderSelect("productsPerPage", "12 ", productsPaginationOptions, false, true)}
+        </div>
+      </section>
+
+      <div className="flex flex-1 justify-center flex-wrap gap-8 m-auto">
+   
+          {totalProducts === 0 && <EmptyResults query={query} />}
+          {productsList.slice(0, productsPerPage).map((product, index) => (
             <ProductCard
               key={index}
-              productImageUrl={gpuPicture}
-              productPrice={879}
-              productTitle="Placa de video galax geforce gtx 1650 ex plus 1click oc 4gb..."
-              store="Terabyte"
+              productImageUrl={product.ImageUrl}
+              productPrice={product.Value}
+              productTitle={product.Title}
+              store={product.Kind}
+              productId={product.Id}
             />
           ))}
-        </div>
-
-        {isFilterModalOpen && (
-          <FilterModal closeFilterModal={() => setFilterModalOpen(false)} />
-        )}
-
-        <PaginationDemo />
+       
       </div>
-    </DefaultLayout>
+
+      {isFilterModalOpen && (
+        <FilterModal closeFilterModal={() => setFilterModalOpen(false)} />
+      )}
+
+      <PaginationDemo totalPages={totalPages} />
+    </main>
   )
 }

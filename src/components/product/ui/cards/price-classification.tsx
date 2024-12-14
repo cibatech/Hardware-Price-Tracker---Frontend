@@ -1,24 +1,49 @@
 import Image from "next/image"
-import logo from "../../../../assets/terabyte-logo.svg"
-import gpu from "../../../../../public/gpu.svg"
+import terabyteLogo from "../../../../assets/terabyte-logo.svg"
+import kabumLogo from "../../../../assets/kabum!-logo.svg"
+import pichauLogo from "../../../../assets/pichau-logo.svg"
 import { LinkButton } from "../link-button"
+import { priceFormatter } from "@/lib/formatter"
+
+export type StoresOptions = "TeraByte" | "Pichau" | "Kabum" // Colocar dentro de uma arquivo types
 
 interface PriceClassificationCardProps {
   isLowestPrice: boolean
+  productPrice: number
+  productStore: StoresOptions
+  productLink: string
+  productImageUrl: string
+  // está faltando o valor à prazo
+}
+
+const storeLogos = {
+  TeraByte: terabyteLogo,
+  Kabum: kabumLogo,
+  Pichau: pichauLogo,
 }
 
 export function PriceClassificationCard({
   isLowestPrice,
+  productPrice,
+  productStore,
+  productLink,
+  productImageUrl,
 }: PriceClassificationCardProps) {
   return (
     <div className="flex border border-zinc-300 justify-between items-center rounded-lg px-1 md:px-10 py-8 md:flex-row flex-col gap-4">
       <div className="flex items-center justify-center">
-        <div className="flex items-center">
-          <Image src={gpu} alt="" className="size-32" />
+        <div className="flex items-center gap-1">
+          <Image
+            src={productImageUrl}
+            width={128}
+            height={128}
+            alt=""
+            className="size-32"
+          />
           <div className="flex gap-1 flex-col">
             <div className="flex flex-col">
               <strong className="text-green-500 text-2xl font-semibold">
-                R$ 879,00{" "}
+                {priceFormatter.format(productPrice)}{" "}
                 <span className="text-sm font-semibold ">(frete incluso)</span>
               </strong>
               <span className="text-xs text-slate-600 font-semibold">
@@ -35,13 +60,12 @@ export function PriceClassificationCard({
       </div>
       <div className="flex items-center justify-between gap-8">
         <div className="flex items-center gap-4">
-          <strong>Terabyte</strong>
+          <strong>{productStore}</strong>
           <div className="size-12 rounded-full flex items-center justify-center bg-zinc-100 ">
-            <Image src={logo} alt="" className="w-8" />
+            <Image src={storeLogos[productStore]} alt="" className="w-8" />
           </div>
         </div>
-
-        <LinkButton redirectLink="">Ir à loja</LinkButton>
+        <LinkButton redirectLink={productLink}>Ir à loja</LinkButton>
       </div>
     </div>
   )
