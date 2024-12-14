@@ -21,5 +21,5 @@ export function useFilters() {
     replace(pathname)
   }
 
-  return { updateFilter, resetFilters, filtersCount: params.size, searchParams }
+  return { updateFilter, resetFilters, filtersCount: params.size, searchParams, params }
 }

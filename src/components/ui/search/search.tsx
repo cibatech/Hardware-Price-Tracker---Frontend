@@ -5,8 +5,8 @@ import { useEffect, useRef, useState } from "react"
 import { SuggestionItem } from "./suggestion-card"
 import { useDebouncedCallback } from "use-debounce"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import { searchByQuery } from "@/http/product/fetch-search-by-product"
 import { Product } from "@/@types/product"
+import { filterProduct } from "@/http/product/filter-product"
 
 export function Search() {
   const [suggestions, setSuggestions] = useState<Product[]>([])
@@ -47,8 +47,8 @@ export function Search() {
   useEffect(() => {
     const handleSearchByQuery = async () => {
       if (query) {
-        const data = await searchByQuery(query)
-        setSuggestions(data.response)
+        const data = await filterProduct("hardware", null, null, null, query)
+        setSuggestions(data.response.Return.TotalList)
       }
     }
 
@@ -92,13 +92,13 @@ export function Search() {
                   key={index}
                   suggestionTitle={suggestion.Title}
                   suggestionCategory={suggestion.Where}
-                  suggestionRedirectProductPageById={suggestion.Title}
+                  suggestionProductId={suggestion.Id}
                 />
               ))
             ) : (
               <div className="flex gap-3 items-center m-auto">
-                <LucideSearch />
-                <strong>Nenhuma busca ainda</strong>
+               
+                <strong>Nenhuma busca ainda.</strong>
               </div>
             )}
           </ul>

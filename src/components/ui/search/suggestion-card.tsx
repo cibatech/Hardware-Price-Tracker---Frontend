@@ -1,26 +1,32 @@
 "use client"
 
-import { redirect } from "next/navigation"
+import { useRouter } from "next/navigation"
 
 interface SuggestionItemProps {
   suggestionTitle: string
   suggestionCategory: string
-  suggestionRedirectProductPageById: string
+  suggestionProductId: string
 }
 
 export function SuggestionItem({
   suggestionTitle,
   suggestionCategory,
-  suggestionRedirectProductPageById,
+  suggestionProductId,
 }: SuggestionItemProps) {
-  function handleRedirectToProductPage() {
-    redirect(`/results/?query=${suggestionTitle}`)
+  const router = useRouter()
+
+  function handleRedirectToPage() {
+    if (window.location.pathname === "/") {
+      router.push(`/results/?query=${suggestionTitle}`)
+    } else {
+      router.push(`/product/${suggestionProductId}`)
+    }
   }
 
   return (
     <div
       className="flex justify-between rounded-3xl border px-4 py-3 w-full cursor-pointer"
-      onClick={handleRedirectToProductPage}
+      onClick={handleRedirectToPage}
     >
       <strong className="max-w-[13rem] truncate overflow-hidden text-ellipsis">
         {suggestionTitle}

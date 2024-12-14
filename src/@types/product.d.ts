@@ -67,6 +67,7 @@ export type ProductsFilterResponse = {
     }
     Return: {
       TotalList: Product[]
+      TotalListLength: number
     }
   }
   Config: {

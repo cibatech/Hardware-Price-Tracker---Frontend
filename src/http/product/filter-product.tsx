@@ -2,15 +2,16 @@ import { ProductsFilterResponse } from "@/@types/product"
 import { api } from "@/services/api"
 
 export async function filterProduct(
-  category: string | "hardware",
+  category: string = "hardware", 
   store: string | null,
   min: number | null,
   max: number | null,
-  query: string | null
+  query: string | null,
+  page: number = 1
 ): Promise<ProductsFilterResponse> {
   try {
     const { data } = await api.get(
-      `/api/products/${category}/${min}--${max}/${store}/${query}/1`
+      `/api/products/${category}/${min}--${max}/${store}/${query}/${page}`
     )
 
     return data
