@@ -8,27 +8,37 @@ export const hardwareComponetsList = [
   "Placa mãe",
 ]
 
-export const productsPaginationOptions = ["12", "20"]
 
 export const options = ["Asus", "Gigabyte", "MSI", "Asrock"]
 
-export const stores = ["TeraByte", "Pichau", "Kabum"]
+// export const stores = ["TeraByte", "Pichau", "Kabum"]
 
 export const hardwareCategories = [
-  "hardware",
-  "periféricos",
-  "hardware/processadores",
-  "hardware/memorias",
-  "hardware/hard-disk",
-  "hardware/fontes",
-  "hardware/memoria-ram",
-  "hardware/disco-rigido-hd",
-  "hardware/hard-disk-e-ssd",
+  { value: "hardware", title: "Hardware" },
+  { value: "periféricos", title: "Periféricos" },
+  { value: "hardware/processadores", title: "Processadores" },
+  { value: "hardware/memorias", title: "Memórias" },
+  { value: "hardware/hard-disk", title: "Hard Disk" },
+  { value: "hardware/fontes", title: "Fontes" },
+  { value: "hardware/memoria-ram", title: "Memória RAM" },
+  { value: "hardware/disco-rigido-hd", title: "Disco Rígido HD" },
+  { value: "hardware/hard-disk-e-ssd", title: "Hard Disk e SSD" },
 ]
 
 export const filterProductByDateOptions = [
-  "30 dias",
-  "3 meses",
-  "6 meses",
-  "1 ano",
+  { value: "30", title: "30 dias" },
+  { value: "90", title: "3 meses" },
+  { value: "120", title: "6 meses" },
+  { value: "365", title: "1 ano" },
+]
+
+export const productsPaginationOptions = [
+  { value: "12", title: "12" },
+  { value: "20", title: "20" }
+]
+
+export const stores = [
+  { value: "TeraByte", title: "TeraByte " },
+  { value: "Pichau", title: "Pichau" },
+  { value: "Kabum", title: "Kabum" },
 ]

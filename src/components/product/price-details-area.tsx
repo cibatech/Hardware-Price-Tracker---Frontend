@@ -9,6 +9,7 @@ import { PriceClassification } from "@/@types/product"
 interface PriceDatailsProps {
   store: string
   price: number
+  tearmValue: string
   productEvaluation: PriceClassification
 }
 
@@ -16,6 +17,7 @@ export function PriceDatailsArea({
   price,
   store,
   productEvaluation,
+  tearmValue
 }: PriceDatailsProps) {
   const goToCompareSection = () => {
     const section = document.getElementById("compare-section")
@@ -35,7 +37,7 @@ export function PriceDatailsArea({
             <span className="text-sm font-semibold ">(frete não incluso)</span>
           </strong>
           <span className="text-xs text-slate-600 font-semibold">
-            ou 8x de R$ 354,87 com juros
+            {tearmValue}
           </span>
         </div>
       </div>

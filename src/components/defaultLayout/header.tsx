@@ -1,15 +1,18 @@
+"use client"
+
 import logo from "../../../public/logo.svg"
 import Image from "next/image"
 import Link from "next/link"
 import { Bell } from "lucide-react"
 import { NavbarMobile } from "./navbar-mobile"
 import { Search } from "../ui/search/search"
-import { cookies } from "next/headers"
+import Cookies from "js-cookie"
 
-export async function Header() {
-  const cookie = await cookies()
-  const userId = cookie.get("userId")
-  const isLogged = userId
+export function Header() {
+  const userId = Cookies.get("userId")
+  console.log("userId:", userId)
+
+  const isLogged = userId !== undefined
 
   return (
     <header className="w-full bg-green-700 flex items-center justify-between p-2 md:flex-row md:p-6 flex-col gap-6">

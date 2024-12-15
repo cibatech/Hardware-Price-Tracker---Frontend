@@ -1,8 +1,13 @@
+"use client"
+
 import { AlertCard } from "@/components/alertas/alert-card"
 import { SearchAlerts } from "@/components/alertas/search"
+import { useAlerts } from "@/contexts/alerts-context"
 import { Trash } from "lucide-react"
 
 export default function Alerts() {
+  const { alerts } = useAlerts()
+
   return (
     <div className="flex flex-col w-full max-w-[80%] m-auto py-8 gap-8 min-h-screen">
       <div className="flex items-center justify-between flex-wrap gap-3">
@@ -16,9 +21,14 @@ export default function Alerts() {
           </button>
         </section>
       </div>
-      <main className="flex gap-3 justify-center md:flex-row flex-col">
-        <AlertCard />
-        <AlertCard />
+      <main className="grid grid-cols-2 gap-3">
+        {alerts.map((alert) => (
+          <AlertCard
+            key={alert.Id}
+            alertId={alert.Id}
+            value={alert.TargetPrice}
+          />
+        ))}
       </main>
     </div>
   )
