@@ -3,11 +3,11 @@ import Image from "next/image"
 import { BreadcrumbDemo } from "@/components/product/ui/breadcumb"
 import { PriceDatailsArea } from "@/components/product/price-details-area"
 import { ComparePriceArea } from "@/components/product/compare-price-area"
-import { PriceHistoryArea } from "@/components/product/price-history-area"
 import { FetchProductById } from "@/http/product/fetch-product-by-id"
 import { FetchTrendsById } from "@/http/product/fetch-trends-by-id"
 import { FetchProductsByComparasion } from "@/http/product/fetch-products-by-comparasion"
 import { PriceClassificationCard } from "@/components/product/ui/cards/price-classification"
+import { PriceHistoryArea } from "@/components/product/price-history-area"
 
 export default async function ProductPage({
   params,
@@ -19,6 +19,7 @@ export default async function ProductPage({
   const comparasionData = await FetchProductsByComparasion(params.id)
   console.log(productData.response.Product.Title)
   console.log(productData.response.Product.Value)
+
 
   const filteredBestPriceOrder =
     comparasionData.response.FindInThreeStores.sort((a, b) => a.Value - b.Value)

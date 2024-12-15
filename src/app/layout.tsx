@@ -1,6 +1,8 @@
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
+import { Toaster } from "sonner"
+import { AlertsProvider } from "@/contexts/alerts-context"
 
 const mainLocalFontFamily = Inter({
   weight: ["300", "400", "500", "600"],
@@ -20,7 +22,8 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <body className={`${mainLocalFontFamily.variable} antialiased`}>
-        {children}
+        <AlertsProvider>{children}</AlertsProvider>
+        <Toaster />
       </body>
     </html>
   )
