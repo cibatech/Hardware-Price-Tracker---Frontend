@@ -32,7 +32,7 @@ export function ProductCard({
         src={productImageUrl}
         alt=""
         width={232}
-        height={146} 
+        height={146}
         className="w-[14.5rem] h-auto m-auto"
       />
       <span className="text-base font-medium">{productTitle}</span>
@@ -41,7 +41,9 @@ export function ProductCard({
           Menor preço via {store}
         </span>
         <strong className="text-xl font-semibold text-green-500">
-          {priceFormatter.format(productPrice)}
+          {productPrice === 0
+            ? "Indisponível"
+            : priceFormatter.format(productPrice)}
         </strong>
       </div>
     </div>

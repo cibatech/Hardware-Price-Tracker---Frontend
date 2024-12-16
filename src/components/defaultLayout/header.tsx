@@ -7,6 +7,7 @@ import { Bell } from "lucide-react"
 import { NavbarMobile } from "./navbar-mobile"
 import { Search } from "../ui/search/search"
 import Cookies from "js-cookie"
+import { PopoverUserInfo } from "./popover-user-info"
 
 export function Header() {
   const userId = Cookies.get("userId")
@@ -36,9 +37,19 @@ export function Header() {
           <Bell />
           <span className="font-normal text-base">Alertas</span>
         </Link>
-        <button className="bg-green-100 hidden px-6 py-3 rounded-3xl text-green-700 text-base font-semibold md:flex hover:opacity-50 hover:transition-all">
-          {isLogged ? "Ismael" : "Entrar"}
-        </button>
+        {isLogged ? (
+          // <button className="bg-green-100 hidden px-6 py-3 rounded-3xl text-green-700 text-base font-semibold md:flex hover:opacity-50 hover:transition-all">
+          //   Ismael
+          // </button>
+          <PopoverUserInfo />
+        ) : (
+          <Link
+            href="/auth/login"
+            className="bg-green-100 hidden px-6 py-3 rounded-3xl text-green-700 text-base font-semibold md:flex hover:opacity-50 hover:transition-all"
+          >
+            Entrar
+          </Link>
+        )}
       </div>
     </header>
   )

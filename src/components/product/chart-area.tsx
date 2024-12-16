@@ -8,9 +8,10 @@ import {
 } from "../shadcn-ui/ui/chart"
 import { filterProductByDateOptions } from "@/constants"
 import { useFilters } from "@/hooks/useFilters"
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { FetchProductById } from "@/http/product/fetch-product-by-id"
 import { useParams } from "next/navigation"
+import { formattedRelativeDate } from "@/lib/formatter"
 
 interface ChartData {
   date: string
@@ -26,16 +27,18 @@ const chartConfig = {
 
 interface CustomTooltipProps {
   active: boolean
-  payload: Record<string, number>[]
+  payload: { value: number }[]
   label: string
 }
 
 const CustomTooltip = ({ active, payload, label }: CustomTooltipProps) => {
-  if (active && payload && payload.length) {
+  if (active && payload?.length) {
     return (
       <div className="bg-white rounded-lg shadow-lg p-3">
         <strong className="text-green-600 font-bold text-xl">{`R$ ${payload[0].value}`}</strong>
-        <p className="text-zinc-600 text-base">Em {label}</p>
+        <p className="text-zinc-600 text-base">
+          {formattedRelativeDate(label)}
+        </p>
       </div>
     )
   }
@@ -49,24 +52,30 @@ export function ChartArea() {
 
   const [chartData, setChartData] = useState<ChartData[]>([])
 
-  const selectedDate = Number(searchParams.get("date")) || 30
-
-  function handleOptionClick(optionValue: string) {
-    updateFilter("date", optionValue)
-  }
+  const selectedDate = useMemo(
+    () => searchParams.get("date") || "30",
+    [searchParams]
+  )
 
   useEffect(() => {
     const fetchChartData = async () => {
-      const response = await FetchProductById(params.id as string, selectedDate)
-
-      if (response?.response?.PriceRef) {
-        const formattedData = Object.entries(response.response.PriceRef).map(
-          ([date, priceRecords]) => ({
-            date,
-            price: priceRecords[0]?.Price, // Seleciona o primeiro preço do dia
-          })
+      try {
+        const response = await FetchProductById(
+          params.id as string,
+          Number(selectedDate)
         )
-        setChartData(formattedData)
+
+        if (response?.response?.PriceRef) {
+          const formattedData = Object.entries(response.response.PriceRef).map(
+            ([date, priceRecords]) => ({
+              date,
+              price: priceRecords[0]?.Price ?? 0,
+            })
+          )
+          setChartData(formattedData)
+        }
+      } catch (error) {
+        console.error("Erro ao buscar os dados do gráfico:", error)
       }
     }
 
@@ -86,7 +95,7 @@ export function ChartArea() {
             tickLine={false}
             axisLine
             tickMargin={8}
-            tickFormatter={(value) => value.slice(5, 10)} // Mostra apenas mês e dia
+            tickFormatter={(value) => value.slice(5, 10)}
           />
           <YAxis tickLine={false} tickFormatter={(value) => `R$ ${value}`} />
           <ChartTooltip
@@ -103,7 +112,6 @@ export function ChartArea() {
         </LineChart>
       </ChartContainer>
 
-      {/* Filtros */}
       <section className="flex items-center w-full gap-8 ml-6 overflow-scroll">
         {filterProductByDateOptions.map((option) => (
           <button
@@ -113,7 +121,7 @@ export function ChartArea() {
                 ? "bg-green-700 text-white"
                 : "text-green-700 hover:bg-green-700 hover:text-white"
             }`}
-            onClick={() => handleOptionClick(option.value)}
+            onClick={() => updateFilter("date", option.value)}
           >
             {option.title}
           </button>
