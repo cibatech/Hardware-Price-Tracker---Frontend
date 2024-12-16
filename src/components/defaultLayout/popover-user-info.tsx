@@ -8,8 +8,9 @@ import {
 } from "../shadcn-ui/ui/popover"
 import { logout } from "@/app/(authenticated)/auth/login/action"
 import { showErrorToast, showSuccessToast } from "../product/ui/toasts"
+import { ReactNode } from "react"
 
-export function PopoverUserInfo() {
+export function PopoverUserInfo({children}: {children: ReactNode}) {
   async function handleUserLogout() {
     try {
       await logout()
@@ -22,9 +23,7 @@ export function PopoverUserInfo() {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <button className="bg-green-100 hidden px-6 py-3 rounded-3xl text-green-700 text-base font-semibold md:flex hover:opacity-50 hover:transition-all">
-          Ismael
-        </button>
+        {children}
       </PopoverTrigger>
       <PopoverContent
         className="rounded-3xl w-80 max-w-[22rem] shadow-none py-5 px-4 gap-3"

@@ -22,7 +22,7 @@ import Loading from "@/components/results/loading"
 
 export default function ResultsPage() {
   const [isFilterModalOpen, setFilterModalOpen] = useState(false)
-  const { filtersCount, resetFilters, searchParams, params, updateFilter} = useFilters()
+  const { filtersCount, resetFilters, searchParams, params } = useFilters()
   const [totalProducts, setTotalProducts] = useState(0)
   const [isLoading, setIsLoading] = useState(false)
   const [productsList, setProductsList] = useState<
@@ -62,7 +62,7 @@ export default function ResultsPage() {
           setTotalProducts(data.response.Return.TotalListLength)
 
           const totalPages = Math.ceil(
-            data.response.Return.TotalListLength / productsPerPage
+            data.response.Return.TotalListLength / 20
           )
           setTotalPages(totalPages)
         }
@@ -77,16 +77,6 @@ export default function ResultsPage() {
   }, [category, store, query, minPrice, maxPrice, currentPage, productsPerPage])
 
   useEffect(() => {
-    const previousStore = new URLSearchParams(params.toString()).get("loja")
-    const newStore = searchParams.get("loja")
-
-   
-    if (newStore !== previousStore) {
-      updateFilter("page", "1")
-    }
-  }, [store, searchParams, params, updateFilter])
-
-  useEffect(() => {
     let shouldUpdate = false
     const updatedParams = new URLSearchParams(params.toString())
 
@@ -96,10 +86,6 @@ export default function ResultsPage() {
     }
     if (!searchParams.get("productsPerPage")) {
       updatedParams.set("productsPerPage", "12")
-      shouldUpdate = true
-    }
-    if (!searchParams.get("page")) {
-      updatedParams.set("page", currentPage.toString())
       shouldUpdate = true
     }
 
@@ -150,7 +136,7 @@ export default function ResultsPage() {
           <label htmlFor="">Produtos por página</label>
           <RenderSelect
             filterKey="productsPerPage"
-            label="12"
+            label="12 "
             list={productsPaginationOptions}
             pagination
           />

@@ -6,7 +6,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "../shadcn-ui/ui/sheet"
-import { hardwareComponetsList } from "@/constants"
+import { hardwareCategories } from "@/constants"
 import { Menu } from "lucide-react"
 import Link from "next/link"
 
@@ -25,12 +25,14 @@ export function NavbarMobile() {
           </SheetHeader>
           <div>
             <ul className="flex flex-col items-center gap-6">
-              {hardwareComponetsList.map((component, index) => (
+              {hardwareCategories.map((component, index) => (
                 <li
                   key={index}
                   className="hover:transition-all hover:opacity-50"
                 >
-                  <Link href={""}>{component}</Link>
+                  <Link href={`/results?categoria=${component.value}`}>
+                    {component.title}
+                  </Link>
                 </li>
               ))}
             </ul>
