@@ -22,12 +22,13 @@ import Loading from "@/components/results/loading"
 
 export default function ResultsPage() {
   const [isFilterModalOpen, setFilterModalOpen] = useState(false)
-  const { filtersCount, resetFilters, searchParams, params } = useFilters()
+  const { filtersCount, resetFilters, searchParams, params, updateFilter} = useFilters()
   const [totalProducts, setTotalProducts] = useState(0)
   const [isLoading, setIsLoading] = useState(false)
   const [productsList, setProductsList] = useState<
     ProductsFilterResponse["response"]["Return"]["TotalList"]
   >([])
+  const [totalPages, setTotalPages] = useState(1) 
   const router = useRouter()
 
   const category = searchParams.get("categoria") || "hardware"
@@ -43,10 +44,9 @@ export default function ResultsPage() {
     ? Number(searchParams.get("finalPrice"))
     : null
 
-  
   useEffect(() => {
     async function fetchProducts() {
-      setIsLoading(true) 
+      setIsLoading(true)
       try {
         const data = await filterProduct(
           category,
@@ -56,19 +56,35 @@ export default function ResultsPage() {
           query,
           currentPage
         )
+
         if (data) {
           setProductsList(data.response.Return.TotalList)
           setTotalProducts(data.response.Return.TotalListLength)
+
+          const totalPages = Math.ceil(
+            data.response.Return.TotalListLength / productsPerPage
+          )
+          setTotalPages(totalPages)
         }
       } catch (error) {
         console.error("Erro ao buscar produtos:", error)
       } finally {
-        setIsLoading(false) 
+        setIsLoading(false)
       }
     }
 
     fetchProducts()
-  }, [category, store, query, minPrice, maxPrice, currentPage])
+  }, [category, store, query, minPrice, maxPrice, currentPage, productsPerPage])
+
+  useEffect(() => {
+    const previousStore = new URLSearchParams(params.toString()).get("loja")
+    const newStore = searchParams.get("loja")
+
+   
+    if (newStore !== previousStore) {
+      updateFilter("page", "1")
+    }
+  }, [store, searchParams, params, updateFilter])
 
   useEffect(() => {
     let shouldUpdate = false
@@ -82,13 +98,15 @@ export default function ResultsPage() {
       updatedParams.set("productsPerPage", "12")
       shouldUpdate = true
     }
+    if (!searchParams.get("page")) {
+      updatedParams.set("page", currentPage.toString())
+      shouldUpdate = true
+    }
 
     if (shouldUpdate) {
       router.replace(`?${updatedParams.toString()}`)
     }
-  }, [searchParams, router, params])
-
-  const totalPages = Math.ceil(totalProducts / productsPerPage)
+  }, [searchParams, router, params, currentPage])
 
   return (
     <main className="flex flex-col gap-8 py-8 w-full max-w-screen-xl m-auto">
@@ -132,7 +150,7 @@ export default function ResultsPage() {
           <label htmlFor="">Produtos por página</label>
           <RenderSelect
             filterKey="productsPerPage"
-            label="12 "
+            label="12"
             list={productsPaginationOptions}
             pagination
           />

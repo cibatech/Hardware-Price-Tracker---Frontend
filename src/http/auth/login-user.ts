@@ -2,21 +2,15 @@
 
 import { LoginFormData, LoginResponse } from "@/@types/auth"
 import { api } from "@/services/api"
-import { NextResponse } from "next/server"
+import { cookies } from "next/headers"
 
 export async function loginUser(
   loginFormData: LoginFormData
 ): Promise<LoginResponse> {
   try {
     const { data } = await api.patch("api/user/login", loginFormData)
-
-    const response = NextResponse.redirect("/")
-    response.cookies.set("userId", data.UserId, {
-      httpOnly: true,
-      sameSite: "strict",
-      maxAge: 60 * 60 * 24 * 7, // 7 dias
-      path: "/",
-    })
+    const cookie = await cookies()
+    cookie.set("userId", data.UserId)
 
     return data
   } catch (error) {

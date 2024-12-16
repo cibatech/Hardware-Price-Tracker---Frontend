@@ -23,6 +23,7 @@ export default function RootLayout({
     <html lang="pt-br">
       <body className={`${mainLocalFontFamily.variable} antialiased`}>
         <AlertsProvider>{children}</AlertsProvider>
+        
         <Toaster />
       </body>
     </html>

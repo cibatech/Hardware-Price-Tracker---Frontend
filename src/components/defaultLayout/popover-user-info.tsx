@@ -6,8 +6,19 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "../shadcn-ui/ui/popover"
+import { logout } from "@/app/(authenticated)/auth/login/action"
+import { showErrorToast, showSuccessToast } from "../product/ui/toasts"
 
 export function PopoverUserInfo() {
+  async function handleUserLogout() {
+    try {
+      await logout()
+      showSuccessToast("Usuário deslogado com sucesso!")
+    } catch {
+      showErrorToast("Erro ao sair.")
+    }
+  }
+
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -25,7 +36,10 @@ export function PopoverUserInfo() {
           <strong className="font-semibold text-green-700">
             Ismael Henrique
           </strong>
-          <button className="bg-green-100 p-2 rounded-full">
+          <button
+            className="bg-green-100 p-2 rounded-full"
+            onClick={handleUserLogout}
+          >
             <LogOut className="text-green-700" />
           </button>
         </div>

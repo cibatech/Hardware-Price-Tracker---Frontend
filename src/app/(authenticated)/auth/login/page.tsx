@@ -4,13 +4,25 @@ import Link from "next/link"
 import { Button } from "../../../../components/ui/button/button"
 import { Input } from "../../../../components/ui/inputs/input"
 import { useForm } from "react-hook-form"
-import { LoginFormData, loginUser } from "@/http/auth/login-user"
+import { loginUser } from "@/http/auth/login-user"
+import { redirect } from "next/navigation"
+import { LoginFormData } from "@/@types/auth"
+import { z } from "zod"
+import { zodResolver } from "@hookform/resolvers/zod"
+
+const loginFormSchema = z.object({
+  Email: z.string().email(),
+  Password: z.string(),
+})
 
 export default function Login() {
-  const { handleSubmit, register } = useForm()
+  const { handleSubmit, register } = useForm<LoginFormData>({
+    resolver: zodResolver(loginFormSchema),
+  })
 
   async function handleUserLogin(data: LoginFormData) {
     await loginUser(data)
+    redirect("/")
   }
 
   return (
