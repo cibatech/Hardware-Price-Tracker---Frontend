@@ -20,4 +20,5 @@ export type RegisterResponse = {
 export type RegisterData = {
   Email: string
   Password: string
+  UserName: string
 }

@@ -44,12 +44,22 @@ export function PriceClassificationCard({
           <div className="flex gap-1 flex-col">
             <div className="flex flex-col">
               <strong className="text-green-500 text-2xl font-semibold">
-                {priceFormatter.format(productPrice)}{" "}
-                <span className="text-sm font-semibold ">(frete incluso)</span>
+                {productPrice === 0 ? (
+                  "Indisponível"
+                ) : (
+                  <>
+                    {priceFormatter.format(productPrice)}
+                    <span className="text-sm font-semibold">
+                      (frete não incluso)
+                    </span>
+                  </>
+                )}
               </strong>
-              <span className="text-xs text-slate-600 font-semibold">
-                ou {tearmValue}
-              </span>
+              {productPrice > 0 && (
+                <span className="text-xs text-slate-600 font-semibold">
+                  ou {tearmValue}
+                </span>
+              )}
             </div>
             {isLowestPrice && (
               <div className="flex max-w-[98px] items-center justify-center text-slate-300 text-xs font-semibold bg-green-700 py-1 rounded-sm">

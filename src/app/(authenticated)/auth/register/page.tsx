@@ -13,6 +13,7 @@ import { showErrorToast, showSuccessToast } from "@/components/product/ui/toasts
 const registerFormSchema = z.object({
   Email: z.string().email(),
   Password: z.string(),
+  UserName: z.string()
 })
 
 export default function Register() {
@@ -21,6 +22,7 @@ export default function Register() {
   })
 
   async function handleUserRegister(data: RegisterData) {
+    console.log(data)
     try {
       await registerUser(data)
       showSuccessToast("Usuário registrado!")
@@ -43,12 +45,12 @@ export default function Register() {
             <span className="text-xs font-semibold text-zinc-600">
               Login e senha necessários para a autenticação
             </span>
-            {/* <Input
+            <Input
               type="text"
               placeholder="Informe seu nome"
               variant="minimalist"
-              {...register("Name")}
-            /> */}
+              {...register("UserName")}
+            />
             <Input
               type="email"
               placeholder="Informe seu email"

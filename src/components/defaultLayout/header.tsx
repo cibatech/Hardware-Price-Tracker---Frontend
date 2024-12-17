@@ -8,14 +8,9 @@ import { NavbarMobile } from "./navbar-mobile"
 import { Search } from "../ui/search/search"
 import Cookies from "js-cookie"
 import { PopoverUserInfo } from "./popover-user-info"
-
-function getInitials(name: string): string {
-  return name
-    .split(" ") 
-    .map((word) => word.charAt(0).toUpperCase()) 
-    .join("") 
-    .toUpperCase()
-}
+import { getInitials } from "@/functions/get-initials"
+import { useEffect, useState } from "react"
+import { getUserProfile, GetUserProfileResponse } from "@/http/auth/get-user-profile"
 
 export function Header() {
   const userId = Cookies.get("userId")
@@ -23,8 +18,20 @@ export function Header() {
 
   const isLogged = userId !== undefined
 
-  const userName = "Ismael Gonçalves"
-  const userInitials = getInitials(userName)
+  const [userProfileData, setUserProfileData] =
+    useState<GetUserProfileResponse | null>(null)
+
+  async function handleGetUserProfileData() {
+    const data = await getUserProfile(userId!)
+    setUserProfileData(data)
+  }
+
+  useEffect(() => {
+    handleGetUserProfileData()
+  }, [])
+
+  const userName = userProfileData?.response.UserName
+  const userInitials = getInitials(userName || "")
 
   return (
     <header className="w-full bg-green-700 flex items-center justify-between p-2 md:flex-row md:p-6 flex-col gap-6">
@@ -37,7 +44,7 @@ export function Header() {
         </Link>
 
         {isLogged ? (
-          <PopoverUserInfo>
+          <PopoverUserInfo userName={userName!}>
             <button className="bg-green-100 flex size-10 rounded-full text-green-700 text-sm md:hidden justify-center items-center font-semibold">
               {userInitials}
             </button>
@@ -61,7 +68,7 @@ export function Header() {
           <span className="font-normal text-base">Alertas</span>
         </Link>
         {isLogged ? (
-          <PopoverUserInfo>
+          <PopoverUserInfo userName={userName!}>
             <button className="bg-green-100 hidden size-10 rounded-full text-green-700 text-base font-semibold md:flex hover:opacity-50 hover:transition-all justify-center items-center">
               {userInitials}
             </button>

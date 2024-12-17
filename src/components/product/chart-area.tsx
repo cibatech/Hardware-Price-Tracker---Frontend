@@ -116,7 +116,7 @@ export function ChartArea() {
         {filterProductByDateOptions.map((option) => (
           <button
             key={option.value}
-            className={`px-4 py-2 border bg-green-100 rounded-3xl transition-all ${
+            className={`px-4 py-2 border bg-green-100 rounded-3xl transition-all text-nowrap ${
               selectedDate === option.value
                 ? "bg-green-700 text-white"
                 : "text-green-700 hover:bg-green-700 hover:text-white"

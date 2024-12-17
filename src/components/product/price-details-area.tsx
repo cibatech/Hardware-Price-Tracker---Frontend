@@ -17,7 +17,7 @@ export function PriceDatailsArea({
   price,
   store,
   productEvaluation,
-  tearmValue
+  tearmValue,
 }: PriceDatailsProps) {
   const goToCompareSection = () => {
     const section = document.getElementById("compare-section")
@@ -33,8 +33,16 @@ export function PriceDatailsArea({
         </strong>
         <div className="flex flex-col">
           <strong className="text-green-500 text-2xl font-semibold">
-            {priceFormatter.format(price)}{" "}
-            <span className="text-sm font-semibold ">(frete não incluso)</span>
+            {price > 0 ? (
+              <>
+                {priceFormatter.format(price)}{" "}
+                <span className="text-sm font-semibold ">
+                  (frete não incluso)
+                </span>
+              </>
+            ) : (
+              "Indisponível"
+            )}
           </strong>
           <span className="text-xs text-slate-600 font-semibold">
             {tearmValue}
