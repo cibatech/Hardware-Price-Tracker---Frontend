@@ -52,7 +52,7 @@ export function Header() {
         ) : (
           <Link
             href="/auth/login"
-            className="bg-green-100 hidden px-6 py-3 rounded-3xl text-green-700 text-base font-semibold md:flex hover:opacity-50 hover:transition-all"
+            className="bg-green-100 md:hidden px-6 py-3 rounded-3xl text-green-700 text-base font-semibold flex hover:opacity-50 hover:transition-all"
           >
             Entrar
           </Link>
