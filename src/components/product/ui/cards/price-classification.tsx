@@ -1,7 +1,7 @@
 import Image from "next/image"
-import terabyteLogo from "../../../../assets/terabyte-logo.svg"
-import kabumLogo from "../../../../assets/kabum!-logo.svg"
-import pichauLogo from "../../../../assets/pichau-logo.svg"
+import terabyteLogo from "@/assets/terabyte-logo.svg"
+import kabumLogo from "@/assets/kabum!-logo.svg"
+import pichauLogo from "@/assets/pichau-logo.svg"
 import { LinkButton } from "../link-button"
 import { priceFormatter } from "@/lib/formatter"
 
