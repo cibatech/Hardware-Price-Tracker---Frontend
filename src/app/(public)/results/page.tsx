@@ -28,6 +28,7 @@ export default function ResultsPage() {
   const [productsList, setProductsList] = useState<
     ProductsFilterResponse["response"]["Return"]["TotalList"]
   >([])
+  const [totalPages, setTotalPages] = useState(1) 
   const router = useRouter()
 
   const category = searchParams.get("categoria") || "hardware"
@@ -43,10 +44,9 @@ export default function ResultsPage() {
     ? Number(searchParams.get("finalPrice"))
     : null
 
-  
   useEffect(() => {
     async function fetchProducts() {
-      setIsLoading(true) 
+      setIsLoading(true)
       try {
         const data = await filterProduct(
           category,
@@ -56,19 +56,25 @@ export default function ResultsPage() {
           query,
           currentPage
         )
+
         if (data) {
           setProductsList(data.response.Return.TotalList)
           setTotalProducts(data.response.Return.TotalListLength)
+
+          const totalPages = Math.ceil(
+            data.response.Return.TotalListLength / 20
+          )
+          setTotalPages(totalPages)
         }
       } catch (error) {
         console.error("Erro ao buscar produtos:", error)
       } finally {
-        setIsLoading(false) 
+        setIsLoading(false)
       }
     }
 
     fetchProducts()
-  }, [category, store, query, minPrice, maxPrice, currentPage])
+  }, [category, store, query, minPrice, maxPrice, currentPage, productsPerPage])
 
   useEffect(() => {
     let shouldUpdate = false
@@ -86,9 +92,7 @@ export default function ResultsPage() {
     if (shouldUpdate) {
       router.replace(`?${updatedParams.toString()}`)
     }
-  }, [searchParams, router, params])
-
-  const totalPages = Math.ceil(totalProducts / productsPerPage)
+  }, [searchParams, router, params, currentPage])
 
   return (
     <main className="flex flex-col gap-8 py-8 w-full max-w-screen-xl m-auto">

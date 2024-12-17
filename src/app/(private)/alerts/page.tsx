@@ -21,14 +21,20 @@ export default function Alerts() {
           </button>
         </section>
       </div>
-      <main className="grid grid-cols-2 gap-3">
-        {alerts.map((alert) => (
-          <AlertCard
-            key={alert.Id}
-            alertId={alert.Id}
-            value={alert.TargetPrice}
-          />
-        ))}
+      <main className="grid md:grid-cols-2 gap-3 grid-cols-1">
+        {alerts.length === 0 ? (
+          <span className="flex justify-center items-center col-span-full mt-4 text-2xl font-semibold ">
+            Você não tem alertas ainda.
+          </span>
+        ) : (
+          alerts.map((alert) => (
+            <AlertCard
+              key={alert.Id}
+              alertId={alert.Id}
+              value={alert.TargetPrice}
+            />
+          ))
+        )}
       </main>
     </div>
   )

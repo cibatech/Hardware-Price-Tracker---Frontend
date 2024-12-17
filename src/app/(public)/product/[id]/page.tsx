@@ -17,9 +17,6 @@ export default async function ProductPage({
   const productData = await FetchProductById(params.id)
   const trendsData = await FetchTrendsById(params.id)
   const comparasionData = await FetchProductsByComparasion(params.id)
-  console.log(productData.response.Product.Title)
-  console.log(productData.response.Product.Value)
-
 
   const filteredBestPriceOrder =
     comparasionData.response.FindInThreeStores.sort((a, b) => a.Value - b.Value)

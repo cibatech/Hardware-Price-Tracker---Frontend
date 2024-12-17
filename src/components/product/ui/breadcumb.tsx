@@ -34,7 +34,7 @@ export function BreadcrumbDemo({
             <BreadcrumbItem>
               <BreadcrumbLink
                 href={`/product/${produtId}`}
-                className="max-w-[20rem] truncate"
+                className="md:max-w-[20rem] max-w-[8rem] truncate"
               >
                 {productTitle}
               </BreadcrumbLink>

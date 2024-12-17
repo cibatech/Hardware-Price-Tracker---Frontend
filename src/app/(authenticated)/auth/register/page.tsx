@@ -4,13 +4,32 @@ import Link from "next/link"
 import { Button } from "../../../../components/ui/button/button"
 import { Input } from "../../../../components/ui/inputs/input"
 import { useForm } from "react-hook-form"
-import { RegisterData, registerUser } from "@/http/auth/register-user"
+import { registerUser } from "@/http/auth/register-user"
+import { RegisterData } from "@/@types/auth"
+import { z } from "zod"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { showErrorToast, showSuccessToast } from "@/components/product/ui/toasts"
+
+const registerFormSchema = z.object({
+  Email: z.string().email(),
+  Password: z.string(),
+  UserName: z.string()
+})
 
 export default function Register() {
-  const { handleSubmit, register } = useForm()
+  const { handleSubmit, register } = useForm<RegisterData>({
+    resolver: zodResolver(registerFormSchema),
+  })
 
   async function handleUserRegister(data: RegisterData) {
-    await registerUser(data)
+    console.log(data)
+    try {
+      await registerUser(data)
+      showSuccessToast("Usuário registrado!")
+    } catch (error) {
+      console.log(error)
+      showErrorToast("Error ao registrar usuário.")
+    }
   }
 
   return (
@@ -26,12 +45,12 @@ export default function Register() {
             <span className="text-xs font-semibold text-zinc-600">
               Login e senha necessários para a autenticação
             </span>
-            {/* <Input
+            <Input
               type="text"
               placeholder="Informe seu nome"
               variant="minimalist"
-              {...register("Name")}
-            /> */}
+              {...register("UserName")}
+            />
             <Input
               type="email"
               placeholder="Informe seu email"
