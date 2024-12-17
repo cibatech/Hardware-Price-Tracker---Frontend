@@ -8,16 +8,21 @@ import { registerUser } from "@/http/auth/register-user"
 import { RegisterData } from "@/@types/auth"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { showErrorToast, showSuccessToast } from "@/components/product/ui/toasts"
+import {
+  showErrorToast,
+  showSuccessToast,
+} from "@/components/product/ui/toasts"
 
 const registerFormSchema = z.object({
-  Email: z.string().email(),
-  Password: z.string(),
-  UserName: z.string()
+  Email: z.string().email("Digite o email corretamente."),
+  Password: z.string().min(1, "Digite sua senha."),
+  UserName: z.string().min(1, "Digite seu nome."),
 })
 
 export default function Register() {
-  const { handleSubmit, register } = useForm<RegisterData>({
+  const { handleSubmit, register, formState: {
+    errors
+  } } = useForm<RegisterData>({
     resolver: zodResolver(registerFormSchema),
   })
 
@@ -51,18 +56,27 @@ export default function Register() {
               variant="minimalist"
               {...register("UserName")}
             />
+            {errors.UserName && (
+              <p className="text-red-500 text-sm">{errors.UserName.message}</p>
+            )}
             <Input
               type="email"
               placeholder="Informe seu email"
               variant="minimalist"
               {...register("Email")}
             />
+            {errors.Email && (
+              <p className="text-red-500 text-sm">{errors.Email.message}</p>
+            )}
             <Input
               type="password"
               placeholder="Crie uma senha"
               variant="minimalist"
               {...register("Password")}
             />
+            {errors.Password && (
+              <p className="text-red-500 text-sm">{errors.Password.message}</p>
+            )}
           </div>
           <Button variant="submit">Confirmar</Button>
         </form>
