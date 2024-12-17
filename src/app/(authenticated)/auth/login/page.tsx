@@ -11,12 +11,16 @@ import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 
 const loginFormSchema = z.object({
-  Email: z.string().email(),
-  Password: z.string(),
+  Email: z.string().email("Digite o email corretamente."),
+  Password: z.string().min(1, "Digite sua senha."),
 })
 
 export default function Login() {
-  const { handleSubmit, register } = useForm<LoginFormData>({
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<LoginFormData>({
     resolver: zodResolver(loginFormSchema),
   })
 
@@ -45,12 +49,18 @@ export default function Login() {
               variant="minimalist"
               {...register("Email")}
             />
+            {errors.Email && (
+              <p className="text-red-500 text-sm">{errors.Email.message}</p>
+            )}
             <Input
               type="password"
               placeholder="Crie uma senha"
               variant="minimalist"
               {...register("Password")}
             />
+            {errors.Password && (
+              <p className="text-red-500 text-sm">{errors.Password.message}</p>
+            )}
           </div>
           <Link
             href="/auth/forgot-password"
