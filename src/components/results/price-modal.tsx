@@ -10,11 +10,11 @@ import { z } from "zod"
 export const priceFilterFormSchema = z.object({
   initialPrice: z
     .string()
-    .transform((value) => Number(value)) // Converte para número
+    .transform((value) => Number(value)) 
     .refine((value) => !isNaN(value), "Preço inicial deve ser um número"),
   finalPrice: z
     .string()
-    .transform((value) => Number(value)) // Converte para número
+    .transform((value) => Number(value)) 
     .refine((value) => !isNaN(value), "Preço final deve ser um número"),
 })
 

@@ -8,6 +8,7 @@ import { FetchTrendsById } from "@/http/product/fetch-trends-by-id"
 import { FetchProductsByComparasion } from "@/http/product/fetch-products-by-comparasion"
 import { PriceClassificationCard } from "@/components/product/ui/cards/price-classification"
 import { PriceHistoryArea } from "@/components/product/price-history-area"
+import ImageIndisplonible from "@/assets/image-indisponible.svg"
 
 export default async function ProductPage({
   params,
@@ -39,7 +40,7 @@ export default async function ProductPage({
           {/* <StarRating rating={2.4} avaliationsNumber={203} /> */}
 
           <Image
-            src={productData.response.Product.ImageUrl}
+            src={productData.response.Product.ImageUrl || ImageIndisplonible}
             width={212}
             height={112}
             alt=""

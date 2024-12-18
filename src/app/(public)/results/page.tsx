@@ -16,9 +16,10 @@ import { FilterModal } from "@/components/results/filter-modal"
 import { PaginationDemo } from "@/components/results/products-pagination"
 import { filterProduct } from "@/http/product/filter-product"
 import { ProductsFilterResponse } from "@/@types/product"
-import { EmptyResults } from "@/components/results/empty-results"
+import { EmptySearchResults } from "@/components/results/empty-search-results"
 import { useRouter } from "next/navigation"
 import { LoadingSpinner } from "@/components/product/ui/loading"
+import { EmptyFilterResults } from "@/components/results/empty-filter-results"
 
 export default function ResultsPage() {
   const [isFilterModalOpen, setFilterModalOpen] = useState(false)
@@ -95,6 +96,7 @@ export default function ResultsPage() {
   }, [searchParams, router, params, currentPage])
 
   const isEmptyQueryForLoading = !isLoading && totalProducts === 0 && query
+  const isEmptyFilterResults = !isLoading && totalProducts === 0 
 
   return (
     <main className="flex flex-col gap-8 py-8 w-full max-w-screen-xl m-auto">
@@ -147,7 +149,8 @@ export default function ResultsPage() {
 
       <div className="flex flex-1 justify-center flex-wrap gap-8 m-auto">
         {isLoading && <LoadingSpinner />}
-        {isEmptyQueryForLoading && <EmptyResults query={query} />}
+        {isEmptyFilterResults && <EmptyFilterResults />}
+        {isEmptyQueryForLoading && <EmptySearchResults query={query} />}
         {!isLoading &&
           productsList
             .slice(0, productsPerPage)

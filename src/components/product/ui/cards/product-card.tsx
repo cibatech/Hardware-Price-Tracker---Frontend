@@ -1,7 +1,8 @@
 "use client"
 
-import { priceFormatter } from "@/lib/formatter"
 import Image from "next/image"
+import ImageIndisplonible from "@/assets/image-indisponible.svg"
+import { priceFormatter } from "@/lib/formatter"
 import { redirect } from "next/navigation"
 
 interface IProductCard {
@@ -29,7 +30,7 @@ export function ProductCard({
       onClick={handleRedirectToProductPage}
     >
       <Image
-        src={productImageUrl}
+        src={productImageUrl || ImageIndisplonible}
         alt=""
         width={232}
         height={146}
