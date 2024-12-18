@@ -1,5 +1,5 @@
 <p align="center">
-  <img align="center" height="300" src="src/assets/Grocery Store.png"  />
+  <img align="center" height="300" src="public/sponsor-icon.png"  />
 </p>
 
 ## <p align="center">Hardware Price Tracker - App</p>
@@ -11,18 +11,9 @@
 
 O Hardware Price Tracker é uma plataforma online desenvolvida para facilitar a busca por produtos de hardware em três das principais lojas do segmento: Kabum, Pichau e Terabyte. Com ele, você pode comparar os preços de um mesmo produto para encontrar a melhor oferta e consultar o histórico de preços, ajudando a identificar os momentos mais vantajosos para sua compra. Além disso, o site oferece a possibilidade de criar uma conta para gerenciar alertas personalizados, permitindo que você seja notificado sempre que os produtos de interesse atingirem o preço desejado.
 
-## 📸 Screenshots
-<p align="center">
-  <img height="350" src="src/assets/home.png" />
-  <img height="350" src="src/assets/filter.png" />
-  <img height="430" src="src/assets/emptycart.png" />
-</p>
+## 📸 Screenshots 
 
-<!-- ## 🎥 Preview
-
-<p align="center">
-  <img height="430" src="src/assets/gif-previw.gif" />
-</p> -->
+<div align="center" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;"> <div> <img src="./public/screenshot-home.png" alt="Home Page" width="300px" style="margin: 10px; border-radius: 8px;"/> <img src="./public/screenshot-results.png" alt="Results Page" width="200px" style="margin: 10px; border-radius: 8px;"/> </div> <img src="./public/prduct-page.png" alt="Product Page" width="200px" height="100px" style="margin: 10px; border-radius: 8px;"/> <img src="./public/product-page-compare.png" alt="Product Compare Page" width="300px" style="margin: 10px; border-radius: 8px;"/> <img src="./public/product-page-chart-area.png" alt="Chart Area Page" width="350px" style="margin: 10px; border-radius: 8px;"/> </div>
 
 ## 🚀 Rodando localmente
 
@@ -70,11 +61,14 @@ ou
 
 
 ## 💻 Tecnologias Utilizadas
-- ![Badge React](https://img.shields.io/badge/React-%E2%9C%94-blue?style=for-the-badge)
-- ![Badge Lucide React](https://img.shields.io/badge/Lucide_React-%E2%9C%94-blue?style=for-the-badge)
-- ![Badge React Toastify](https://img.shields.io/badge/React%20Toastify-%E2%9C%94-blue?style=for-the-badge)  
+- ![Badge React](https://img.shields.io/badge/Nextjs-%E2%9C%94-blue?style=for-the-badge)
+- ![Badge React](https://img.shields.io/badge/Reactjs-%E2%9C%94-blue?style=for-the-badge)
+- ![Badge Lucide React](https://img.shields.io/badge/Shdadcn_ui-%E2%9C%94-blue?style=for-the-badge)
+- ![Badge React Toastify](https://img.shields.io/badge/React_hook_form-%E2%9C%94-blue?style=for-the-badge) 
+- ![Badge React Toastify](https://img.shields.io/badge/Recharts-%E2%9C%94-blue?style=for-the-badge)   
 - ![Badge Tailwindcss](https://img.shields.io/badge/Tailwindcss-%E2%9C%94-blue?style=for-the-badge)
 - ![Badge TypeScript](https://img.shields.io/badge/TypeScript-%E2%9C%94-blue?style=for-the-badge)
+- ![Badge TypeScript](https://img.shields.io/badge/Zod-%E2%9C%94-blue?style=for-the-badge)
 
 ## 🛠️ Funcionalidades
 
@@ -88,44 +82,10 @@ ou
 
 ## 🎓 Aprendizado
 
-O objetivo desse projeto foi aprender, com ele consegui aperfeiçoar meus conhecimentos em React, TypeScript e Tailwindcss. O foco também foi desenvolver a lógica de programação, tive bastante dificuldade em implementar funcionalidades relacionadas as alterações do checkbox e do carrinho, mas após bastante pesquisa consegui resolver esse problema.
+O objetivo desse projeto foi aprender, com ele consegui aperfeiçoar meus conhecimentos em Nextjs,Reactjs, TypeScript e Tailwindcss. O foco também foi desenvolver o conhecimento em `Nextjs`, tive bastante dificuldade em implementar funcionalidades relacionadas à autenticação e roteamento do nextjs, mas após ler a documentação consegui resolver esse problema.
 
 
 
 
 
 
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

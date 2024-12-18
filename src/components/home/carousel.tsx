@@ -6,7 +6,7 @@ import {
   CarouselPrevious,
 } from "../shadcn-ui/ui/carousel"
 
-import gpuPicture from "../../../public/gpu.svg"
+import gpuPicture from "../../assets/image-indisponible.svg"
 import { ProductCard } from "../product/ui/cards/product-card"
 
 export function CarouselSpacing() {
