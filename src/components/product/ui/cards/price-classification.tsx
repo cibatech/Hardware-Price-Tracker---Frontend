@@ -2,6 +2,7 @@ import Image from "next/image"
 import terabyteLogo from "@/assets/terabyte-logo.svg"
 import kabumLogo from "@/assets/kabum!-logo.svg"
 import pichauLogo from "@/assets/pichau-logo.svg"
+import ImageIndisplonible from "@/assets/image-indisponible.svg"
 import { LinkButton } from "../link-button"
 import { priceFormatter } from "@/lib/formatter"
 
@@ -35,7 +36,7 @@ export function PriceClassificationCard({
       <div className="flex items-center justify-center">
         <div className="flex items-center gap-1">
           <Image
-            src={productImageUrl}
+            src={productImageUrl || ImageIndisplonible}
             width={128}
             height={128}
             alt=""
