@@ -11,6 +11,7 @@ import { PopoverUserInfo } from "./popover-user-info"
 import { getInitials } from "@/functions/get-initials"
 import { useEffect, useState } from "react"
 import { getUserProfile, GetUserProfileResponse } from "@/http/auth/get-user-profile"
+import { showInfoToast } from "../product/ui/toasts"
 
 export function Header() {
   const userId = Cookies.get("userId")
@@ -32,6 +33,12 @@ export function Header() {
 
   const userName = userProfileData?.response.UserName
   const userInitials = getInitials(userName || "")
+
+  async function verifyToRedirect() {
+    if (!isLogged) {
+      showInfoToast("É necessário ter uma conta para acessar a página de alertas.")
+    }
+  }
 
   return (
     <header className="w-full bg-green-700 flex items-center justify-between p-2 md:flex-row md:p-6 flex-col gap-6">
@@ -63,6 +70,7 @@ export function Header() {
         <Link
           href={"/alerts"}
           className="flex gap-2 text-zinc-300 hover:opacity-50 transition-all"
+          onClick={verifyToRedirect}
         >
           <Bell />
           <span className="font-normal text-base">Alertas</span>

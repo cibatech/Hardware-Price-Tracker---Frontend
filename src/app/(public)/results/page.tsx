@@ -18,7 +18,7 @@ import { filterProduct } from "@/http/product/filter-product"
 import { ProductsFilterResponse } from "@/@types/product"
 import { EmptyResults } from "@/components/results/empty-results"
 import { useRouter } from "next/navigation"
-import Loading from "@/components/results/loading"
+import { LoadingSpinner } from "@/components/product/ui/loading"
 
 export default function ResultsPage() {
   const [isFilterModalOpen, setFilterModalOpen] = useState(false)
@@ -94,6 +94,8 @@ export default function ResultsPage() {
     }
   }, [searchParams, router, params, currentPage])
 
+  const isEmptyQueryForLoading = !isLoading && totalProducts === 0 && query
+
   return (
     <main className="flex flex-col gap-8 py-8 w-full max-w-screen-xl m-auto">
       <section className="flex flex-1 items-center justify-between">
@@ -144,8 +146,8 @@ export default function ResultsPage() {
       </section>
 
       <div className="flex flex-1 justify-center flex-wrap gap-8 m-auto">
-        {isLoading && <Loading />}
-        {!isLoading && totalProducts === 0 && <EmptyResults query={query} />}
+        {isLoading && <LoadingSpinner />}
+        {isEmptyQueryForLoading && <EmptyResults query={query} />}
         {!isLoading &&
           productsList
             .slice(0, productsPerPage)
