@@ -11,29 +11,36 @@ import { showErrorToast, showSuccessToast } from "../product/ui/toasts"
 interface AlertCardProps {
   value: number
   alertId: string
+  alertName: string
+  alertImageUrl: string
 }
 
-export function AlertCard({ alertId, value }: AlertCardProps) {
-   const { deleteAlertById } = useAlerts()
+export function AlertCard({
+  alertId,
+  value,
+  alertImageUrl,
+  alertName,
+}: AlertCardProps) {
+  const { deleteAlertById } = useAlerts()
 
-   async function handleDeleteAlert() {
-     try {
-      await deleteAlertById(alertId) 
+  async function handleDeleteAlert() {
+    try {
+      await deleteAlertById(alertId)
       showSuccessToast("Alerta deletado com sucesso!")
-     } catch (error) {
+    } catch (error) {
       console.log(error)
       showErrorToast("Erro ao deletar alerta.")
-     }
-   }
+    }
+  }
 
   return (
-    <div className="border border-zinc-300 flex justify-center items-center px-4 py-4 rounded-3xl max-w-[40rem]">
+    <div className="border border-zinc-300 flex justify-center items-center gap-3 px-4 py-4 rounded-3xl max-w-[40rem]">
       <div className="size-32 flex items-center justify-center">
-        <Image src={imageIndisponible} alt="" />
+        <Image src={alertImageUrl || imageIndisponible} alt="" width={128} height={128} />
       </div>
       <section className="flex flex-col justify-between gap-4">
         <span>
-          Placa de video galax geforce gtx 1650 ex plus 1click oc 4gb...
+          {alertName}
         </span>
         <div className="flex justify-between items-center">
           <strong className="text-xl font-semibold text-green-500">
@@ -51,6 +58,5 @@ export function AlertCard({ alertId, value }: AlertCardProps) {
         </div>
       </section>
     </div>
-    
   )
 }

@@ -1,28 +1,27 @@
-"use client"
-
 import { LogOut, Pencil } from "lucide-react"
-
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "../shadcn-ui/ui/popover"
 import { logout } from "@/app/(authenticated)/auth/login/action"
-import { showErrorToast, showSuccessToast } from "../product/ui/toasts"
+import { showErrorToast } from "../product/ui/toasts"
 import { ReactNode } from "react"
 import Link from "next/link"
 
 export function PopoverUserInfo({
   children,
   userName,
+  onLogout, 
 }: {
   children: ReactNode
   userName: string
+  onLogout?: () => void 
 }) {
   async function handleUserLogout() {
     try {
-      await logout()
-      showSuccessToast("Usuário deslogado com sucesso!")
+      await logout() // action to logout
+      if (onLogout) onLogout() // function to call when the user logout 
     } catch {
       showErrorToast("Erro ao sair.")
     }

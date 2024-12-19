@@ -2,12 +2,6 @@
 
 import { useEffect, useState } from "react"
 import Cookies from "js-cookie"
-import {
-  getUserProfile,
-  GetUserProfileResponse,
-} from "@/http/auth/get-user-profile"
-import { getInitials } from "@/functions/get-initials"
-import { showInfoToast } from "../product/ui/toasts"
 import Link from "next/link"
 import Image from "next/image"
 import { Bell } from "lucide-react"
@@ -15,30 +9,46 @@ import logo from "../../assets/logo.svg"
 import { NavbarMobile } from "./navbar-mobile"
 import { Search } from "../ui/search/search"
 import { PopoverUserInfo } from "./popover-user-info"
+import {
+  getUserProfile,
+  GetUserProfileResponse,
+} from "@/http/auth/get-user-profile"
+import { showInfoToast, showSuccessToast } from "../product/ui/toasts"
+import { getInitials } from "@/functions/get-initials"
 
 export function Header() {
-  const userId = Cookies.get("userId") || ""
-  console.log("userId:", userId)
-
-  const isLogged = userId !== undefined
-
+  const [isLogged, setIsLogged] = useState(false)
   const [userProfileData, setUserProfileData] =
     useState<GetUserProfileResponse | null>(null)
 
-  async function handleGetUserProfileData() {
-   if (userId) {
-     const data = await getUserProfile(userId!)
-     setUserProfileData(data)
-   }
-  }
-
   useEffect(() => {
-    handleGetUserProfileData()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const userId = Cookies.get("userId")
+    setIsLogged(Boolean(userId))
+
+    async function fetchUserProfile() {
+      if (userId) {
+        try {
+          const data = await getUserProfile(userId)
+          setUserProfileData(data)
+        } catch (error) {
+          console.error("Failed to fetch user profile data:", error)
+        }
+      }
+    }
+
+    if (userId) {
+      fetchUserProfile()
+    }
   }, [])
 
+  function handleLogout() {
+    setIsLogged(false)
+    setUserProfileData(null)
+    showSuccessToast("Você foi deslogado com sucesso.")
+  }
+
   const userName = userProfileData?.response.UserName
-  const userInitials = getInitials(userName || "")
+  const userInitials = getInitials(userName)
 
   function verifyToRedirect() {
     if (!isLogged) {
@@ -51,17 +61,15 @@ export function Header() {
   return (
     <header className="w-full bg-green-700 flex items-center justify-between p-2 md:flex-row md:p-6 flex-col gap-6">
       <div className="flex items-center md:justify-center justify-between gap-6">
-        <button className="bg-transparent">
-          <NavbarMobile />
-        </button>
-        <Link href={"/"}>
-          <Image src={logo} alt="Landscape picture" width={240} height={24} />
+        <NavbarMobile />
+        <Link href="/">
+          <Image src={logo} alt="Logo" width={240} height={24} />
         </Link>
 
         {isLogged ? (
-          <PopoverUserInfo userName={userName!}>
+          <PopoverUserInfo userName={userName || ""} onLogout={handleLogout}>
             <button className="bg-green-100 flex size-10 rounded-full text-green-700 text-sm md:hidden justify-center items-center font-semibold">
-              {userInitials}
+              {userInitials || "..."}
             </button>
           </PopoverUserInfo>
         ) : (
@@ -84,10 +92,9 @@ export function Header() {
           <span className="font-normal text-base">Alertas</span>
         </Link>
         {isLogged ? (
-          <PopoverUserInfo userName={userName!}>
+          <PopoverUserInfo userName={userName || ""} onLogout={handleLogout}>
             <button className="bg-green-100 hidden size-10 rounded-full text-green-700 text-base font-semibold md:flex hover:opacity-50 hover:transition-all justify-center items-center">
-              {!userInitials && "..."}
-              {userInitials}
+              {userInitials || "..."}
             </button>
           </PopoverUserInfo>
         ) : (

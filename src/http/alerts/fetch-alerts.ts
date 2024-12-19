@@ -1,11 +1,5 @@
+import { Alert } from "@/@types/alerts"
 import { api } from "@/services/api"
-
-export type Alert = {
-  Id: string
-  TargetPrice: number
-  UserId: string
-  ProdId: string
-}
 
 export type FetchAlertResponse = {
   Description: string
