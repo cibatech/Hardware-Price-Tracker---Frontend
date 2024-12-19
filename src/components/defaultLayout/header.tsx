@@ -17,7 +17,7 @@ import { Search } from "../ui/search/search"
 import { PopoverUserInfo } from "./popover-user-info"
 
 export function Header() {
-  const userId = Cookies.get("userId")
+  const userId = Cookies.get("userId") || ""
   console.log("userId:", userId)
 
   const isLogged = userId !== undefined
@@ -26,19 +26,21 @@ export function Header() {
     useState<GetUserProfileResponse | null>(null)
 
   async function handleGetUserProfileData() {
-    const data = await getUserProfile(userId!)
-    setUserProfileData(data)
+   if (userId) {
+     const data = await getUserProfile(userId!)
+     setUserProfileData(data)
+   }
   }
 
   useEffect(() => {
     handleGetUserProfileData()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const userName = userProfileData?.response.UserName
   const userInitials = getInitials(userName || "")
 
-   function verifyToRedirect() {
+  function verifyToRedirect() {
     if (!isLogged) {
       showInfoToast(
         "É necessário ter uma conta para acessar a página de alertas."
