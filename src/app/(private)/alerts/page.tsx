@@ -8,6 +8,24 @@ import { Trash } from "lucide-react"
 export default function Alerts() {
   const { alerts } = useAlerts()
 
+  console.log("Alerts context loaded:", alerts)
+
+  if (!alerts) {
+    return (
+      <div className="flex justify-center items-center col-span-full mt-4 text-2xl font-semibold">
+        O contexto de alertas ainda não foi carregado.
+      </div>
+    )
+  }
+
+  if (alerts.length === 0) {
+    return (
+      <div className="flex justify-center items-center col-span-full mt-4 text-2xl font-semibold">
+        Você não tem alertas ainda.
+      </div>
+    )
+  }
+
   return (
     <div className="flex flex-col w-full max-w-[80%] m-auto py-8 gap-8 min-h-screen">
       <div className="flex items-center justify-between flex-wrap gap-3">
@@ -22,19 +40,13 @@ export default function Alerts() {
         </section>
       </div>
       <main className="grid md:grid-cols-2 gap-3 grid-cols-1">
-        {alerts.length === 0 ? (
-          <span className="flex justify-center items-center col-span-full mt-4 text-2xl font-semibold ">
-            Você não tem alertas ainda.
-          </span>
-        ) : (
-          alerts.map((alert) => (
-            <AlertCard
-              key={alert.Id}
-              alertId={alert.Id}
-              value={alert.TargetPrice}
-            />
-          ))
-        )}
+        {alerts.map((alert) => (
+          <AlertCard
+            key={alert.Id}
+            alertId={alert.Id}
+            value={alert.TargetPrice}
+          />
+        ))}
       </main>
     </div>
   )

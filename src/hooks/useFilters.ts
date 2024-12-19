@@ -1,10 +1,12 @@
 import { useSearchParams, useRouter, usePathname } from "next/navigation"
 
 export function useFilters() {
-  const { replace } = useRouter()
+  const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
-  const params = new URLSearchParams(searchParams)
+
+  // Cria uma cópia mutável dos parâmetros
+  const params = new URLSearchParams(searchParams?.toString())
 
   const updateFilter = (key: string, value: string) => {
     const isSelected = params.get(key) === value
@@ -13,13 +15,21 @@ export function useFilters() {
     } else {
       params.set(key, value)
     }
-    replace(`${pathname}?${params.toString()}`)
+
+    // Substitui os parâmetros na URL
+    router.replace(`${pathname}?${params.toString()}`)
   }
 
   const resetFilters = () => {
     params.forEach((_, key) => params.delete(key))
-    replace(pathname)
+    router.replace(pathname)
   }
 
-  return { updateFilter, resetFilters, filtersCount: params.size, searchParams, params }
+  return {
+    updateFilter,
+    resetFilters,
+    filtersCount: params.size,
+    searchParams,
+    params,
+  }
 }

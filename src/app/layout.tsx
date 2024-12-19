@@ -3,6 +3,7 @@ import { Inter } from "next/font/google"
 import "./globals.css"
 import { Toaster } from "sonner"
 import { AlertsProvider } from "@/contexts/alerts-context"
+import { Suspense } from "react"
 
 const mainLocalFontFamily = Inter({
   subsets: ["latin"],
@@ -23,9 +24,11 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <body className={`${mainLocalFontFamily.variable} antialiased`}>
-        <AlertsProvider>{children}</AlertsProvider>
-        
-        <Toaster />
+        <Suspense>
+          <AlertsProvider>{children}</AlertsProvider>
+
+          <Toaster />
+        </Suspense>
       </body>
     </html>
   )
