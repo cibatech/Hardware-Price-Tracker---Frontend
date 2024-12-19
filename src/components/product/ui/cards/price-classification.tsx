@@ -1,6 +1,6 @@
 import Image from "next/image"
 import terabyteLogo from "@/assets/terabyte-logo.svg"
-import kabumLogo from "@/assets/kabum!-logo.svg"
+import kabumLogo from "@/assets/kabum-logo.svg"
 import pichauLogo from "@/assets/pichau-logo.svg"
 import ImageIndisplonible from "@/assets/image-indisponible.svg"
 import { LinkButton } from "../link-button"

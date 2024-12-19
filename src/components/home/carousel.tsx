@@ -6,7 +6,7 @@ import {
   CarouselPrevious,
 } from "../shadcn-ui/ui/carousel"
 
-import gpuPicture from "../../../public/gpu.svg"
+import gpuPicture from "../../assets/image-indisponible.svg"
 import { ProductCard } from "../product/ui/cards/product-card"
 
 export function CarouselSpacing() {
@@ -20,7 +20,7 @@ export function CarouselSpacing() {
               productPrice={879}
               productTitle="Placa de video galax geforce gtx 1650 ex plus 1click oc 4gb..."
               store="Terabyte"
-              redirectLink=""
+              productId=""
             />
           </CarouselItem>
         ))}

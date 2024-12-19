@@ -11,33 +11,34 @@ import { showInfoToast } from "../product/ui/toasts"
 import Link from "next/link"
 import Image from "next/image"
 import { Bell } from "lucide-react"
-import logo from "../../../public/logo.svg"
+import logo from "../../assets/logo.svg"
 import { NavbarMobile } from "./navbar-mobile"
 import { Search } from "../ui/search/search"
 import { PopoverUserInfo } from "./popover-user-info"
 
 export function Header() {
-  const [isLogged, setIsLogged] = useState(false)
-  const [userId, setUserId] = useState<string | undefined>(undefined)
+  const userId = Cookies.get("userId")
+  console.log("userId:", userId)
+
+  const isLogged = userId !== undefined
+
   const [userProfileData, setUserProfileData] =
     useState<GetUserProfileResponse | null>(null)
 
-  useEffect(() => {
-    const storedUserId = Cookies.get("userId")
-    setUserId(storedUserId)
-    setIsLogged(!!storedUserId)
-  }, [])
+  async function handleGetUserProfileData() {
+    const data = await getUserProfile(userId!)
+    setUserProfileData(data)
+  }
 
   useEffect(() => {
-    if (userId) {
-      getUserProfile(userId).then(setUserProfileData)
-    }
-  }, [userId])
+    handleGetUserProfileData()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const userName = userProfileData?.response.UserName
   const userInitials = getInitials(userName || "")
 
-  async function verifyToRedirect() {
+   function verifyToRedirect() {
     if (!isLogged) {
       showInfoToast(
         "É necessário ter uma conta para acessar a página de alertas."
@@ -73,7 +74,7 @@ export function Header() {
       <Search />
       <div className="flex w-full items-center justify-between gap-6 md:justify-center md:w-auto">
         <Link
-          href={isLogged ? "/alerts" : "#"}
+          href="/alerts"
           className="flex gap-2 text-zinc-300 hover:opacity-50 transition-all"
           onClick={verifyToRedirect}
         >
