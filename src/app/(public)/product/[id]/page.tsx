@@ -13,11 +13,13 @@ import ImageIndisplonible from "@/assets/image-indisponible.svg"
 export default async function ProductPage({
   params,
 }: {
-  params: { id: string }
+  params: Promise<{ id: string }>
 }) {
-  const productData = await FetchProductById(params.id)
-  const trendsData = await FetchTrendsById(params.id)
-  const comparasionData = await FetchProductsByComparasion(params.id)
+  const { id } = await params
+
+  const productData = await FetchProductById(id)
+  const trendsData = await FetchTrendsById(id)
+  const comparasionData = await FetchProductsByComparasion(id)
 
   const filteredBestPriceOrder =
     comparasionData.response.FindInThreeStores.sort((a, b) => a.Value - b.Value)

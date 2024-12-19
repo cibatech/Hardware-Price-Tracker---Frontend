@@ -1,5 +1,5 @@
 import pichauLogo from "../../assets/pichau-logo.svg"
-import kabumLogo from "../../assets/kabum!-logo.svg"
+import kabumLogo from "../../assets/kabum-logo.svg"
 import terabyteLogo from "../../assets/terabyte-logo.svg"
 import { CarouselSpacing } from "../../components/home/carousel"
 import { Banner } from "../../components/home/banner"

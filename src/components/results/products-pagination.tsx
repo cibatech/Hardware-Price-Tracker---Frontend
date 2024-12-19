@@ -1,6 +1,6 @@
 "use client"
 
-import { usePathname, useRouter } from "next/navigation"
+import { usePathname } from "next/navigation"
 import {
   Pagination,
   PaginationContent,
@@ -44,9 +44,9 @@ export function PaginationDemo({ totalPages }: { totalPages: number }) {
   const [visiblePages, setVisiblePages] = useState<(number | string)[]>([])
   const { params, searchParams } = useFilters()
   const pathname = usePathname()
-  const { replace } = useRouter()
+  // const { replace } = useRouter()
   const currentPage = Number(searchParams.get("page")) || 1
-  const store = searchParams.get("loja")
+  // const store = searchParams.get("loja") 
 
   const createPageURL = (pageNumber: number | string) => {
     params.set("page", pageNumber.toString())

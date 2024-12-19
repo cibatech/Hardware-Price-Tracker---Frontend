@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image"
-import gtxImage from "../../../public/gpu.svg"
+import imageIndisponible from "../../assets/image-indisponible.svg"
 import { Trash } from "lucide-react"
 import { priceFormatter } from "@/lib/formatter"
 import { EditValueModal } from "./edit-alert-modal"
@@ -29,7 +29,7 @@ export function AlertCard({ alertId, value }: AlertCardProps) {
   return (
     <div className="border border-zinc-300 flex justify-center items-center px-4 py-4 rounded-3xl max-w-[40rem]">
       <div className="size-32 flex items-center justify-center">
-        <Image src={gtxImage} alt="" />
+        <Image src={imageIndisponible} alt="" />
       </div>
       <section className="flex flex-col justify-between gap-4">
         <span>

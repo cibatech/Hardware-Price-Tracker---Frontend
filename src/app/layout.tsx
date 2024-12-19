@@ -5,6 +5,7 @@ import { Toaster } from "sonner"
 import { AlertsProvider } from "@/contexts/alerts-context"
 
 const mainLocalFontFamily = Inter({
+  subsets: ["latin"],
   weight: ["300", "400", "500", "600"],
   variable: "--font-family-main",
 })
