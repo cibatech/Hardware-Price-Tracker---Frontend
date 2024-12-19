@@ -12,7 +12,7 @@ export default function Alerts() {
 
   if (!alerts) {
     return (
-      <div className="flex justify-center items-center col-span-full mt-4 text-2xl font-semibold">
+      <div className="flex justify-center items-center col-span-full mt-4 text-2xl font-semibold h-screen">
         O contexto de alertas ainda não foi carregado.
       </div>
     )
@@ -20,7 +20,7 @@ export default function Alerts() {
 
   if (alerts.length === 0) {
     return (
-      <div className="flex justify-center items-center col-span-full mt-4 text-2xl font-semibold">
+      <div className="flex justify-center items-center col-span-full mt-4 text-2xl font-semibold h-screen">
         Você não tem alertas ainda.
       </div>
     )
@@ -40,11 +40,13 @@ export default function Alerts() {
         </section>
       </div>
       <main className="grid md:grid-cols-2 gap-3 grid-cols-1">
-        {alerts.map((alert) => (
+        {alerts.map((alert, index) => (
           <AlertCard
-            key={alert.Id}
+            key={index}
             alertId={alert.Id}
             value={alert.TargetPrice}
+            alertImageUrl={alert.ProdImage}
+            alertName={alert.ProdName}
           />
         ))}
       </main>

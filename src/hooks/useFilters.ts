@@ -5,7 +5,6 @@ export function useFilters() {
   const pathname = usePathname()
   const searchParams = useSearchParams()
 
-  // Cria uma cópia mutável dos parâmetros
   const params = new URLSearchParams(searchParams?.toString())
 
   const updateFilter = (key: string, value: string) => {
@@ -16,7 +15,6 @@ export function useFilters() {
       params.set(key, value)
     }
 
-    // Substitui os parâmetros na URL
     router.replace(`${pathname}?${params.toString()}`)
   }
 

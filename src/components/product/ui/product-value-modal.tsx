@@ -18,7 +18,7 @@ import { z } from "zod"
 import { creteAlert } from "@/http/alerts/create-alert"
 import { useParams } from "next/navigation"
 import Cookies from "js-cookie"
-import { showErrorToast, showSuccessToast } from "./toasts"
+import { showErrorToast, showInfoToast, showSuccessToast } from "./toasts"
 
 export const createAlertFormSchema = z.object({
   TargetPrice: z.number().min(1, "Valor inválido!"),
@@ -44,6 +44,7 @@ export function ProductValueModal() {
 
       if (!UserId || !ProdId) {
         console.error("UserId ou ProdId não encontrados.")
+        showInfoToast("Faça o login para criar o alerta.")
         return
       }
 

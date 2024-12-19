@@ -6,11 +6,7 @@ import { deleteAlert } from "@/http/alerts/delete-alert"
 import { EditAlertFormSchema } from "@/components/alertas/edit-alert-modal"
 import { editAlert } from "@/http/alerts/edit-alert"
 import Cookies from "js-cookie"
-
-interface Alert {
-  Id: string
-  TargetPrice: number
-}
+import { Alert } from "@/@types/alerts"
 
 interface AlertsContextData {
   alerts: Alert[]
