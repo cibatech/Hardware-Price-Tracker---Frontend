@@ -3,6 +3,7 @@ import kabumLogo from "../../assets/kabum-logo.svg"
 import terabyteLogo from "../../assets/terabyte-logo.svg"
 import { CarouselSpacing } from "../../components/home/carousel"
 import { Banner } from "../../components/home/banner"
+import { RecentlyViewedProducts } from "@/components/home/recently-viewed-products"
 
 export default function Home() {
   return (
@@ -16,7 +17,7 @@ export default function Home() {
         <strong className="text-xl font-semibold">
           Produtos vistos recentemente
         </strong>
-        <CarouselSpacing />
+        <RecentlyViewedProducts />
       </div>
       <div className="flex flex-col items-center text-start w-full max-w-[80%] m-auto gap-8">
         <strong className="text-xl font-semibold">
