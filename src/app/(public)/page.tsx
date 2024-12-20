@@ -1,9 +1,9 @@
 import pichauLogo from "../../assets/pichau-logo.svg"
 import kabumLogo from "../../assets/kabum-logo.svg"
 import terabyteLogo from "../../assets/terabyte-logo.svg"
-import { CarouselSpacing } from "../../components/home/carousel"
 import { Banner } from "../../components/home/banner"
 import { RecentlyViewedProducts } from "@/components/home/recently-viewed-products"
+import { MostSearchedProducts } from "@/components/home/most-searched-products"
 
 export default function Home() {
   return (
@@ -23,7 +23,7 @@ export default function Home() {
         <strong className="text-xl font-semibold">
           Produtos mais pesquisados
         </strong>
-        <CarouselSpacing />
+        <MostSearchedProducts />
       </div>
     </div>
   )
