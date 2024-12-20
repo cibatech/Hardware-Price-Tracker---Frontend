@@ -4,6 +4,7 @@ import "./globals.css"
 import { Toaster } from "sonner"
 import { AlertsProvider } from "@/contexts/alerts-context"
 import { Suspense } from "react"
+import { RecentkyViwedProductsProvider } from "@/contexts/recently-viewed-products-list-context"
 
 const mainLocalFontFamily = Inter({
   subsets: ["latin"],
@@ -25,7 +26,11 @@ export default function RootLayout({
     <html lang="pt-br">
       <body className={`${mainLocalFontFamily.variable} antialiased`}>
         <Suspense>
-          <AlertsProvider>{children}</AlertsProvider>
+          <AlertsProvider>
+            <RecentkyViwedProductsProvider>
+              {children}
+            </RecentkyViwedProductsProvider>
+          </AlertsProvider>
 
           <Toaster />
         </Suspense>
