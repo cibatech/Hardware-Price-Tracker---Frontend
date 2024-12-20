@@ -93,6 +93,9 @@ export function Search() {
                   suggestionTitle={suggestion.Title}
                   suggestionCategory={suggestion.Where}
                   suggestionProductId={suggestion.Id}
+                  suggestionProductStore={suggestion.Kind}
+                  suggetionProductImageUrl={suggestion.ImageUrl}
+                  suggestionProductPrice={suggestion.Value}
                 />
               ))
             ) : (

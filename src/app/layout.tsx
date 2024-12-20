@@ -5,6 +5,7 @@ import { Toaster } from "sonner"
 import { AlertsProvider } from "@/contexts/alerts-context"
 import { Suspense } from "react"
 import { RecentkyViwedProductsProvider } from "@/contexts/recently-viewed-products-list-context"
+import { MostSearchedProductProvider } from "@/contexts/most-searched-products-context"
 
 const mainLocalFontFamily = Inter({
   subsets: ["latin"],
@@ -28,7 +29,9 @@ export default function RootLayout({
         <Suspense>
           <AlertsProvider>
             <RecentkyViwedProductsProvider>
-              {children}
+              <MostSearchedProductProvider>
+                {children}
+              </MostSearchedProductProvider>
             </RecentkyViwedProductsProvider>
           </AlertsProvider>
 
