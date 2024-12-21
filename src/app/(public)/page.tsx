@@ -21,7 +21,7 @@ export default function Home() {
       </div>
       <div className="flex flex-col items-center text-start w-full max-w-[80%] m-auto gap-8">
         <strong className="text-xl font-semibold">
-          Produtos mais pesquisados
+          Produtos pesquisados recentemente
         </strong>
         <MostSearchedProducts />
       </div>
