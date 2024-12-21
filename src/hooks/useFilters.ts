@@ -15,7 +15,7 @@ export function useFilters() {
       params.set(key, value)
     }
 
-    router.replace(`${pathname}?${params.toString()}`)
+    router.replace(`${pathname}?${params.toString()}`, { scroll: false })
   }
 
   const resetFilters = () => {

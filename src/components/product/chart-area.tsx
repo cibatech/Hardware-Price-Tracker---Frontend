@@ -12,6 +12,7 @@ import { useEffect, useMemo, useState } from "react"
 import { FetchProductById } from "@/http/product/fetch-product-by-id"
 import { useParams } from "next/navigation"
 import { formattedRelativeDate } from "@/lib/formatter"
+import { LoadingSpinner } from "./ui/loading"
 
 interface ChartData {
   date: string
@@ -51,6 +52,7 @@ export function ChartArea() {
   const params = useParams()
 
   const [chartData, setChartData] = useState<ChartData[]>([])
+  const [isLoading, setIsLoading] = useState(true)
 
   const selectedDate = useMemo(
     () => searchParams.get("date") || "30",
@@ -59,6 +61,7 @@ export function ChartArea() {
 
   useEffect(() => {
     const fetchChartData = async () => {
+      setIsLoading(true)
       try {
         const response = await FetchProductById(
           params.id as string,
@@ -76,11 +79,17 @@ export function ChartArea() {
         }
       } catch (error) {
         console.error("Erro ao buscar os dados do gráfico:", error)
+      } finally {
+        setIsLoading(false)
       }
     }
 
     fetchChartData()
   }, [params.id, selectedDate])
+
+  if (isLoading) {
+    return <LoadingSpinner />
+  }
 
   return (
     <div className="flex flex-col gap-10">
