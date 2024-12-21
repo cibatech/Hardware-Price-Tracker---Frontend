@@ -1,15 +1,16 @@
-"use client"
+"use client";
 
-import { useMostSearchedProductsContexts } from "@/contexts/most-searched-products-context"
-import { useRouter } from "next/navigation"
+import { useMostSearchedProductsContexts } from "@/contexts/most-searched-products-context";
+
+import { useRouter } from "next/navigation";
 
 export interface SuggestionItemProps {
-  suggestionTitle: string
-  suggestionCategory: string
-  suggestionProductId: string
-  suggetionProductImageUrl: string
-  suggestionProductStore: string
-  suggestionProductPrice: number
+  suggestionTitle: string;
+  suggestionCategory: string;
+  suggestionProductId: string;
+  suggetionProductImageUrl: string;
+  suggestionProductStore: string;
+  suggestionProductPrice: number;
 }
 
 export function SuggestionItem({
@@ -18,18 +19,14 @@ export function SuggestionItem({
   suggestionProductId,
   suggestionProductStore,
   suggetionProductImageUrl,
-  suggestionProductPrice
+  suggestionProductPrice,
 }: SuggestionItemProps) {
-  const router = useRouter()
+  const router = useRouter();
   const { addProductInMostSearchedProductsContextList } =
-    useMostSearchedProductsContexts()
+    useMostSearchedProductsContexts();
 
   function handleRedirectToPage() {
-    if (window.location.pathname === "/") {
-      router.push(`/results/?query=${suggestionTitle}`)
-    } else {
-      router.push(`/product/${suggestionProductId}`)
-    }
+    router.push(`/product/${suggestionProductId}`);
   }
 
   const product = {
@@ -39,11 +36,11 @@ export function SuggestionItem({
     suggestionProductStore,
     suggetionProductImageUrl,
     suggestionProductPrice,
-  }
+  };
 
   function handleAddProductInMostSearchedProductsContextList() {
-    handleRedirectToPage()
-    addProductInMostSearchedProductsContextList(product)
+    handleRedirectToPage();
+    addProductInMostSearchedProductsContextList(product);
   }
 
   return (
@@ -56,5 +53,5 @@ export function SuggestionItem({
       </strong>
       <span className="text-green-700">em {suggestionCategory}</span>
     </div>
-  )
+  );
 }
