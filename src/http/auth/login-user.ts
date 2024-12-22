@@ -1,6 +1,6 @@
 "use server"
 
-import { LoginFormData, LoginResponse } from "@/@types/auth"
+import { LoginFormData, LoginResponse } from "@/@types/user"
 import { api } from "@/services/api"
 import { cookies } from "next/headers"
 

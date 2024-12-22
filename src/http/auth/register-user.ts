@@ -1,4 +1,4 @@
-import { RegisterData, RegisterResponse } from "@/@types/auth"
+import { RegisterData, RegisterResponse } from "@/@types/user"
 import { api } from "@/services/api"
 
 export async function registerUser(

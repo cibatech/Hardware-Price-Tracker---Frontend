@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { sendEmailForResetPassword } from "@/http/auth/send-email-user"
+import { resetPassword } from "@/http/auth/reset-password-user"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { ArrowLeft } from "lucide-react"
 import { useRouter } from "next/navigation"
@@ -11,21 +11,32 @@ import { z } from "zod"
 
 const forgotPasswordFormSchema = z.object({
   email: z.string().email(),
+  password: z.string().min(1),
 })
 
-type ForgotPasswordFormData = z.infer<typeof forgotPasswordFormSchema>
+type ForgotPasswordFormSchema = z.infer<typeof forgotPasswordFormSchema>
 
-export default function ForgotPassword() {
+export default function NewPassword() {
   const { back, push } = useRouter()
-  const { register, handleSubmit } = useForm<ForgotPasswordFormData>({
+  const { register, handleSubmit } = useForm<ForgotPasswordFormSchema>({
     resolver: zodResolver(forgotPasswordFormSchema),
   })
 
-  async function handleSendEmail(data: ForgotPasswordFormData) {
-    const response = await sendEmailForResetPassword(data.email)
-    const code = response.CodeSent
-    localStorage.setItem("@code", code)
-    push("forgot-password/send-code")
+  async function handleResetPassword(data: ForgotPasswordFormSchema) {
+    const code = localStorage.getItem("@code") as string
+    console.log(data)
+
+    const formData = {
+      UserProvidedCode: code,
+      StoredCode: code,
+      Email: data.email,
+      Password: data.password,
+    }
+
+    console.log(data)
+    console.log("formdata: ", formData)
+    await resetPassword(formData)
+    push("/")
   }
 
   return (
@@ -42,7 +53,7 @@ export default function ForgotPassword() {
         </section>
         <form
           action=""
-          onSubmit={handleSubmit(handleSendEmail)}
+          onSubmit={handleSubmit(handleResetPassword)}
           className="flex flex-col gap-8"
         >
           <div className="flex flex-col gap-3">
@@ -55,6 +66,13 @@ export default function ForgotPassword() {
               placeholder="Informe seu email"
               variant="minimalist"
               {...register("email")}
+            />
+            <Input
+              type="password"
+              id="password"
+              placeholder="Crie uma nova senha"
+              variant="minimalist"
+              {...register("password")}
             />
           </div>
           <Button variant="submit">Confirmar</Button>

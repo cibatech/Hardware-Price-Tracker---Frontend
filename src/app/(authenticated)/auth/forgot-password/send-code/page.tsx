@@ -2,7 +2,6 @@
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { sendEmailForResetPassword } from "@/http/auth/send-email-user"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { ArrowLeft } from "lucide-react"
 import { useRouter } from "next/navigation"
@@ -10,22 +9,22 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 
 const forgotPasswordFormSchema = z.object({
-  email: z.string().email(),
+  code: z.string()
 })
 
 type ForgotPasswordFormData = z.infer<typeof forgotPasswordFormSchema>
 
-export default function ForgotPassword() {
+export default function SendCode() {
   const { back, push } = useRouter()
   const { register, handleSubmit } = useForm<ForgotPasswordFormData>({
     resolver: zodResolver(forgotPasswordFormSchema),
   })
 
-  async function handleSendEmail(data: ForgotPasswordFormData) {
-    const response = await sendEmailForResetPassword(data.email)
-    const code = response.CodeSent
-    localStorage.setItem("@code", code)
-    push("forgot-password/send-code")
+  async function handleVeryCode(data: ForgotPasswordFormData) {
+    const code = localStorage.getItem("@code")
+    if (code === data.code) {
+      push("new-password")
+    }
   }
 
   return (
@@ -38,23 +37,23 @@ export default function ForgotPassword() {
           >
             <ArrowLeft />
           </button>
-          <strong>Recuperação de senha</strong>
+          <strong>Código de verificação</strong>
         </section>
         <form
           action=""
-          onSubmit={handleSubmit(handleSendEmail)}
+          onSubmit={handleSubmit(handleVeryCode)}
           className="flex flex-col gap-8"
         >
           <div className="flex flex-col gap-3">
             <label htmlFor="email">
-              Informe o email para recuperar sua senha.
+              Informe o código que foi enviado no seu email.
             </label>
             <Input
-              type="email"
-              id="email"
-              placeholder="Informe seu email"
+              type="text"
+              id="code"
+              placeholder="Informe o código"
               variant="minimalist"
-              {...register("email")}
+              {...register("code")}
             />
           </div>
           <Button variant="submit">Confirmar</Button>

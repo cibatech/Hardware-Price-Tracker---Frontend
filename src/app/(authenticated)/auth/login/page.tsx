@@ -6,7 +6,7 @@ import { Input } from "../../../../components/ui/input"
 import { useForm } from "react-hook-form"
 import { loginUser } from "@/http/auth/login-user"
 import { redirect } from "next/navigation"
-import { LoginFormData } from "@/@types/auth"
+import { LoginFormData } from "@/@types/user"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 
