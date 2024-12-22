@@ -3,8 +3,8 @@ import {
   productsPaginationOptions,
   stores,
 } from "@/constants"
-import { RenderSelect } from "./render-select"
-import { Button } from "../ui/button/button"
+import { RenderSelect } from "./select/render-select"
+import { Button } from "../ui/button"
 import { useFilters } from "@/hooks/useFilters"
 import { Trash, X } from "lucide-react"
 

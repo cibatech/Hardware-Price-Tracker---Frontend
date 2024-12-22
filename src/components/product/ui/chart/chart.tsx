@@ -1,56 +1,27 @@
 "use client"
 
 import { CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts"
-import {
-  ChartConfig,
-  ChartContainer,
-  ChartTooltip,
-} from "../shadcn-ui/ui/chart"
+import { ChartContainer, ChartTooltip } from "../../../shadcn-ui/ui/chart"
 import { filterProductByDateOptions } from "@/constants"
 import { useFilters } from "@/hooks/useFilters"
 import { useEffect, useMemo, useState } from "react"
 import { FetchProductById } from "@/http/product/fetch-product-by-id"
 import { useParams } from "next/navigation"
-import { formattedRelativeDate } from "@/lib/formatter"
+import { LoadingSpinner } from "../../../ui/loading"
+import { chartConfig } from "@/lib/utils"
+import { CustomTooltip } from "./chart-tooltip"
 
 interface ChartData {
   date: string
   price: number
 }
 
-const chartConfig = {
-  desktop: {
-    label: "Desktop",
-    color: "#22c55e",
-  },
-} satisfies ChartConfig
-
-interface CustomTooltipProps {
-  active: boolean
-  payload: { value: number }[]
-  label: string
-}
-
-const CustomTooltip = ({ active, payload, label }: CustomTooltipProps) => {
-  if (active && payload?.length) {
-    return (
-      <div className="bg-white rounded-lg shadow-lg p-3">
-        <strong className="text-green-600 font-bold text-xl">{`R$ ${payload[0].value}`}</strong>
-        <p className="text-zinc-600 text-base">
-          {formattedRelativeDate(label)}
-        </p>
-      </div>
-    )
-  }
-
-  return null
-}
-
-export function ChartArea() {
+export function ProductChartHistoryPrices() {
   const { searchParams, updateFilter } = useFilters()
   const params = useParams()
 
   const [chartData, setChartData] = useState<ChartData[]>([])
+  const [isLoading, setIsLoading] = useState(true)
 
   const selectedDate = useMemo(
     () => searchParams.get("date") || "30",
@@ -59,6 +30,7 @@ export function ChartArea() {
 
   useEffect(() => {
     const fetchChartData = async () => {
+      setIsLoading(true)
       try {
         const response = await FetchProductById(
           params.id as string,
@@ -76,11 +48,17 @@ export function ChartArea() {
         }
       } catch (error) {
         console.error("Erro ao buscar os dados do gráfico:", error)
+      } finally {
+        setIsLoading(false)
       }
     }
 
     fetchChartData()
   }, [params.id, selectedDate])
+
+  if (isLoading) {
+    return <LoadingSpinner />
+  }
 
   return (
     <div className="flex flex-col gap-10">

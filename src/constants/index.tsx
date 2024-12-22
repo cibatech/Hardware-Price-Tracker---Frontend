@@ -1,18 +1,3 @@
-export const hardwareComponetsList = [
-  "Processador",
-  "Placa de vídeo",
-  "Fonte",
-  "Cooler",
-  "Armazenamento",
-  "Memória RAM",
-  "Placa mãe",
-]
-
-
-export const options = ["Asus", "Gigabyte", "MSI", "Asrock"]
-
-// export const stores = ["TeraByte", "Pichau", "Kabum"]
-
 export const hardwareCategories = [
   { value: "hardware", title: "Hardware" },
   { value: "periféricos", title: "Periféricos" },
@@ -34,7 +19,7 @@ export const filterProductByDateOptions = [
 
 export const productsPaginationOptions = [
   { value: "12", title: "12" },
-  { value: "20", title: "20" }
+  { value: "20", title: "20" },
 ]
 
 export const stores = [

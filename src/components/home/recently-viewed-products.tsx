@@ -38,7 +38,7 @@ export function RecentlyViewedProducts() {
                   productId={alert.productId}
                 />
               </CarouselItem>
-            ))}
+            ))} 
           </CarouselContent>
           <CarouselPrevious />
           <CarouselNext />

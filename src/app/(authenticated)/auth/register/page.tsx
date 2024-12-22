@@ -1,17 +1,14 @@
 "use client"
 
 import Link from "next/link"
-import { Button } from "../../../../components/ui/button/button"
-import { Input } from "../../../../components/ui/inputs/input"
+import { Button } from "../../../../components/ui/button"
+import { Input } from "../../../../components/ui/input"
 import { useForm } from "react-hook-form"
 import { registerUser } from "@/http/auth/register-user"
 import { RegisterData } from "@/@types/auth"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
-import {
-  showErrorToast,
-  showSuccessToast,
-} from "@/components/product/ui/toasts"
+import { showErrorToast, showSuccessToast } from "@/components/ui/toasts"
 
 const registerFormSchema = z.object({
   Email: z.string().email("Digite o email corretamente."),
@@ -20,9 +17,11 @@ const registerFormSchema = z.object({
 })
 
 export default function Register() {
-  const { handleSubmit, register, formState: {
-    errors
-  } } = useForm<RegisterData>({
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<RegisterData>({
     resolver: zodResolver(registerFormSchema),
   })
 

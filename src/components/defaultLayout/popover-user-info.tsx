@@ -5,23 +5,23 @@ import {
   PopoverTrigger,
 } from "../shadcn-ui/ui/popover"
 import { logout } from "@/app/(authenticated)/auth/login/action"
-import { showErrorToast } from "../product/ui/toasts"
+import { showErrorToast } from "../ui/toasts"
 import { ReactNode } from "react"
 import Link from "next/link"
 
 export function PopoverUserInfo({
   children,
   userName,
-  onLogout, 
+  onLogout,
 }: {
   children: ReactNode
   userName: string
-  onLogout?: () => void 
+  onLogout?: () => void
 }) {
   async function handleUserLogout() {
     try {
       await logout() // action to logout
-      if (onLogout) onLogout() // function to call when the user logout 
+      if (onLogout) onLogout() // function to call when the user logout
     } catch {
       showErrorToast("Erro ao sair.")
     }

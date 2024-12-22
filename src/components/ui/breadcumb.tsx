@@ -4,7 +4,7 @@ import {
   BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbSeparator,
-} from "../../shadcn-ui/ui/breadcrumb"
+} from "../shadcn-ui/ui/breadcrumb"
 
 interface BreadcrumbDemoProps {
   productTitle?: string

@@ -4,3 +4,21 @@ export interface Alert {
   ProdImage: string
   ProdName: string
 }
+
+export type CreateAlertData = {
+  TargetPrice: number
+  ProdId: string
+  UserId: string
+}
+
+export type AlertResponse = {
+  Id: string
+} & CreateAlertData
+
+export type CreateAlertResponse = {
+  Description: string
+  response: AlertResponse
+  config: CreateAlertData
+}
+
+export type DeleteAlertResponse =  CreateAlertResponse

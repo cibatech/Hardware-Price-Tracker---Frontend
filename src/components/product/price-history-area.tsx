@@ -1,4 +1,4 @@
-import { ChartArea } from "./chart-area"
+import { ProductChartHistoryPrices } from "./ui/chart/chart"
 
 export function PriceHistoryArea() {
   return (
@@ -7,7 +7,7 @@ export function PriceHistoryArea() {
       id="price-history"
     >
       <strong className="text-xl font-semibold">Histórico de preços</strong>
-      <ChartArea  />
+      <ProductChartHistoryPrices />
     </section>
   )
 }

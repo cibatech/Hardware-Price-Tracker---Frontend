@@ -1,7 +1,7 @@
 "use client"
 
 import { priceFormatter } from "@/lib/formatter"
-import { Button } from "../ui/button/button"
+import { Button } from "../ui/button"
 import { PriceAnalysisCard } from "./ui/cards/price-analysis-card"
 import { ProductValueModal } from "./ui/product-value-modal"
 import { PriceClassification } from "@/@types/product"
