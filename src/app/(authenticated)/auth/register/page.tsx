@@ -8,10 +8,7 @@ import { registerUser } from "@/http/auth/register-user"
 import { RegisterData } from "@/@types/auth"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
-import {
-  showErrorToast,
-  showSuccessToast,
-} from "@/components/product/ui/toasts"
+import { showErrorToast, showSuccessToast } from "@/components/ui/toasts"
 
 const registerFormSchema = z.object({
   Email: z.string().email("Digite o email corretamente."),

@@ -1,20 +1,5 @@
+import { CreateAlertData, CreateAlertResponse } from "@/@types/alerts"
 import { api } from "@/services/api"
-
-export type CreateAlertData = {
-  TargetPrice: number
-  ProdId: string
-  UserId: string
-}
-
-export type AlertResponse = {
-  Id: string
-} & CreateAlertData
-
-export type CreateAlertResponse = {
-  Description: string
-  response: AlertResponse
-  config: CreateAlertData
-}
 
 export async function creteAlert(
   createAlertData: CreateAlertData

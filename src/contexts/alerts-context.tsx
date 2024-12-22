@@ -7,6 +7,7 @@ import { EditAlertFormSchema } from "@/components/alertas/edit-alert-modal"
 import { editAlert } from "@/http/alerts/edit-alert"
 import Cookies from "js-cookie"
 import { Alert } from "@/@types/alerts"
+// import { CreateAlertData, creteAlert } from "@/http/alerts/create-alert"
 
 interface AlertsContextData {
   alerts: Alert[]
@@ -18,6 +19,16 @@ const AlertsContext = createContext<AlertsContextData | undefined>(undefined)
 
 export function AlertsProvider({ children }: { children: React.ReactNode }) {
   const [alerts, setAlerts] = useState<Alert[]>([])
+
+  // async function crateNewAlert(newAlert: CreateAlertData) {
+  //   const response = await creteAlert(newAlert)
+
+  //   response.response.
+  //   const alert = {
+  //     response
+  //   }
+  //   setAlerts([newAlert, ...alerts])
+  // }
 
   useEffect(() => {
     async function loadAlerts() {

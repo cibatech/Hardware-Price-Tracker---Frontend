@@ -1,24 +1,9 @@
+import { DeleteAlertResponse } from "@/@types/alerts"
 import { api } from "@/services/api"
-
-export type CreateAlertData = {
-  TargetPrice: number
-  ProdId: string
-  UserId: string
-}
-
-export type AlertResponse = {
-  Id: string
-} & CreateAlertData
-
-export type CreateAlertResponse = {
-  Description: string
-  response: AlertResponse
-  config: CreateAlertData
-}
 
 export async function deleteAlert(
   alertId: string
-): Promise<CreateAlertResponse> {
+): Promise<DeleteAlertResponse> {
   try {
     const { data } = await api.delete(`api/tracker/delete/${alertId}`)
 

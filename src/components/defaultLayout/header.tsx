@@ -13,7 +13,7 @@ import {
   getUserProfile,
   GetUserProfileResponse,
 } from "@/http/auth/get-user-profile"
-import { showInfoToast, showSuccessToast } from "../product/ui/toasts"
+import { showInfoToast, showSuccessToast } from "../ui/toasts"
 import { getInitials } from "@/functions/get-initials"
 
 export function Header() {

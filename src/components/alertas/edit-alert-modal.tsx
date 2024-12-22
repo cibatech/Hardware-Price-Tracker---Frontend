@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { Input } from "../ui/input"
 import { useAlerts } from "@/contexts/alerts-context"
-import { showErrorToast, showSuccessToast } from "../product/ui/toasts"
+import { showErrorToast, showSuccessToast } from "../ui/toasts"
 import { Button } from "../ui/button"
 
 export const editAlertFormSchema = z.object({

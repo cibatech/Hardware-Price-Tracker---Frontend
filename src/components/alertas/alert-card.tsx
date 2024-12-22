@@ -6,7 +6,7 @@ import { Pencil, Trash } from "lucide-react"
 import { priceFormatter } from "@/lib/formatter"
 import { EditValueModal } from "./edit-alert-modal"
 import { useAlerts } from "@/contexts/alerts-context"
-import { showErrorToast, showSuccessToast } from "../product/ui/toasts"
+import { showErrorToast, showSuccessToast } from "../ui/toasts"
 import { useState } from "react"
 
 interface AlertCardProps {

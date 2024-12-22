@@ -39,8 +39,6 @@ export default async function ProductPage({
             {productData.response.Product.Title}
           </h1>
 
-          {/* <StarRating rating={2.4} avaliationsNumber={203} /> */}
-
           <Image
             src={productData.response.Product.ImageUrl || ImageIndisplonible}
             width={212}
@@ -68,6 +66,7 @@ export default async function ProductPage({
             productStore={product.Kind}
             productImageUrl={product.ImageUrl}
             tearmValue={product.onInstallment}
+            productId={product.Id}
           />
         ))}
       </ComparePriceArea>

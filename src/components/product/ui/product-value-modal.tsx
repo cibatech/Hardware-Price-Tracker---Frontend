@@ -18,7 +18,11 @@ import { z } from "zod"
 import { creteAlert } from "@/http/alerts/create-alert"
 import { useParams } from "next/navigation"
 import Cookies from "js-cookie"
-import { showErrorToast, showInfoToast, showSuccessToast } from "./toasts"
+import {
+  showErrorToast,
+  showInfoToast,
+  showSuccessToast,
+} from "../../ui/toasts"
 
 export const createAlertFormSchema = z.object({
   TargetPrice: z.number().min(1, "Valor inválido!"),

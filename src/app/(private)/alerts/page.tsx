@@ -4,19 +4,11 @@ import { AlertCard } from "@/components/alertas/alert-card"
 import { SearchAlerts } from "@/components/alertas/search"
 import { useAlerts } from "@/contexts/alerts-context"
 import { Trash } from "lucide-react"
+import { useSearchParams } from "next/navigation"
 
 export default function Alerts() {
   const { alerts } = useAlerts()
-
-  console.log("Alerts context loaded:", alerts)
-
-  if (!alerts) {
-    return (
-      <div className="flex justify-center items-center col-span-full mt-4 text-2xl font-semibold h-screen">
-        O contexto de alertas ainda não foi carregado.
-      </div>
-    )
-  }
+  const searchParams = useSearchParams()
 
   if (alerts.length === 0) {
     return (
@@ -25,6 +17,13 @@ export default function Alerts() {
       </div>
     )
   }
+
+  const alertSearch = searchParams.get("alertSearch")
+  const filteredAlerts = alertSearch
+    ? alerts.filter((alert) =>
+        alert.ProdName.toLowerCase().includes(alertSearch)
+      )
+    : alerts
 
   return (
     <div className="flex flex-col w-full max-w-[80%] m-auto py-8 gap-8 min-h-screen">
@@ -37,11 +36,10 @@ export default function Alerts() {
             <Trash />
             Remover todos os alertas
           </button>
-          
         </section>
       </div>
       <main className="grid md:grid-cols-2 gap-3 grid-cols-1">
-        {alerts.map((alert, index) => (
+        {filteredAlerts.map((alert, index) => (
           <AlertCard
             key={index}
             alertId={alert.Id}
