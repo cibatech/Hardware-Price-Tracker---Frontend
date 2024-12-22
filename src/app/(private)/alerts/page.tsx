@@ -37,6 +37,7 @@ export default function Alerts() {
             <Trash />
             Remover todos os alertas
           </button>
+          
         </section>
       </div>
       <main className="grid md:grid-cols-2 gap-3 grid-cols-1">

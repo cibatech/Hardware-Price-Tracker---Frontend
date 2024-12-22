@@ -1,53 +1,53 @@
-"use client";
+"use client"
 
-import { Filter, Trash } from "lucide-react";
-import { useEffect, useState } from "react";
+import { Filter, Trash } from "lucide-react"
+import { useEffect, useState } from "react"
 import {
   hardwareCategories,
   productsPaginationOptions,
   stores,
-} from "@/constants";
-import { useFilters } from "@/hooks/useFilters";
-import { BreadcrumbDemo } from "@/components/product/ui/breadcumb";
-import { Button } from "@/components/ui/button/button";
-import { RenderSelect } from "@/components/results/render-select";
-import { ProductCard } from "@/components/product/ui/cards/product-card";
-import { FilterModal } from "@/components/results/filter-modal";
-import { PaginationDemo } from "@/components/results/products-pagination";
-import { filterProduct } from "@/http/product/filter-product";
-import { ProductsFilterResponse } from "@/@types/product";
-import { EmptySearchResults } from "@/components/results/empty-search-results";
-import { useRouter } from "next/navigation";
-import { LoadingSpinner } from "@/components/product/ui/loading";
-import { EmptyFilterResults } from "@/components/results/empty-filter-results";
+} from "@/constants"
+import { useFilters } from "@/hooks/useFilters"
+import { BreadcrumbDemo } from "@/components/ui/breadcumb"
+import { Button } from "@/components/ui/button"
+import { RenderSelect } from "@/components/results/select/render-select"
+import { ProductCard } from "@/components/product/ui/cards/product-card"
+import { FilterModal } from "@/components/results/filter-modal"
+import { PaginationDemo } from "@/components/results/products-pagination"
+import { filterProduct } from "@/http/product/filter-product"
+import { ProductsFilterResponse } from "@/@types/product"
+import { EmptySearchResults } from "@/components/results/empty-search-results"
+import { useRouter } from "next/navigation"
+import { LoadingSpinner } from "@/components/ui/loading"
+import { EmptyFilterResults } from "@/components/results/empty-filter-results"
 
 export default function ResultsPage() {
-  const [isFilterModalOpen, setFilterModalOpen] = useState(false);
-  const { filtersCount, resetFilters, searchParams, params } = useFilters();
-  const [totalProducts, setTotalProducts] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isFilterModalOpen, setFilterModalOpen] = useState(false)
+  const { filtersCount, resetFilters, searchParams, params } = useFilters()
+  const [totalProducts, setTotalProducts] = useState(0)
+  const [isLoading, setIsLoading] = useState(false)
   const [productsList, setProductsList] = useState<
     ProductsFilterResponse["response"]["Return"]["TotalList"]
-  >([]);
-  const [totalPages, setTotalPages] = useState(1);
-  const router = useRouter();
+  >([])
+  const [totalPages, setTotalPages] = useState(1)
+  const router = useRouter()
 
-  const category = searchParams.get("categoria") || "hardware";
-  const store = searchParams.get("loja");
-  const query = searchParams.get("query");
-  const currentPage = Number(searchParams.get("page")) || 1;
-  const productsPerPage = Number(searchParams.get("productsPerPage")) || 12;
+  const category = searchParams.get("categoria") || "hardware"
+  const store = searchParams.get("loja")
+  const query = searchParams.get("query")
+  const currentPage = Number(searchParams.get("page")) || 1
+  const productsPerPage = Number(searchParams.get("productsPerPage")) || 12
 
   const minPrice = searchParams.get("initialPrice")
     ? Number(searchParams.get("initialPrice"))
-    : null;
+    : null
   const maxPrice = searchParams.get("finalPrice")
     ? Number(searchParams.get("finalPrice"))
-    : null;
+    : null
 
   useEffect(() => {
     async function fetchProducts() {
-      setIsLoading(true);
+      setIsLoading(true)
       try {
         const data = await filterProduct(
           category,
@@ -56,59 +56,51 @@ export default function ResultsPage() {
           maxPrice,
           query,
           currentPage
-        );
+        )
 
         if (data) {
-          setProductsList(data.response.Return.TotalList);
-          setTotalProducts(data.response.Return.TotalListLength);
+          setProductsList(data.response.Return.TotalList)
+          setTotalProducts(data.response.Return.TotalListLength)
 
           const totalPages = Math.ceil(
             data.response.Return.TotalListLength / 20
-          );
-          setTotalPages(totalPages);
+          )
+          setTotalPages(totalPages)
         }
       } catch (error) {
-        console.error("Erro ao buscar produtos:", error);
+        console.error("Erro ao buscar produtos:", error)
       } finally {
-        setIsLoading(false);
+        setIsLoading(false)
       }
     }
 
-    fetchProducts();
-  }, [
-    category,
-    store,
-    query,
-    minPrice,
-    maxPrice,
-    currentPage,
-    productsPerPage,
-  ]);
+    fetchProducts()
+  }, [category, store, query, minPrice, maxPrice, currentPage, productsPerPage])
 
   useEffect(() => {
-    let shouldUpdate = false;
-    const updatedParams = new URLSearchParams(params.toString());
+    let shouldUpdate = false
+    const updatedParams = new URLSearchParams(params.toString())
 
     if (!searchParams.get("categoria")) {
-      updatedParams.set("categoria", "hardware");
-      shouldUpdate = true;
+      updatedParams.set("categoria", "hardware")
+      shouldUpdate = true
     }
     if (!searchParams.get("productsPerPage")) {
-      updatedParams.set("productsPerPage", "12");
-      shouldUpdate = true;
+      updatedParams.set("productsPerPage", "12")
+      shouldUpdate = true
     }
 
     if (shouldUpdate) {
-      router.replace(`?${updatedParams.toString()}`);
+      router.replace(`?${updatedParams.toString()}`)
     }
-  }, [searchParams, router, params, currentPage]);
+  }, [searchParams, router, params, currentPage])
 
-  const isEmptyQueryForLoading = !isLoading && totalProducts === 0 && !!query;
+  const isEmptyQueryForLoading = !isLoading && totalProducts === 0 && !!query
   const isEmptyFilterResults =
     !isLoading &&
     totalProducts === 0 &&
     !query &&
-    (minPrice || maxPrice || store);
+    (minPrice || maxPrice || store)
   // const isEmptyFilterResults = !isLoading && totalProducts === 0
 
   return (
@@ -186,5 +178,5 @@ export default function ResultsPage() {
 
       <PaginationDemo totalPages={totalPages} />
     </main>
-  );
+  )
 }

@@ -1,13 +1,14 @@
 import { useFilters } from "@/hooks/useFilters"
-import { Select } from "../ui/select/select"
-import { PriceModal } from "./price-modal"
+import { Select } from "../../ui/select"
+import { PriceModal } from "../price-modal"
+import { SelectOption } from "./select-option"
 
-type Option = {
+interface Option {
   title: string
   value: string
 }
 
-type RenderSelectProps = {
+interface RenderSelectProps {
   filterKey: string
   label: string
   list?: Option[]
@@ -41,7 +42,7 @@ export function RenderSelect({
           ? isPriceFilterActive
             ? "Preço "
             : "Preço"
-          : selectedOption?.title || label 
+          : selectedOption?.title || label
       }
       defaultText={label}
       pagePagination={pagination}
@@ -59,26 +60,5 @@ export function RenderSelect({
         ))
       )}
     </Select>
-  )
-}
-
-type SelectOptionProps = {
-  option: string
-  isSelected: boolean
-  onClick: () => void
-}
-
-const SelectOption = ({ option, isSelected, onClick }: SelectOptionProps) => {
-  return (
-    <button
-      onClick={onClick}
-      className={`px-4 py-2 border rounded-full text-green-500 hover:bg-green-700 hover:text-white ${
-        isSelected
-          ? "bg-green-700 text-white border-green-700"
-          : "border-green-500"
-      }`}
-    >
-      {option}
-    </button>
   )
 }

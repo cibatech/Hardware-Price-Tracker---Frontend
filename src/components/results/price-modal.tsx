@@ -1,8 +1,8 @@
 "use client"
 
 import { useFilters } from "@/hooks/useFilters"
-import { Button } from "../ui/button/button"
-import { Input } from "../ui/inputs/input"
+import { Button } from "../ui/button"
+import { Input } from "../ui/input"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
@@ -10,11 +10,11 @@ import { z } from "zod"
 export const priceFilterFormSchema = z.object({
   initialPrice: z
     .string()
-    .transform((value) => Number(value)) 
+    .transform((value) => Number(value))
     .refine((value) => !isNaN(value), "Preço inicial deve ser um número"),
   finalPrice: z
     .string()
-    .transform((value) => Number(value)) 
+    .transform((value) => Number(value))
     .refine((value) => !isNaN(value), "Preço final deve ser um número"),
 })
 
@@ -44,9 +44,9 @@ export const PriceModal = () => {
 
     const currentPriceFilter = params.get("price")
     if (currentPriceFilter === "true") {
-      updateFilter("priceFilter", "false") 
+      updateFilter("priceFilter", "false")
     } else {
-      updateFilter("priceFilter", "true") 
+      updateFilter("priceFilter", "true")
     }
   }
 

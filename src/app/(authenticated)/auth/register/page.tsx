@@ -1,8 +1,8 @@
 "use client"
 
 import Link from "next/link"
-import { Button } from "../../../../components/ui/button/button"
-import { Input } from "../../../../components/ui/inputs/input"
+import { Button } from "../../../../components/ui/button"
+import { Input } from "../../../../components/ui/input"
 import { useForm } from "react-hook-form"
 import { registerUser } from "@/http/auth/register-user"
 import { RegisterData } from "@/@types/auth"
@@ -20,9 +20,11 @@ const registerFormSchema = z.object({
 })
 
 export default function Register() {
-  const { handleSubmit, register, formState: {
-    errors
-  } } = useForm<RegisterData>({
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<RegisterData>({
     resolver: zodResolver(registerFormSchema),
   })
 

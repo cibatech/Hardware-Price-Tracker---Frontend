@@ -1,8 +1,8 @@
 "use client"
 
 import Link from "next/link"
-import { Button } from "../../../../components/ui/button/button"
-import { Input } from "../../../../components/ui/inputs/input"
+import { Button } from "../../../../components/ui/button"
+import { Input } from "../../../../components/ui/input"
 import { useForm } from "react-hook-form"
 import { loginUser } from "@/http/auth/login-user"
 import { redirect } from "next/navigation"

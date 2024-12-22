@@ -10,8 +10,8 @@ import {
   DialogTrigger,
 } from "../../shadcn-ui/ui/dialog"
 import { BellRing } from "lucide-react"
-import { Input } from "../../ui/inputs/input"
-import { Button } from "../../ui/button/button"
+import { Input } from "../../ui/input"
+import { Button } from "../../ui/button"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"

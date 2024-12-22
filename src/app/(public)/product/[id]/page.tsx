@@ -1,6 +1,6 @@
 import Image from "next/image"
 
-import { BreadcrumbDemo } from "@/components/product/ui/breadcumb"
+import { BreadcrumbDemo } from "@/components/ui/breadcumb"
 import { PriceDatailsArea } from "@/components/product/price-details-area"
 import { ComparePriceArea } from "@/components/product/compare-price-area"
 import { FetchProductById } from "@/http/product/fetch-product-by-id"
