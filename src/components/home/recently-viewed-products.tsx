@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import {
   Carousel,
@@ -6,44 +6,37 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "../shadcn-ui/ui/carousel";
+} from "../shadcn-ui/ui/carousel"
 
-import gpuPicture from "../../assets/image-indisponible.svg";
-import { ProductCard } from "../product/ui/cards/product-card";
-import { useRecentkyViwedProducts } from "@/contexts/recently-viewed-products-list-context";
+import gpuPicture from "../../assets/image-indisponible.svg"
+import { ProductCard } from "../product/ui/cards/product-card"
+import { useRecentkyViwedProducts } from "@/contexts/recently-viewed-products-list-context"
+import { EmptyViewProducts } from "./empties"
 
 export function RecentlyViewedProducts() {
-  const { recentlyViewedProductsList } = useRecentkyViwedProducts();
+  const { recentlyViewedProductsList } = useRecentkyViwedProducts()
+
+  if (recentlyViewedProductsList.length === 0) {
+    return <EmptyViewProducts />
+  }
 
   return (
-    <>
-      {recentlyViewedProductsList.length === 0 && (
-        <div>
-          <p>Você não viu nenhum produto ainda.</p>
-        </div>
-      )}
-      {recentlyViewedProductsList.length > 0 && (
-        <Carousel className="w-full md:max-w-full max-w-[80%]">
-          <CarouselContent className="-ml-1 gap-8 ">
-            {recentlyViewedProductsList.map((alert, index) => (
-              <CarouselItem
-                key={index}
-                className="pl-1 md:basis-1/2 lg:basis-1/4"
-              >
-                <ProductCard
-                  productImageUrl={alert.productImageUrl || gpuPicture}
-                  productPrice={alert.productPrice}
-                  productTitle={alert.productTitle}
-                  store={alert.store}
-                  productId={alert.productId}
-                />
-              </CarouselItem>
-            ))} 
-          </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
-        </Carousel>
-      )}
-    </>
-  );
+    <Carousel className="w-full md:max-w-full max-w-[80%]">
+      <CarouselContent className="-ml-1 gap-8 ">
+        {recentlyViewedProductsList.map((alert, index) => (
+          <CarouselItem key={index} className="pl-1 md:basis-1/2 lg:basis-1/4">
+            <ProductCard
+              productImageUrl={alert.productImageUrl || gpuPicture}
+              productPrice={alert.productPrice}
+              productTitle={alert.productTitle}
+              store={alert.store}
+              productId={alert.productId}
+            />
+          </CarouselItem>
+        ))}
+      </CarouselContent>
+      <CarouselPrevious />
+      <CarouselNext />
+    </Carousel>
+  )
 }

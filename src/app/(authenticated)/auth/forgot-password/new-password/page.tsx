@@ -7,6 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { ArrowLeft } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
+import Cookies from "js-cookie"
 import { z } from "zod"
 
 const forgotPasswordFormSchema = z.object({
@@ -23,7 +24,7 @@ export default function NewPassword() {
   })
 
   async function handleResetPassword(data: ForgotPasswordFormSchema) {
-    const code = localStorage.getItem("@code") as string
+    const code = Cookies.get("verificationCode") as string
     console.log(data)
 
     const formData = {

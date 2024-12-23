@@ -1,16 +1,16 @@
-"use client";
+"use client"
 
-import { useMostSearchedProductsContexts } from "@/contexts/most-searched-products-context";
+import { useMostSearchedProducts } from "@/contexts/most-searched-products-context"
 
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation"
 
 export interface SuggestionItemProps {
-  suggestionTitle: string;
-  suggestionCategory: string;
-  suggestionProductId: string;
-  suggetionProductImageUrl: string;
-  suggestionProductStore: string;
-  suggestionProductPrice: number;
+  suggestionTitle: string
+  suggestionCategory: string
+  suggestionProductId: string
+  suggetionProductImageUrl: string
+  suggestionProductStore: string
+  suggestionProductPrice: number
 }
 
 export function SuggestionItem({
@@ -21,12 +21,12 @@ export function SuggestionItem({
   suggetionProductImageUrl,
   suggestionProductPrice,
 }: SuggestionItemProps) {
-  const router = useRouter();
+  const router = useRouter()
   const { addProductInMostSearchedProductsContextList } =
-    useMostSearchedProductsContexts();
+    useMostSearchedProducts()
 
   function handleRedirectToPage() {
-    router.push(`/product/${suggestionProductId}`);
+    router.push(`/product/${suggestionProductId}`)
   }
 
   const product = {
@@ -36,11 +36,11 @@ export function SuggestionItem({
     suggestionProductStore,
     suggetionProductImageUrl,
     suggestionProductPrice,
-  };
+  }
 
   function handleAddProductInMostSearchedProductsContextList() {
-    handleRedirectToPage();
-    addProductInMostSearchedProductsContextList(product);
+    handleRedirectToPage()
+    addProductInMostSearchedProductsContextList(product)
   }
 
   return (
@@ -53,5 +53,5 @@ export function SuggestionItem({
       </strong>
       <span className="text-green-700">em {suggestionCategory}</span>
     </div>
-  );
+  )
 }

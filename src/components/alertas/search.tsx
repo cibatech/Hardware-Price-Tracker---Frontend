@@ -15,9 +15,9 @@ export function SearchAlerts() {
     const params = new URLSearchParams(searchParams)
 
     if (term) {
-      params.set("alertSearch", term)
+      params.set("alert-search", term.toLowerCase())
     } else {
-      params.delete("alertSearch")
+      params.delete("alert-search")
     }
     replace(`${pathname}?${params.toString()}`)
   }, 300)

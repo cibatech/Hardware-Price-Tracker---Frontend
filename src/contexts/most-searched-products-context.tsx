@@ -79,11 +79,11 @@ export function MostSearchedProductProvider({
   )
 }
 
-export const useMostSearchedProductsContexts = () => {
+export const useMostSearchedProducts = () => {
   const context = useContext(MostSearchedProductsContext)
   if (!context) {
     throw new Error(
-      "useAlerts must be used within an RecentkyViwedProductsProvider"
+      "useMostSearchedProducts must be used within an MostSearchedProductProvider"
     )
   }
   return context

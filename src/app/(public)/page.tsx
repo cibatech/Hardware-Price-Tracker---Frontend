@@ -7,8 +7,8 @@ import { MostSearchedProducts } from "@/components/home/most-searched-products"
 
 export default function Home() {
   return (
-    <div className="flex flex-col items-end justify-start gap-8 py-8">
-      <div className="flex flex-wrap items-c justify-center m-auto gap-16">
+    <div className="flex flex-col items-end justify-start gap-8 py-8 flex-1">
+      <div className="flex flex-wrap items-center justify-center m-auto gap-16">
         <Banner imageUrl={terabyteLogo} imageAlt="" text="Terabyte" store="TeraByte" />
         <Banner imageUrl={kabumLogo} imageAlt="" text="Kabum!" store="Kabum" />
         <Banner imageUrl={pichauLogo} imageAlt="" text="Pichau" store="Pichau" />

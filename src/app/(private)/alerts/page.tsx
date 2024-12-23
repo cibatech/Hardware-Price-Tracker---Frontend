@@ -18,7 +18,7 @@ export default function Alerts() {
     )
   }
 
-  const alertSearch = searchParams.get("alertSearch")
+  const alertSearch = searchParams.get("alert-search")
   const filteredAlerts = alertSearch
     ? alerts.filter((alert) =>
         alert.ProdName.toLowerCase().includes(alertSearch)

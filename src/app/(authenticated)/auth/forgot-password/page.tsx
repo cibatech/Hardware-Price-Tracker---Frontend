@@ -8,6 +8,7 @@ import { ArrowLeft } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
+import Cookies from "js-cookie"
 
 const forgotPasswordFormSchema = z.object({
   email: z.string().email(),
@@ -24,7 +25,7 @@ export default function ForgotPassword() {
   async function handleSendEmail(data: ForgotPasswordFormData) {
     const response = await sendEmailForResetPassword(data.email)
     const code = response.CodeSent
-    localStorage.setItem("@code", code)
+    Cookies.set("verificationCode", code, { expires: 30 / (24 * 60 * 60) })
     push("forgot-password/send-code")
   }
 

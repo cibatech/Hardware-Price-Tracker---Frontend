@@ -25,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br">
-      <body className={`${mainLocalFontFamily.variable} antialiased`}>
+      <body className={`${mainLocalFontFamily.variable} antialiased h-screen`}>
         <Suspense>
           <AlertsProvider>
             <RecentkyViwedProductsProvider>

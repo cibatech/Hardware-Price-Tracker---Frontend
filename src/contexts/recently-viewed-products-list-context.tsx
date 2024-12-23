@@ -77,7 +77,7 @@ export const useRecentkyViwedProducts = () => {
   const context = useContext(RecentkyViwedProductsContext)
   if (!context) {
     throw new Error(
-      "useAlerts must be used within an RecentkyViwedProductsProvider"
+      "useRecentkyViwedProducts must be used within an RecentkyViwedProductsProvider"
     )
   }
   return context

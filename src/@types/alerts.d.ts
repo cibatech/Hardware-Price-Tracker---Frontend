@@ -17,7 +17,7 @@ export type AlertResponse = {
 
 export type CreateAlertResponse = {
   Description: string
-  response: AlertResponse
+  response: Alert
   config: CreateAlertData
 }
 

@@ -15,7 +15,6 @@ import { Button } from "../../ui/button"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-import { creteAlert } from "@/http/alerts/create-alert"
 import { useParams } from "next/navigation"
 import Cookies from "js-cookie"
 import {
@@ -23,6 +22,7 @@ import {
   showInfoToast,
   showSuccessToast,
 } from "../../ui/toasts"
+import { useAlerts } from "@/contexts/alerts-context"
 
 export const createAlertFormSchema = z.object({
   TargetPrice: z.number().min(1, "Valor inválido!"),
@@ -31,6 +31,7 @@ export const createAlertFormSchema = z.object({
 type CreateAlertFormSchema = z.infer<typeof createAlertFormSchema>
 
 export function ProductValueModal() {
+  const {createNewAlert} = useAlerts()
   const params = useParams()
   const {
     register,
@@ -58,7 +59,7 @@ export function ProductValueModal() {
         UserId,
       }
 
-      await creteAlert(alertData)
+      await createNewAlert(alertData)
       showSuccessToast("Alerta criado!")
     } catch (error) {
       console.log("Error: ", error)

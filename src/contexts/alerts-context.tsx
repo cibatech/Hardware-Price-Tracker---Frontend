@@ -5,12 +5,13 @@ import { fetchAlerts } from "@/http/alerts/fetch-alerts"
 import { deleteAlert } from "@/http/alerts/delete-alert"
 import { EditAlertFormSchema } from "@/components/alertas/edit-alert-modal"
 import { editAlert } from "@/http/alerts/edit-alert"
+import { Alert, CreateAlertData } from "@/@types/alerts"
+import { creteAlert } from "@/http/alerts/create-alert"
 import Cookies from "js-cookie"
-import { Alert } from "@/@types/alerts"
-// import { CreateAlertData, creteAlert } from "@/http/alerts/create-alert"
 
 interface AlertsContextData {
   alerts: Alert[]
+  createNewAlert: (newAlert: CreateAlertData) => Promise<void>
   deleteAlertById: (alertId: string) => Promise<void>
   editAlertById: (alertId: string, data: EditAlertFormSchema) => Promise<void>
 }
@@ -20,15 +21,20 @@ const AlertsContext = createContext<AlertsContextData | undefined>(undefined)
 export function AlertsProvider({ children }: { children: React.ReactNode }) {
   const [alerts, setAlerts] = useState<Alert[]>([])
 
-  // async function crateNewAlert(newAlert: CreateAlertData) {
-  //   const response = await creteAlert(newAlert)
+  async function createNewAlert(newAlert: CreateAlertData) {
+    const data = await creteAlert(newAlert)
 
-  //   response.response.
-  //   const alert = {
-  //     response
-  //   }
-  //   setAlerts([newAlert, ...alerts])
-  // }
+    const { Id, TargetPrice, ProdImage, ProdName } = data.response
+
+    const alert: Alert = {
+      Id,
+      TargetPrice,
+      ProdImage,
+      ProdName,
+    }
+
+    setAlerts([alert, ...alerts])
+  }
 
   useEffect(() => {
     async function loadAlerts() {
@@ -64,7 +70,9 @@ export function AlertsProvider({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <AlertsContext.Provider value={{ alerts, deleteAlertById, editAlertById }}>
+    <AlertsContext.Provider
+      value={{ alerts, deleteAlertById, createNewAlert, editAlertById }}
+    >
       {children}
     </AlertsContext.Provider>
   )
