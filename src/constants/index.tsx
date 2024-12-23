@@ -1,6 +1,6 @@
 export const hardwareCategories = [
   { value: "hardware", title: "Hardware" },
-  { value: "periféricos", title: "Periféricos" },
+  { value: "perifericos", title: "Periféricos" },
   { value: "hardware/processadores", title: "Processadores" },
   { value: "hardware/memorias", title: "Memórias" },
   { value: "hardware/hard-disk", title: "Hard Disk" },
@@ -8,6 +8,7 @@ export const hardwareCategories = [
   { value: "hardware/memoria-ram", title: "Memória RAM" },
   { value: "hardware/disco-rigido-hd", title: "Disco Rígido HD" },
   { value: "hardware/hard-disk-e-ssd", title: "Hard Disk e SSD" },
+  { value: "motherboard", title: "Placa mãe" },
 ]
 
 export const filterProductByDateOptions = [

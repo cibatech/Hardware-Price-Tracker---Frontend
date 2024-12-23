@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import Cookies from "js-cookie"
+import { showErrorToast, showInfoToast } from "@/components/ui/toasts"
 
 const forgotPasswordFormSchema = z.object({
   email: z.string().email(),
@@ -23,10 +24,15 @@ export default function ForgotPassword() {
   })
 
   async function handleSendEmail(data: ForgotPasswordFormData) {
-    const response = await sendEmailForResetPassword(data.email)
-    const code = response.CodeSent
-    Cookies.set("verificationCode", code, { expires: 30 / (24 * 60 * 60) })
-    push("forgot-password/send-code")
+    try {
+      const response = await sendEmailForResetPassword(data.email)
+      const code = response.CodeSent
+      Cookies.set("verificationCode", code, { expires: 1 })
+      showInfoToast("Código enviado! Verifique na sua caixa de emails.")
+      push("forgot-password/send-code")
+    } catch {
+      showErrorToast("Ops! Algo deu errado ao enviar o código.")
+    }
   }
 
   return (

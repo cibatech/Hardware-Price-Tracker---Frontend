@@ -5,10 +5,13 @@ import { Button } from "../../../../components/ui/button"
 import { Input } from "../../../../components/ui/input"
 import { useForm } from "react-hook-form"
 import { loginUser } from "@/http/auth/login-user"
-import { redirect } from "next/navigation"
+
 import { LoginFormData } from "@/@types/user"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { showErrorToast, showSuccessToast } from "@/components/ui/toasts"
+import { useRouter } from "next/navigation"
+
 
 const loginFormSchema = z.object({
   Email: z.string().email("Digite o email corretamente."),
@@ -23,10 +26,19 @@ export default function Login() {
   } = useForm<LoginFormData>({
     resolver: zodResolver(loginFormSchema),
   })
+  const {push} = useRouter()
 
   async function handleUserLogin(data: LoginFormData) {
-    await loginUser(data)
-    redirect("/")
+    // await loginUser(data)
+    // redirect("/")
+
+    try {
+      await loginUser(data)
+      showSuccessToast("Usuário logado com sucesso!")
+      push("/")
+    } catch {
+      showErrorToast("Senha ou email incorreto.")
+    }
   }
 
   return (
@@ -54,7 +66,7 @@ export default function Login() {
             )}
             <Input
               type="password"
-              placeholder="Crie uma senha"
+              placeholder="Digite sua senha"
               variant="minimalist"
               {...register("Password")}
             />
@@ -73,7 +85,7 @@ export default function Login() {
         <span className="text-center">
           Ainda não tenho uma conta -{" "}
           <Link href="/auth/register" className="text-balance underline">
-            Cadrastar
+            Cadastrar
           </Link>
         </span>
       </div>

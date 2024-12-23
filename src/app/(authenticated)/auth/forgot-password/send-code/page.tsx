@@ -8,9 +8,10 @@ import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
 import Cookies from "js-cookie"
 import { z } from "zod"
+import { showErrorToast, showSuccessToast } from "@/components/ui/toasts"
 
 const forgotPasswordFormSchema = z.object({
-  code: z.string()
+  code: z.string(),
 })
 
 type ForgotPasswordFormData = z.infer<typeof forgotPasswordFormSchema>
@@ -24,7 +25,10 @@ export default function SendCode() {
   async function handleVeryCode(data: ForgotPasswordFormData) {
     const code = Cookies.get("verificationCode")
     if (code === data.code) {
+      showSuccessToast("Código verificado!")
       push("new-password")
+    } else {
+      showErrorToast("Código inválido!")
     }
   }
 

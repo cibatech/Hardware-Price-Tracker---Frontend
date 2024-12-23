@@ -9,6 +9,8 @@ import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
 import Cookies from "js-cookie"
 import { z } from "zod"
+import { loginUser } from "@/http/auth/login-user"
+import { showErrorToast, showSuccessToast } from "@/components/ui/toasts"
 
 const forgotPasswordFormSchema = z.object({
   email: z.string().email(),
@@ -24,20 +26,30 @@ export default function NewPassword() {
   })
 
   async function handleResetPassword(data: ForgotPasswordFormSchema) {
-    const code = Cookies.get("verificationCode") as string
-    console.log(data)
+    try {
+      const code = Cookies.get("verificationCode") as string
 
-    const formData = {
-      UserProvidedCode: code,
-      StoredCode: code,
-      Email: data.email,
-      Password: data.password,
+      const formData = {
+        UserProvidedCode: code,
+        StoredCode: code,
+        Email: data.email,
+        Password: data.password,
+      }
+
+      const response = await resetPassword(formData)
+
+      if (response.Description === "Successfully updated password") {
+        await loginUser({
+          Email: data.email,
+          Password: data.password,
+        })
+
+        showSuccessToast("Senha recuperada com sucesso!")
+        push("/")
+      }
+    } catch {
+      showErrorToast("Ops! Algo deu errado, tente novamente.")
     }
-
-    console.log(data)
-    console.log("formdata: ", formData)
-    await resetPassword(formData)
-    push("/")
   }
 
   return (

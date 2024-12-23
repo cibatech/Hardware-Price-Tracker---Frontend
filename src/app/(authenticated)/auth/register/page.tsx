@@ -9,6 +9,8 @@ import { RegisterData } from "@/@types/user"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { showErrorToast, showSuccessToast } from "@/components/ui/toasts"
+import { loginUser } from "@/http/auth/login-user"
+import { useRouter } from "next/navigation"
 
 const registerFormSchema = z.object({
   Email: z.string().email("Digite o email corretamente."),
@@ -24,12 +26,19 @@ export default function Register() {
   } = useForm<RegisterData>({
     resolver: zodResolver(registerFormSchema),
   })
+  const { push } = useRouter()
 
   async function handleUserRegister(data: RegisterData) {
     console.log(data)
     try {
       await registerUser(data)
+      const { Email, Password } = data
+      await loginUser({
+        Email,
+        Password,
+      })
       showSuccessToast("Usuário registrado!")
+      push("/")
     } catch (error) {
       console.log(error)
       showErrorToast("Error ao registrar usuário.")

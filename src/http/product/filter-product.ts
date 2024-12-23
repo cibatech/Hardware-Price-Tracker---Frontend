@@ -2,7 +2,7 @@ import { ProductsFilterResponse } from "@/@types/product"
 import { api } from "@/services/api"
 
 export async function filterProduct(
-  category: string = "hardware", 
+  category: string | null, 
   store: string | null,
   min: number | null,
   max: number | null,

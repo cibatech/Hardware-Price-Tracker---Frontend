@@ -32,7 +32,7 @@ export default function ResultsPage() {
   const [totalPages, setTotalPages] = useState(1)
   const router = useRouter()
 
-  const category = searchParams.get("categoria") || "hardware"
+  const category = searchParams.get("categoria")
   const store = searchParams.get("loja")
   const query = searchParams.get("query")
   const currentPage = Number(searchParams.get("page")) || 1
@@ -81,10 +81,6 @@ export default function ResultsPage() {
     let shouldUpdate = false
     const updatedParams = new URLSearchParams(params.toString())
 
-    if (!searchParams.get("categoria")) {
-      updatedParams.set("categoria", "hardware")
-      shouldUpdate = true
-    }
     if (!searchParams.get("productsPerPage")) {
       updatedParams.set("productsPerPage", "12")
       shouldUpdate = true
@@ -95,17 +91,14 @@ export default function ResultsPage() {
     }
   }, [searchParams, router, params, currentPage])
 
+  const isActiveFilters = !query && (minPrice || maxPrice || store)
   const isEmptyQueryForLoading = !isLoading && totalProducts === 0 && !!query
   const isEmptyFilterResults =
-    !isLoading &&
-    totalProducts === 0 &&
-    !query &&
-    (minPrice || maxPrice || store)
-  // const isEmptyFilterResults = !isLoading && totalProducts === 0
+    !isLoading && totalProducts === 0 && isActiveFilters
 
   return (
     <main className="flex flex-col gap-8 py-8 w-full max-w-screen-xl m-auto">
-      <section className="flex flex-1 items-center justify-between">
+      <section className="flex flex-1 items-center justify-between h-screen">
         <BreadcrumbDemo isProductPage={false} />
         <div className="md:flex items-center justify-between gap-4 hidden">
           <div className="flex items-center gap-2">
