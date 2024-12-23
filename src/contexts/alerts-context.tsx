@@ -8,12 +8,15 @@ import { editAlert } from "@/http/alerts/edit-alert"
 import { Alert, CreateAlertData } from "@/@types/alerts"
 import { creteAlert } from "@/http/alerts/create-alert"
 import Cookies from "js-cookie"
+import { deleteAllAlerts } from "@/http/alerts/delete-all-alerts"
+import { showErrorToast, showSuccessToast } from "@/components/ui/toasts"
 
 interface AlertsContextData {
   alerts: Alert[]
   createNewAlert: (newAlert: CreateAlertData) => Promise<void>
   deleteAlertById: (alertId: string) => Promise<void>
   editAlertById: (alertId: string, data: EditAlertFormSchema) => Promise<void>
+  handleDeleteAllAlerts: () => void
 }
 
 const AlertsContext = createContext<AlertsContextData | undefined>(undefined)
@@ -69,9 +72,26 @@ export function AlertsProvider({ children }: { children: React.ReactNode }) {
     )
   }
 
+  async function handleDeleteAllAlerts() {
+    try {
+      const userId = Cookies.get("userId") as string
+      await deleteAllAlerts(userId)
+      setAlerts([])
+      showSuccessToast("Todos os alertas foram deletados!")
+    } catch {
+      showErrorToast("Erro ao deletar todos os alertas!")
+    }
+  }
+
   return (
     <AlertsContext.Provider
-      value={{ alerts, deleteAlertById, createNewAlert, editAlertById }}
+      value={{
+        alerts,
+        deleteAlertById,
+        createNewAlert,
+        editAlertById,
+        handleDeleteAllAlerts,
+      }}
     >
       {children}
     </AlertsContext.Provider>

@@ -1,13 +1,13 @@
 export const hardwareCategories = [
   { value: "hardware", title: "Hardware" },
   { value: "perifericos", title: "Periféricos" },
-  { value: "hardware/processadores", title: "Processadores" },
-  { value: "hardware/memorias", title: "Memórias" },
-  { value: "hardware/hard-disk", title: "Hard Disk" },
-  { value: "hardware/fontes", title: "Fontes" },
-  { value: "hardware/memoria-ram", title: "Memória RAM" },
-  { value: "hardware/disco-rigido-hd", title: "Disco Rígido HD" },
-  { value: "hardware/hard-disk-e-ssd", title: "Hard Disk e SSD" },
+  { value: "processadores", title: "Processadores" },
+  { value: "memorias", title: "Memórias" },
+  { value: "hard-disk", title: "Hard Disk" },
+  { value: "fontes", title: "Fontes" },
+  { value: "memoria-ram", title: "Memória RAM" },
+  { value: "disco-rigido-hd", title: "Disco Rígido HD" },
+  { value: "hard-disk-e-ssd", title: "Hard Disk e SSD" },
   { value: "motherboard", title: "Placa mãe" },
 ]
 

@@ -7,7 +7,7 @@ import { Trash } from "lucide-react"
 import { useSearchParams } from "next/navigation"
 
 export default function Alerts() {
-  const { alerts } = useAlerts()
+  const { alerts, handleDeleteAllAlerts } = useAlerts()
   const searchParams = useSearchParams()
 
   if (alerts.length === 0) {
@@ -32,7 +32,10 @@ export default function Alerts() {
 
         <section className="flex items-center gap-4 flex-wrap">
           <SearchAlerts />
-          <button className="bg-green-100 flex text-sm font-medium text-green-700 items-center rounded-3xl px-3 py-2 gap-3 flex-1">
+          <button
+            onClick={handleDeleteAllAlerts}
+            className="bg-green-100 flex text-sm font-medium text-green-700 items-center rounded-3xl px-3 py-2 gap-3 flex-1"
+          >
             <Trash />
             Remover todos os alertas
           </button>
