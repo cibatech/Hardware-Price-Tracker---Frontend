@@ -1,13 +1,12 @@
 {
-  "outputDirectory": "storybook-static",
-  "framework": null,
+  "framework": "nextjs",
   "rewrites": [
     {
-      "source": "/storybook/(.*)", 
+      "source": "/storybook/(.*)",
       "destination": "/storybook-static/$1"
     },
     {
-      "source": "/(.*)", 
+      "source": "/(.*)",
       "destination": "/"
     }
   ]

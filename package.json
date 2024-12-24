@@ -2,16 +2,17 @@
   "name": "hardware-price-tracker",
   "version": "0.1.0",
   "private": true,
-  "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
-    "serve-storybook": "serve storybook-static",
-    "build-storybook-docs": "storybook build --docs"
-  },
+"scripts": {
+  "dev": "next dev --turbopack",
+  "build": "next build && npm run build-storybook",
+  "start": "next start",
+  "lint": "next lint",
+  "storybook": "storybook dev -p 6006",
+  "build-storybook": "storybook build --output-dir ./storybook-static",
+  "serve-storybook": "serve storybook-static",
+  "build-storybook-docs": "storybook build --docs"
+}
+,
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
     "@radix-ui/react-dialog": "^1.1.2",
