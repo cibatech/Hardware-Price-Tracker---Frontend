@@ -1,0 +1,393 @@
+import { Meta } from "@storybook/blocks"
+import Image from "next/image"
+
+import Github from "./assets/github.svg"
+import Discord from "./assets/discord.svg"
+import Youtube from "./assets/youtube.svg"
+import Tutorials from "./assets/tutorials.svg"
+import Styling from "./assets/styling.png"
+import Context from "./assets/context.png"
+import Assets from "./assets/assets.png"
+import Docs from "./assets/docs.png"
+import Share from "./assets/share.png"
+import FigmaPlugin from "./assets/figma-plugin.png"
+import Testing from "./assets/testing.png"
+import Accessibility from "./assets/accessibility.png"
+import Theming from "./assets/theming.png"
+import AddonLibrary from "./assets/addon-library.png"
+import prodPage from "../../public/prduct-page.png"
+import homePage from "../../public/screenshot-home.png"
+import resultsPage from "../../public/screenshot-results.png"
+import alertPage from "../../public/alerts-picture.png"
+
+export const RightArrow = () => (
+  <svg
+    viewBox="0 0 14 14"
+    width="8px"
+    height="14px"
+    style={{
+      marginLeft: "4px",
+      display: "inline-block",
+      shapeRendering: "inherit",
+      verticalAlign: "middle",
+      fill: "currentColor",
+      "path fill": "currentColor",
+    }}
+  >
+    <path d="m11.1 7.35-5.5 5.5a.5.5 0 0 1-.7-.7L10.04 7 4.9 1.85a.5.5 0 1 1 .7-.7l5.5 5.5c.2.2.2.5 0 .7Z" />
+  </svg>
+)
+
+<Meta title="Hardware Price Tracker" />
+
+<div className="sb-container">
+  <div className='sb-section-title'>
+    # Hardware Price Tracker App - Documentation
+
+O Hardware Price Tracker é uma plataforma online desenvolvida para facilitar a busca por produtos de hardware em três das principais lojas do segmento: Kabum, Pichau e Terabyte. Com ele, você pode comparar os preços de um mesmo produto para encontrar a melhor oferta e consultar o histórico de preços, ajudando a identificar os momentos mais vantajosos para sua compra. Além disso, o site oferece a possibilidade de criar uma conta para gerenciar alertas personalizados, permitindo que você seja notificado sempre que os produtos de interesse atingirem o preço desejado.
+
+  </div>
+</div>
+
+<div className="sb-container">
+  <div className='sb-section-title'>
+
+# Estrutura do Projeto
+
+📁 **src**  
+├── 📂 **@types**  
+├── 📂 **app**  
+├── 📂 **assets**  
+├── 📂 **components**  
+├── 📂 **constants**  
+├── 📂 **contexts**  
+├── 📂 **functions**  
+├── 📂 **hooks**  
+├── 📂 **http**  
+├── 📂 **lib**  
+├── 📂 **services**
+
+📄 **middleware.ts**  
+📄 **next-env.d.ts**  
+📄 **next.config.ts**  
+📄 **package.json**  
+📄 **package-lock.json**  
+📄 **pnpm-lock.yaml**  
+📄 **postcss.config.mjs**  
+📄 **README.md**  
+📄 **README.mdx**  
+📄 **tailwind.config.ts**  
+📄 **tsconfig.json**  
+📄 **components.json**  
+📄 **.eslint.json**  
+📄 **.gitignore**
+
+---
+
+### Descrição das Pastas e Arquivos
+
+- **src/**: Diretório principal contendo os arquivos de código-fonte da aplicação.
+
+  - **@types/**: Definições de tipos personalizadas utilizadas no TypeScript.
+  - **app/**: Diretório responsável pelo roteamento da aplicação
+  - **assets/**: Onde ficam armazenadas as imagens da aplicação.
+  - **components/**: Componentes reutilizáveis da interface de usuário.
+  - **constants/**: Valores constantes usados ao longo do projeto.
+  - **contexts/**: Gerenciamento de estado global usando o Context API.
+  - **functions/**: Funções utilitárias.
+  - **hooks/**: Hooks personalizados utilizados na aplicação.
+  - **http/**: Configurações e serviços relacionados a chamadas de API.
+  - **lib/**: Contém alguns objetos de configuração e alguns formatadores.
+  - **services/**: Interação com a API externa.
+
+- **middleware.ts**: Configuração do middleware utilizado para trabalhar com rotas privadas.
+- **next-env.d.ts**: Configuração gerada automaticamente pelo Next.js para suporte ao TypeScript.
+- **next.config.ts**: Configuração personalizada do framework Next.js.
+- **package.json**: Contém as dependências do projeto e scripts para gerenciamento.
+- **package-lock.json**: Arquivo que define a versão exata das dependências instaladas.
+- **pnpm-lock.yaml**: Arquivo de bloqueio para quem utiliza o PNPM como gerenciador de pacotes.
+- **postcss.config.mjs**: Configuração do PostCSS para o projeto.
+- **README.md**: Documentação do projeto.
+- **tailwind.config.ts**: Arquivo de configuração do Tailwind CSS.
+- **tsconfig.json**: Configuração do TypeScript.
+- **components.json**: Arquivo JSON contendo definições e o mapeamento de componentes da blioteca shadcn ui.
+- **.eslint.json**: Configurações para o linting do código usando ESLint.
+- **.gitignore**: Especifica arquivos e diretórios a serem ignorados pelo Git.
+
+---
+
+  </div>
+</div>
+<div className="sb-container">
+  <div className='sb-section-title'>
+    # Veja Alguns Screenshots
+
+    Aqui estão alguns screenshot das páginas disponíveis no site.
+
+  </div>
+
+  <div className="sb-section">
+    <div className="sb-features-grid">
+      <div className="sb-grid-item">
+        <Image 
+          width={0}
+          height={0}
+          style={{ width: '100%', height: 'auto' }} 
+          src={homePage} 
+          alt="A screenshot showing the autodocs tag being set, pointing a docs page being generated" 
+        />
+        <h4 className="sb-section-item-heading">Home page</h4>
+        <p className="sb-section-item-paragraph"> Uma captura de tela mostrando a página inicial do site Hardware Price Tracker, destacando as funcionalidades principais, como busca de produtos e uma navegação intuitiva.</p>
+      </div>
+      <div className="sb-grid-item">
+        <Image 
+          width={0}
+          height={0}
+          style={{ width: '100%', height: 'auto' }} 
+          src={resultsPage} 
+          alt="A browser window showing a Storybook being published to a chromatic.com URL" 
+        />
+        <h4 className="sb-section-item-heading">Página de Resultados</h4>
+        <p className="sb-section-item-paragraph">Página de resultados mostrando produtos de hardware e possíveis filtragens entre Kabum, Pichau e Terabyte</p>
+      </div>
+      <div className="sb-grid-item">
+        <Image 
+          width={0}
+          height={0}
+          style={{ width: '100%', height: 'auto' }} 
+          src={alertPage} 
+          alt="Windows showing the Storybook plugin in Figma" 
+        />
+        <h4 className="sb-section-item-heading">Página de Alertas</h4>
+        <p className="sb-section-item-paragraph">Página onde os usuários podem gerenciar seus alertas de preços personalizados. Nesta seção, é possível configurar o valor desejado para notificação e visualizar os produtos monitorados.</p>
+      </div>
+      <div className="sb-grid-item">
+        <Image 
+          width={0}
+          height={0}
+          style={{ width: '100%', height: 'auto' }} 
+          src={prodPage} 
+          alt="Screenshot of Storybook in light and dark mode" 
+        />
+        <h4 className="sb-section-item-heading">Página do Produto</h4>
+        <p className="sb-section-item-paragraph">Acesse a página do produto para ver as variações de preço, fazer comparação de preços e ative o alerta de preço do produto.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div className="sb-container">
+  # Links
+  <div >
+       <a
+          href="https://github.com/storybookjs/storybook"
+          target="_blank"
+        >Repositório - Frontend<RightArrow /></a>
+  </div>
+   <div >
+        <a
+          href="https://github.com/storybookjs/storybook"
+          target="_blank"
+        >Repositorio - Backend<RightArrow /></a>
+    </div>
+    <div >
+        <a
+          href="https://github.com/storybookjs/storybook"
+          target="_blank"
+        >Documentação dos componentes utilizados da biblioteca shadc ui<RightArrow /></a>
+    </div>
+    <div >
+        <a
+          href="https://github.com/storybookjs/storybook"
+          target="_blank"
+        >Documentação do restante dos componentes na pasta ao lado - Story Book<RightArrow /></a>
+    </div>
+
+</div>
+
+# Author
+<div className="sb-section">
+  <div className="sb-features-grid">
+     <div className="sb-section-item">
+      <Image
+        src={"https://github.com/ismael-henrique-dev.png"}
+        alt="A wall of logos representing different styling technologies"
+        width={0}
+        height={0}
+        style={{ width: '50%', height: 'auto' }}
+      />
+      <h4 className="sb-section-item-heading">Ismael Henrique</h4>
+      <p className="sb-section-item-paragraph">Desenvolvedor Frontend</p>
+    </div>
+  </div>
+</div>
+
+<style>
+  {`
+  .sb-column {
+    display: flex;
+    flex-direction: column; /* Organiza os links em coluna */
+    gap: 8px; /* Espaçamento vertical entre os links */
+  }
+
+  .sb-column a {
+    display: block; /* Garante que cada link ocupe uma linha separada */
+    text-decoration: none; /* Remove o sublinhado dos links */
+    color: #0070f3; /* Define a cor dos links */
+  }
+
+  .sb-container {
+    margin-bottom: 48px;
+  }
+
+  .sb-section {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+  }
+
+  img {
+    object-fit: cover;
+  }
+
+  .sb-section-title {
+    margin-bottom: 32px;
+  }
+
+  .sb-section a:not(h1 a, h2 a, h3 a) {
+    font-size: 14px;
+  }
+
+  .sb-section-item, .sb-grid-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sb-section-item-heading {
+    padding-top: 20px !important;
+    padding-bottom: 5px !important;
+    margin: 0 !important;
+  }
+  .sb-section-item-paragraph {
+    margin: 0;
+    padding-bottom: 10px;
+  }
+
+  .sb-chevron {
+    margin-left: 5px;
+  }
+
+  .sb-features-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 32px 20px;
+  }
+
+  .sb-socials {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .sb-socials p {
+    margin-bottom: 10px;
+  }
+
+  .sb-explore-image {
+    max-height: 32px;
+    align-self: flex-start;
+  }
+
+  .sb-addon {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    background-color: #EEF3F8;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    background: #EEF3F8;
+    height: 180px;
+    margin-bottom: 48px;
+    overflow: hidden;
+  }
+
+  .sb-addon-text {
+    padding-left: 48px;
+    max-width: 240px;
+  }
+
+  .sb-addon-text h4 {
+    padding-top: 0px;
+  }
+
+  .sb-addon-img {
+    position: absolute;
+    left: 345px;
+    top: 0;
+    height: 100%;
+    width: 200%;
+    overflow: hidden;
+  }
+
+  .sb-addon-img img {
+    width: 650px;
+    transform: rotate(-15deg);
+    margin-left: 40px;
+    margin-top: -72px;
+    box-shadow: 0 0 1px rgba(255, 255, 255, 0);
+    backface-visibility: hidden;
+  }
+
+  @media screen and (max-width: 800px) {
+    .sb-addon-img {
+      left: 300px;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .sb-section {
+      flex-direction: column;
+    }
+
+    .sb-features-grid {
+      grid-template-columns: repeat(1, 1fr);
+    }
+
+    .sb-socials {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .sb-addon {
+      height: 280px;
+      align-items: flex-start;
+      padding-top: 32px;
+      overflow: hidden;
+    }
+
+    .sb-addon-text {
+      padding-left: 24px;
+    }
+
+    .sb-addon-img {
+      right: 0;
+      left: 0;
+      top: 130px;
+      bottom: 0;
+      overflow: hidden;
+      height: auto;
+      width: 124%;
+    }
+
+    .sb-addon-img img {
+      width: 1200px;
+      transform: rotate(-12deg);
+      margin-left: 0;
+      margin-top: 48px;
+      margin-bottom: -40px;
+      margin-left: -24px;
+    }
+  }
+  `}
+</style>
