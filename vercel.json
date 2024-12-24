@@ -1,4 +1,14 @@
 {
   "outputDirectory": "storybook-static",
-  "framework": null
+  "framework": null,
+  "rewrites": [
+    {
+      "source": "/storybook/(.*)", 
+      "destination": "/storybook-static/$1"
+    },
+    {
+      "source": "/(.*)", 
+      "destination": "/"
+    }
+  ]
 }
