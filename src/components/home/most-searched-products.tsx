@@ -11,13 +11,13 @@ import {
 import gpuPicture from "../../assets/image-indisponible.svg"
 import { ProductCard } from "../product/ui/cards/product-card"
 import { useMostSearchedProducts } from "@/contexts/most-searched-products-context"
-import { EmptySearchForProducts } from "./empties"
+import { EmptyProducts } from "./empties"
 
 export function MostSearchedProducts() {
   const { mostSearchedProductsContextList } = useMostSearchedProducts()
 
   if (mostSearchedProductsContextList.length === 0) {
-    return <EmptySearchForProducts />
+    return <EmptyProducts variant="search" />
   }
 
   return (

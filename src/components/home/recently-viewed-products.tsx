@@ -11,13 +11,13 @@ import {
 import gpuPicture from "../../assets/image-indisponible.svg"
 import { ProductCard } from "../product/ui/cards/product-card"
 import { useRecentkyViwedProducts } from "@/contexts/recently-viewed-products-list-context"
-import { EmptyViewProducts } from "./empties"
+import { EmptyProducts } from "./empties"
 
 export function RecentlyViewedProducts() {
   const { recentlyViewedProductsList } = useRecentkyViwedProducts()
 
   if (recentlyViewedProductsList.length === 0) {
-    return <EmptyViewProducts />
+    return <EmptyProducts variant="view" />
   }
 
   return (

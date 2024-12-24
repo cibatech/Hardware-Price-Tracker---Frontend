@@ -1,7 +1,7 @@
 import { ChevronDown, ChevronUp } from "lucide-react"
 import { ReactNode, useState } from "react"
 
-interface ISelectProps {
+export interface ISelectProps {
   children: ReactNode
   selected: string
   defaultText?: string

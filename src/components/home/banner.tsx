@@ -3,7 +3,7 @@
 import Image from "next/image"
 import { redirect } from "next/navigation"
 
-interface IBannerProps {
+export interface IBannerProps {
   imageUrl: string
   imageAlt: string
   text: string

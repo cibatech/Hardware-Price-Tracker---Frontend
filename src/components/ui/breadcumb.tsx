@@ -6,7 +6,7 @@ import {
   BreadcrumbSeparator,
 } from "../shadcn-ui/ui/breadcrumb"
 
-interface BreadcrumbDemoProps {
+export interface BreadcrumbDemoProps {
   productTitle?: string
   produtId?: string
   isProductPage: boolean
