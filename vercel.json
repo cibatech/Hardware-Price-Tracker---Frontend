@@ -1,3 +1,4 @@
 {
-  "outputDirectory": "./storybook-static"
+  "outputDirectory": "storybook-static",
+  "framework": null
 }
