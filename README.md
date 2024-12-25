@@ -9,7 +9,7 @@
    <img src="https://img.shields.io/badge/NPM-v9.5.1-white?style=for-the-badge" />
 </p>
 
-Docs: https://hardware-price-tracker-32dxvjgni-ismaels-projects-39b44ae5.vercel.app
+Docs: [https://hardware-price-tracker-docs.vercel.app](https://hardware-price-tracker-app-git-5ad09a-ismaels-projects-39b44ae5.vercel.app/?_vercel_share=zcYROBpd7e0QIyvtt27lPRPw7jKR7aN7)
 
 O Hardware Price Tracker é uma plataforma online desenvolvida para facilitar a busca por produtos de hardware em três das principais lojas do segmento: Kabum, Pichau e Terabyte. Com ele, você pode comparar os preços de um mesmo produto para encontrar a melhor oferta e consultar o histórico de preços, ajudando a identificar os momentos mais vantajosos para sua compra. Além disso, o site oferece a possibilidade de criar uma conta para gerenciar alertas personalizados, permitindo que você seja notificado sempre que os produtos de interesse atingirem o preço desejado.
 
