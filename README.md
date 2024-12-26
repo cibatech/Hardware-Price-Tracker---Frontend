@@ -5,8 +5,10 @@
 ## <p align="center">Hardware Price Tracker - App</p>
 
 <p align="center">
-   <img src="https://img.shields.io/badge/React-v18.2.0-white?style=for-the-badge" />
+   <img src="https://img.shields.io/badge/React-v19.0.0-white?style=for-the-badge" />
    <img src="https://img.shields.io/badge/NPM-v9.5.1-white?style=for-the-badge" />
+    <img src="https://img.shields.io/badge/Nextjs-v15-white?style=for-the-badge" />
+    <img src="https://img.shields.io/badge/Nodejs-=>20-white?style=for-the-badge" />
 </p>
 
 Docs: [https://hardware-price-tracker-docs.vercel.app](https://hardware-price-tracker-app-git-5ad09a-ismaels-projects-39b44ae5.vercel.app/?_vercel_share=zcYROBpd7e0QIyvtt27lPRPw7jKR7aN7)
@@ -80,6 +82,7 @@ ou
 - Monitorar histórico de preços
 - Criar, buscar, deletar e editar alertas salvos
 - Indetificar se o preço está bom, ótimo ou ruim
+- Sistema de atenticação: login, register e forgot-password
 
 
 ## 🎓 Aprendizado
