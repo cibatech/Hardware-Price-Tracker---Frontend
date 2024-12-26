@@ -1,20 +1,5 @@
 import { Meta } from "@storybook/blocks"
 import Image from "next/image"
-
-import Github from "./assets/github.svg"
-import Discord from "./assets/discord.svg"
-import Youtube from "./assets/youtube.svg"
-import Tutorials from "./assets/tutorials.svg"
-import Styling from "./assets/styling.png"
-import Context from "./assets/context.png"
-import Assets from "./assets/assets.png"
-import Docs from "./assets/docs.png"
-import Share from "./assets/share.png"
-import FigmaPlugin from "./assets/figma-plugin.png"
-import Testing from "./assets/testing.png"
-import Accessibility from "./assets/accessibility.png"
-import Theming from "./assets/theming.png"
-import AddonLibrary from "./assets/addon-library.png"
 import prodPage from "../../public/prduct-page.png"
 import homePage from "../../public/screenshot-home.png"
 import resultsPage from "../../public/screenshot-results.png"
@@ -118,6 +103,45 @@ O Hardware Price Tracker é uma plataforma online desenvolvida para facilitar a 
 
   </div>
 </div>
+
+# Rodando localmente
+
+Clone o projeto
+
+```bash
+  git clone https://github.com/ismael-henrique-dev/Hardware-Price-Tracker-App.git
+```
+
+Entre no diretório do projeto
+
+```bash
+  cd hardware-price-tracker
+```
+
+Instale as dependências
+
+```bash
+  npm install
+```
+
+ou 
+
+```bash
+  pnpm install
+```
+
+Inicie o servidor
+
+```bash
+  npm run dev
+```
+
+ou 
+
+```bash
+  pnpm dev
+```
+
 <div className="sb-container">
   <div className='sb-section-title'>
     # Veja Alguns Screenshots
@@ -205,20 +229,43 @@ O Hardware Price Tracker é uma plataforma online desenvolvida para facilitar a 
 
 </div>
 
+
+
 # Author
 
+{" "}
+
 <div className="sb-section">
-  <div className="sb-features-grid">
-    <div className="sb-section-item">
-      <Image
-        src={"https://github.com/ismael-henrique-dev.png"}
-        alt="A wall of logos representing different styling technologies"
-        width={0}
-        height={0}
-        style={{ width: "50%", height: "auto" }}
-      />
-      <h4 className="sb-section-item-heading">Ismael Henrique</h4>
-      <p className="sb-section-item-paragraph">Desenvolvedor Frontend</p>
+  <div className="sb-container-test">
+    <div className="sb-section">
+      <div className="sb-features-grid">
+        <div className="sb-section-item">
+          <Image
+            src={"https://github.com/ismael-henrique-dev.png"}
+            alt="A wall of logos representing different styling technologies"
+            width={0}
+            height={0}
+            style={{ width: "50%", height: "auto" }}
+          />
+          <h4 className="sb-section-item-heading">Ismael Henrique</h4>
+          <p className="sb-section-item-paragraph">Desenvolvedor Frontend</p>
+        </div>
+      </div>
+    </div>
+    <div className="sb-section">
+      <div className="sb-features-grid">
+        <div className="sb-section-item">
+          <Image
+            src={"https://github.com/ciringa.png"}
+            alt="A wall of logos representing different styling technologies"
+            width={0}
+            height={0}
+            style={{ width: "50%", height: "auto" }}
+          />
+          <h4 className="sb-section-item-heading">Thierrir Alencar</h4>
+          <p className="sb-section-item-paragraph">Desenvolvedor Backend</p>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -239,6 +286,14 @@ O Hardware Price Tracker é uma plataforma online desenvolvida para facilitar a 
 
   .sb-container {
     margin-bottom: 48px;
+  }
+
+  .sb-container-test {
+    display: flex;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 20px;
   }
 
   .sb-section {
