@@ -17,7 +17,7 @@ import { PaginationDemo } from "@/components/results/products-pagination"
 import { filterProduct } from "@/http/product/filter-product"
 import { ProductsFilterResponse } from "@/@types/product"
 import { EmptySearchResults } from "@/components/results/empty-search-results"
-import { useRouter } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { LoadingSpinner } from "@/components/ui/loading"
 import { EmptyFilterResults } from "@/components/results/empty-filter-results"
 
@@ -30,6 +30,7 @@ export default function ResultsPage() {
     ProductsFilterResponse["response"]["Return"]["TotalList"]
   >([])
   const [totalPages, setTotalPages] = useState(1)
+  const pathname = usePathname()
   const router = useRouter()
 
   const category = searchParams.get("categoria")
@@ -66,6 +67,11 @@ export default function ResultsPage() {
             data.response.Return.TotalListLength / 20
           )
           setTotalPages(totalPages)
+
+          if (currentPage > totalPages) {
+            params.set("page", "1");
+            router.replace(`${pathname}?${params.toString()}`);
+          }
         }
       } catch (error) {
         console.error("Erro ao buscar produtos:", error)
@@ -75,6 +81,7 @@ export default function ResultsPage() {
     }
 
     fetchProducts()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category, store, query, minPrice, maxPrice, currentPage, productsPerPage])
 
   useEffect(() => {
